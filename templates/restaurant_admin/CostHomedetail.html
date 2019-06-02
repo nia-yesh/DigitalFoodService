@@ -1,0 +1,52 @@
+<a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
+<a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+<a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
+<a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+<h1>Costs</h1>
+
+<ul>
+{% for c in object_list %}
+    <h1>{{c.id}}<h1>
+    <h1>tax:{{c.tax}}<h1>
+    <h1>service charge:{{c.service_charge}}<h1>
+    <h1>packaging cost:{{c.packaging_cost}}<h1>
+      <form method="post">
+           {% csrf_token %}
+          <input type="hidden" name="id" value="{{c.pk}}">
+          <p><input type="submit" value="this" ></p>
+      </form>
+      <a href="{% url 'restaurant_admin:Cost_delete' pk=c.pk %}">delete</a></ul>
+
+{% empty %}
+    <li>No Cost yet.</li>
+{% endfor %}
+</ul>
+
+{%if chosen_object%}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+  <p>tax :{{update_form.tax}} {{update_form.tax.errors}}</p>
+  <p>service charge:{{update_form.service_charge}} {{update_form.service_charge.errors}}</p>
+  <p>packaging_cost:{{update_form.packaging_cost}} {{update_form.packaging_cost.errors}}</p>
+  <input type='hidden' name='pk' value="{{chosen_object.pk}}">
+  <input type="submit" name= "edit" value="Update">
+</form>
+
+{%endif%}
+
+<form method="post">
+ {% csrf_token %}
+    <p><input type="submit" name="create" value="create" ></p>
+</form>
+
+{%if create_bool%}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>tax :{{create_form.tax}} {{create_form.tax.errors}}</p>
+    <p>service charge:{{create_form.service_charge}} {{create_form.service_charge.errors}}</p>
+    <p>packaging_cost:{{create_form.packaging_cost}} {{create_form.packaging_cost.errors}}</p>
+    <input type="submit" name="create_1" value="CREATE">
+  </form>
+  {%endif%}
+
+
+</main>

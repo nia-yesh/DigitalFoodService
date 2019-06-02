@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+{% load static %}
+<script src="{% static 'app.js' %}"></script>
+<title>Site</title>
+</head>
+<body>
+
+
+    <form method="post" name={{q.pk}} enctype="multipart/form-data">
+      {%csrf_token%}
+      {%for q in questions%}
+      <p>{{q.question}}</p>
+        <input type=hidden name="question_{{q.pk}}" value={{q.pk}}>
+        <input  type="radio" name="state_{{q.pk}}" value="good" required>good<br>
+        <input type="radio" name="state_{{q.pk}}" value="medium">medium<br>
+        <input  type="radio" name="state_{{q.pk}}" value="bad">bad<br>
+      {%endfor%}
+      <input type="submit" value="submit" name="sub" >
+
+    </form>
+
+</body>
+</html>

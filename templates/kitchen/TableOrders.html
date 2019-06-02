@@ -1,0 +1,24 @@
+h1>Table Orders</h1>
+<ul>
+{% for order in order_list %}
+    <p>Details :{{ order.details}}</p>
+    <p>takeaway:{{ order.takeaway }}</p>
+    <p>status: {{ order.status }}</p>
+    <p>cost : {{ order.cost}}</p>
+    <ul>
+    {% for foodorder in order.FoodOrder_list.all %}
+        <p>food id:{{ foodorder.food.pk}}</p>
+        <p>food_name :{{ foodorder.food.food_name}}</p>
+        <p>number: {{ foodorder.number }}</p>
+        <p>food_details :{{ foodorder.food.food_details}}</p>
+        <p>cost :{{ foodorder.food.cost}}</p>
+        <p>food_category : {{ foodorder.food.food_category.name}}</p>
+        <img src="{{ foodorder.food.food_img.url }}">
+    {% empty %}
+        <li>No order yet.</li>
+    {% endfor %}
+    </ul>
+{% empty %}
+    <li>No order yet.</li>
+{% endfor %}
+</ul>

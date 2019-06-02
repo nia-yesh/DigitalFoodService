@@ -1,0 +1,14 @@
+<h1>Worker Detail</h1>
+<p>name :{{object.name}}</p>
+<p>f_name :{{ object.f_name }}</p>
+<p>position:{{ object.position }}</p>
+<p>home address: {{ object.home_addr }}</p>
+<p>phone_number: {{ object.phone_number }}</p>
+<p>national_code:{{object.national_code}}</p>
+<p>mobile_number: {{ object.mobile_number }}</p>
+
+<img src="{{ object.profile.url }}" height="200" width="200">
+
+<a href="{% url 'restaurant_admin:Worker_update' pk=object.pk %}">update</a>
+<a href="{% url 'restaurant_admin:Worker_delete' pk=object.pk %}">delete</a>
+<a href="{% url 'restaurant_admin:WorkerHome_detail' %}">Workers</a>

@@ -1,0 +1,19 @@
+{% block title %}Home page{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p>Hi {{ user.username }} !</p>
+
+<ul><a href="{% url 'restaurant_admin:TableHome_detail' %}">table</a>  </ul>
+<ul><a href="{% url 'restaurant_admin:FoodHome_detail' %}">Food</a></ul>
+<ul><a href="{% url 'restaurant_admin:WorkerHome_detail' %}">Worker</a></ul>
+<ul><a href="{% url 'restaurant_admin:CostHome_detail' %}">Cost</a>  </ul>
+
+
+<a href="{% url 'restaurant_admin:logout' %}">logout</a>
+<a href="{% url 'restaurant_admin:change_password' %}">change password</a>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'restaurant_admin:login' %}">login</a>
+{% endif %}
+{% endblock %}

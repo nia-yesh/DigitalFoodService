@@ -1,0 +1,110 @@
+@font-face {
+    font-family: Shabnam;
+    src: url('../assets/fonts/shabnam/Farsi-Digits/shabnam-FD.eot') ;
+    src: url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff') format('woff'),
+         url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf') format('truetype');
+    font-weight: normal;
+  }
+  
+  @font-face {
+    font-family: Shabnam;
+    src: url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot');
+    src: url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.woff') format('woff'),
+         url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.ttf') format('truetype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: Shabnam;
+    src: url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot');
+    src: url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.woff') format('woff'),
+         url('../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.ttf') format('truetype');
+    font-weight: 300;
+  }
+  /* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+.top-bar {
+    margin: 0px 0px 10px;
+    background-color: lightpink;
+    padding: 10px;
+    width: 500px;
+}
+header {
+    position: relative;
+    background-color: black;
+    height: 100vh;
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  header video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  header .container {
+    position: relative;
+    z-index: 2;
+    font-family: shabnam;
+  }
+  a{
+    color: white;
+  }
+  button{
+
+  }
+  
+  header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+  }
+  .body{
+      font-family: shabnam;
+  }
+  #video1{
+    -webkit-filter: blur(15px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur( 15px);
+  }
+ p{
+   direction: rtl;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  /* border-right: .15em solid orange;  */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+ }
+  

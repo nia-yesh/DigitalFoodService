@@ -1,0 +1,14 @@
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>create</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>question :{{form.question}} {{form.question.errors}}</p>
+
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>

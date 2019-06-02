@@ -1,0 +1,13 @@
+<h1>FoodCategory Detail</h1>
+<h1>{{object.name}}</h1>
+<ul>
+{% for food in object.Food_FoodCategory.all %}
+    <p><a href={{food.get_absolute_url}}>{{food.food_name}}</a></p>
+{% empty %}
+    <li>No Food yet.</li>
+{% endfor %}
+</ul>
+<a href="{% url 'restaurant_admin:FoodCategory_update' pk=object.pk %}">update</a>
+<a href="{% url 'restaurant_admin:FoodCategory_delete' pk=object.pk %}">delete</a>
+<a href="{% url 'restaurant_admin:admin_home' %}">Home</a>
+<p><a href="{% url 'restaurant_admin:FoodHome_detail' %}">foods</a></p>

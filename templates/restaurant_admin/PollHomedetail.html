@@ -1,0 +1,50 @@
+<a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
+<a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+<a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
+<a href="{% url 'restaurant_admin:CostHome_detail' %}">cost</a>
+
+<a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+<h1>Polls</h1>
+<ul>
+{% for object in object_list %}
+<h1>question :{{object.question}}<h1>
+<h1>response_good :{{object.good_response}}<h1>
+<h1>response_medium :{{object.medium_response}}<h1>
+<h1>response_bad :{{object.bad_response}}<h1>
+
+      <form method="post">
+           {% csrf_token %}
+          <input type="hidden" name="id" value="{{object.pk}}">
+          <p><input type="submit" value="this" ></p>
+      </form>
+      <a href="{% url 'restaurant_admin:Poll_delete' pk=object.pk %}">delete</a></ul>
+
+{% empty %}
+    <li>No Poll yet.</li>
+{% endfor %}
+</ul>
+
+{%if chosen_object%}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+  <p>question :{{update_form.question}} {{update_form.question.errors}}</p>
+  <input type='hidden' name='pk' value="{{chosen_object.pk}}">
+  <input type="submit" name= "edit" value="Update">
+</form>
+
+{%endif%}
+
+<form method="post">
+ {% csrf_token %}
+    <p><input type="submit" name="create" value="create" ></p>
+</form>
+
+{%if create_bool%}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>question :{{create_form.question}} {{create_form.question.errors}}</p>
+    <input type="submit" name="create_1" value="CREATE">
+  </form>
+  {%endif%}
+
+
+</main>

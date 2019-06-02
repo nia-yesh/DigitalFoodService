@@ -1,0 +1,7 @@
+<h1>Table Detail</h1>
+<p>{{ table.table_number }}</p>
+<p>table availablitiy:{{ table.table_availability  }}</p>
+<p>reservation state:{{ table.reservation_state }}</p>
+
+<a href="{% url 'restaurant_admin:Table_delete' pk=object.pk %}">delete</a>
+<a href="{% url 'restaurant_admin:TableHome_detail' %}">back</a>

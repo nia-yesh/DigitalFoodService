@@ -1,0 +1,247 @@
+#list-items {
+    border:black  2px solid;
+    padding: 10px;
+    width: 300px;
+    margin: 10px;
+    direction: rtl;
+  }
+  @font-face {
+  font-family: Shabnam;
+  src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot');
+  src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot?#iefix') format('embedded-opentype'),
+       url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff') format('woff'),
+       url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot');
+  src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD?#iefix') format('embedded-opentype'),
+       url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.woff') format('woff'),
+       url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot');
+  src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot?#iefix') format('embedded-opentype'),
+       url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.woff') format('woff'),
+       url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.ttf') format('truetype');
+  font-weight: 300;
+}
+.card{
+  border-color: #d40062
+}
+.delete_all a{
+  color:#cbcbcb;
+}
+/*below is for cards*/
+.list-group-item{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  justify-content: space-between;
+}
+/*  below is for header */
+.hheader {
+  text-align: center;
+  
+  padding: 5px 5px;
+  background: #555;
+  color: #f1f1f1;
+  flex-shrink: 0;
+  background-color: #d40062;
+}
+/* .content {
+  padding: 16px;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+.sticky + .content {
+  padding-top: 102px;
+} */
+/* end for header */
+main{
+  flex: 1;
+  overflow: auto;
+}
+.main_content {
+  flex-grow: 1;
+  background-color: #fafafa;
+  /* flex-grow: 1;
+  overflow: auto; */
+}
+.costing{
+  text-align: right;
+  /* border:black 2px solid; */
+  /* background-color: #fafafa; */
+  /* width: 70%; */
+  /* margin: auto; */
+  padding-right: 10%;
+  padding-left: 10%;
+  display: flex;
+  flex-direction:row-reverse;
+  flex-wrap: nowrap;
+  color: #4a4a4a; 
+  margin-bottom: 22%;
+}
+.more_food a{
+  color:#d40062;
+  text-align: center;
+  direction: rtl;
+}
+.more_food:hover{
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  
+  
+}
+.form-control:focus {
+  border-color:#d40062;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+}
+  h1{
+    font-family: shabnam;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  body{
+    font-family: shabnam;
+    margin: 0;
+    padding: 0;
+  }
+  html,
+  body {
+     margin: 0;
+     height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+  }
+  #sabad{
+    text-align: center;
+    margin-top: 2%;
+    direction: rtl;
+
+  }
+  /* about buttons
+   */
+   #minus{
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  width: 35px;
+  height: 35px;
+    background: hsla(356, 100%, 51%, 0.4);
+     color: #555;
+    /* border: 1px solid #223445; */
+    border-radius: 50%;
+    /* -moz-border-radius: 5px */
+    display:inline-block;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    margin: 4px 2px;
+       cursor: pointer;
+    /* -webkit-border-radius: 5px; */
+}
+#minus:hover{
+   background: hsla(0, 100%, 50%, 0.8);
+    color:#f1f7fc;
+}
+#plus{
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+background: hsla(120,100%,50%,0.3);
+  width: 35px;
+  height: 35px;
+  color: #555;
+ border-radius: 50%;
+    cursor: pointer;
+ display:inline-block;
+ padding: 0px;
+ text-align: center;
+ text-decoration: none;
+ margin: 4px 2px;
+
+}
+#plus:hover{
+  background: hsla(120, 100%, 38%, 0.8);
+   color:#f1f7fc;
+}
+#finalize{
+  font-family: shabnam;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background:#555;
+  color:#f1f7fc;
+  border: 1px solid #555;
+
+}
+#finalize2{
+  color: white;
+  display: flex;
+  width: 22rem;
+  height: 4rem;
+  line-height: 0px;
+  border-radius: 10rem;
+  justify-content: center;
+  align-items:center; 
+}
+
+#finalize:hover{
+  background: #9bcef7;
+   color:white;
+}
+/* end about buttons */
+  .wrapper {
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        background-color: #fafafa;
+        padding: 80px 0;
+    }
+    /* .wrapper ul {
+        display: inline-grid;
+        margin: 0;
+        padding: 0;
+        
+        zoom:1;
+        *display: inline;
+    }
+    .wrapper li {
+        float: left;
+        padding: 2px 5px;
+        border: 1px solid black;
+    } */
+
+
+
+    @media screen and (max-width: 600px) {
+      #finalize2{
+        /* vertical-align: 0; */
+        border-radius: 0;
+        border: none;
+        background: linear-gradient(270deg,#0087af,#d40062);
+        height: 5rem;
+        margin: 2rem auto 0;
+        -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-box-pack: justify;
+    padding: 0 2rem;
+    -webkit-box-align: center;
+    text-decoration: none;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    left: 0;
+    right: 0;
+        /* width: 100%; */
+      }
+    }

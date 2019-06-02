@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <link rel="stylesheet" href="{% static 'customer/css/category_list.css'%}">
+</head>
+<body>
+
+    {% if order_status == 'NO' %}
+        <div class="top-bar">You Haven't ordered yet.</div>
+
+    {% elif order_status == 'OR'%}
+        <div class="top-bar">You have ordered. Waiting for kitchen to accept.</div>
+
+    {% elif order_status == 'CH'%}
+        <div class="top-bar">you have changed your order. Waiting for kitchen to accept.</div>
+
+    {% elif order_status == 'PR'%}
+        <div class="top-bar">Kitchen is preparing your order. You can't change your order anymore.</div>
+
+    {% elif order_status == 'RE'%}
+        <div class="top-bar">Your order is ready.</div>
+
+    {% elif order_status == 'DE'%}
+        <div class="top-bar">Bon appetit.</div>
+    {% endif%}
+
+    <a style="margin: 10px" href="{% url 'index' %}">Back</a>
+
+    <ol style="margin: 10px">
+        {% for cat in categories %}
+            <h2><li>
+                <a href="{{cat.id}}">{{cat.name}}</a>
+            </li></h2>
+        {% endfor %}
+    </ol>
+
+    <div style="margin: 10px">
+        {% if food_order %}
+            {% if order_status == 'OR' or order_status == 'CH' or order_status == 'NO'%}
+                <a class="btn btn-primary" href="{% url 'customer:orders' %}">
+                    {% if order_status == 'NO' %} Order
+                    {% elif order_status == 'CH' or order_status == 'OR'%} Change Order
+                    {% endif %}
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+
+</body>
+<script src="{% static 'customer/js/category_list.js'%}" type="text/javascript" ></script>
+</html>

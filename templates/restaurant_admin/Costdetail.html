@@ -1,0 +1,10 @@
+<h1>Cost Detail</h1>
+<h1>{{object.id}}<h1>
+<h1>tax :{{object.tax}}<h1>
+<h1>service charge:{{object.service_charge}}<h1>
+<h1>packaging_cost:{{object.packaging_cost}}<h1>
+
+<a href="{% url 'restaurant_admin:Cost_update' pk=object.pk %}">update</a>
+<a href="{% url 'restaurant_admin:Cost_delete' pk=object.pk %}">delete</a>
+<a href="{% url 'restaurant_admin:admin_home' %}">Home</a>
+<p><a href="{% url 'restaurant_admin:CostHome_detail' %}">back to Costs</a></p>

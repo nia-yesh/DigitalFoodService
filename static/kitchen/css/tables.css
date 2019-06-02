@@ -1,0 +1,114 @@
+.parent-container {
+   display: flex;
+    margin: 0px;
+
+}
+/**.container {
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+**/
+.card{
+    width: 250px ;
+    margin-bottom: 25px ;
+    margin-top: 25px;
+    margin-left: 25px ;
+}
+
+/**.orl{
+    background-color: deepskyblue;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 20%;
+    float: right ;
+    margin: 0px;
+    margin-top: 25px;
+    margin-right: 10px;
+    padding: 0px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+}**/
+
+.or{
+    font-family: Shabnam;
+    margin-bottom: 50px;
+}
+
+.topnav{
+    height:50px;
+    white-space: nowrap;
+    background-color: lightskyblue;
+    text-align:right;
+    padding-top: 10px;
+}
+.l1{
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+
+.row{
+    margin-left: 10px ;
+    margin-bottom: 10px;
+}
+
+.card-body{
+    padding: 5px;
+}
+
+.tb{
+    height: 40px ;
+    background-color: rgb(64, 139, 213) ;
+    padding-top: 5px;
+}
+
+.orl{
+    max-height: none;
+    height: 100vh;
+    background-color: lightskyblue ;
+    border-radius: 0%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 22%;
+    float: right ;
+    position: sticky;
+    margin: 0px;
+    margin-top: 25px;
+    margin-right: 10px;
+    padding: 0px;
+    position: -webkit-sticky;
+    top: 0;
+}
+.tor{
+    background-color: rgb(64, 139, 213);
+    height: 5%;
+}
+.ors{
+    background-color:rgb(92, 163, 233);
+    padding: 5px;
+    margin: 10px;
+}
+.p1{
+    text-align: right;
+}
+.p2{
+    text-align: right;
+}
+.p3{
+    text-align: right;
+}
+.or1{
+    text-align: center;
+    margin-left: 45px;
+}
+.or2{
+    text-align: center ;
+    margin-left: 45px;
+}
+.or3{
+    text-align: center ;
+    margin-left: 45px;
+}

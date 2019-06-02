@@ -1,0 +1,11 @@
+<h1>Poll Detail</h1>
+<h1>question :{{object.question}}<h1>
+<h1>response_good :{{object.good_response}}<h1>
+<h1>response_medium :{{object.medium_response}}<h1>
+<h1>response_bad :{{object.bad_response}}<h1>
+
+
+<a href="{% url 'restaurant_admin:Poll_update' pk=object.pk %}">update</a>
+<a href="{% url 'restaurant_admin:Poll_delete' pk=object.pk %}">delete</a>
+<a href="{% url 'restaurant_admin:admin_home' %}">Home</a>
+<p><a href="{% url 'restaurant_admin:PollHome_detail' %}">back to polls</a></p>

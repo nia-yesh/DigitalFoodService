@@ -1,0 +1,12 @@
+<h1>Food Detail</h1>
+<p>name:{{object.food_name}}</p>
+<p>Details :{{ object.food_details }}</p>
+<p>food_availability:{{ object.food_availability }}</p>
+<p>cost: {{ object.cost }}</p>
+<p>food_category : {{ food.food_category.name}}</p>
+<p><img src="{{ food.food_img.url }}" height="200" width="200"></p>
+
+<a href="{% url 'restaurant_admin:Food_update' pk=object.pk %}">update</a>
+<a href="{% url 'restaurant_admin:Food_delete' pk=object.pk %}">delete</a>
+<a href="{% url 'restaurant_admin:admin_home' %}">Home</a>
+<p><a href="{% url 'restaurant_admin:FoodHome_detail' %}">Foods</a></p>

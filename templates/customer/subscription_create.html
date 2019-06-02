@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>اشتراک</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <div>Name:</div><div>{{ form.sub_name }}</div>
+        <div>Last Name:</div><div>{{ form.sub_lastName }}</div>
+        <div>Birth Date</div><div>{{ form.sub_birthDate }}</div>
+        <div>Address:</div><div>{{ form.sub_address }}</div>
+        <div>Phone:</div><div>{{ form.sub_phone }}</div>
+        <div>Mobile Phone:</div><div>{{ form.sub_mobile_phone }}</div>
+        <button type="submit" name="subscript" value="save">ثبت</button>
+    </form>
+</body>
+</html>

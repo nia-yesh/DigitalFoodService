@@ -1,0 +1,16 @@
+<html>
+<head>
+</head>
+
+<body>
+  {% for poll in polls%}
+      <h2>question: {{poll.question}}</h2>
+      <p>good_response: {{poll.good_response}}</p>
+      <p>medium_response: {{poll.medium_response}}</p>
+      <p>bad_response: {{poll.bad_response}}</p>
+
+  {%empty%}
+      <p> No poll</p>
+  {%endfor%}
+</body>
+</html>

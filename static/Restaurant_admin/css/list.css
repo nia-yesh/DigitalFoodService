@@ -1,0 +1,159 @@
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.ttf') format('truetype');
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: shabnam;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.top_header {
+    flex-shrink: 0;
+}
+
+.main_content {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.topnav {
+    white-space: nowrap; /* [1] */
+    overflow-x: auto; /* [2] */
+    -webkit-overflow-scrolling: touch; /* [3] */
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* [4] */
+}
+
+/* [5] */
+.topnav::-webkit-scrollbar {
+    display: none;
+}
+
+.topnav {
+    padding: 12px 16px;
+    direction: rtl;
+    text-align: center;
+    background: #5CA4A9;
+    opacity: 60%;
+    color: white;
+    /* overflow: hidden; */
+}
+
+.topnav a {
+    font-family: shabnam;
+    direction: rtl;
+    /* float: none; */
+    display: inline;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background: #387175;
+    color: white;
+}
+
+html,
+body {
+    height: 100%;
+    font-size: 15px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+}
+
+.top_header {
+    flex-shrink: 0;
+}
+
+.main_content {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+main {
+    flex: 1;
+    overflow: auto;
+}
+
+.card {
+
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+    transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+#img_size {
+    height: 300px;
+}
+
+/* *********************************************************************************** */
+@media screen and (max-width: 600px) {
+    #img_size {
+        height: auto;
+    }
+}
+input[type='checkbox'], input[type='checkbox']:checked, input[type='checkbox']:not(:checked) {
+  display:block;
+  position:relative ;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+#id_food_category
+{
+    display: block!important;
+}
+a{
+    color:white;
+}
+.modal{
+    background: none !important;
+
+    z-index: 1050;
+height:auto;
+width: auto;}

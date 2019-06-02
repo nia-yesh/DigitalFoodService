@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="utf-8">
+
+    <title>{{category.name}}</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="{% static 'customer/css/category_detail.css'%}">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <header class="top_header topnav">
+    <div class="nav_items" >
+        {% for cat in categories %}
+            <a href="{% url 'customer:food_menu' pk=cat.id %}">{{cat.name}}</a>
+        {% endfor %}
+    </div>
+  </header>
+  <main class="main_content">
+        <div class="wrapper">
+            <div class="flex-container" >
+
+
+                {% for food in category.foods.all %}
+
+
+          <div class="flex-item">
+
+              <div class="card">
+                <img src="{{food.food_img.url}}" alt="{{food.food_name}}"  class="card-image" >
+                <div class="card-desc" >
+                <p style="font-weight:bold; text-align:right ;margin-right: 5px">{{food.food_name}}</p>
+                    <p id="inside" >{{food.cost}} تومان</p>
+                    <p style="  font-weight:300;">{{food.food_details}}</p>
+                  </div>
+                    {% if food.food_availability == False %}
+                        <p><strong>این غذا متأسفانه موجود نیست</strong></p>
+                    {% else %}
+                  <div class="card-actions">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="food_pk" value="{{food.pk}}">
+                    <button id="minus" type="submit" name="removeFood" value="-"><i class="fa fa-minus"></i></button>
+                    <div style="display: inline-block; margin: 0 10px">
+                        {% if food_order %}
+                            {% for f in food_order %}
+                                {% if f.food_id == food.pk%}
+                                    {{f.number}}
+                                {% endif %}
+                            {% endfor %}
+                            {% if food.pk not in ordered %}
+                                0
+                            {% endif %}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </div>
+                    <button id="plus" type="submit" name="addFood" value="+"><i class="fa fa-plus"></i></button>
+                </form>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+            {% endfor %}
+
+      </div>
+        </div>
+            <div style="margin: 10px">
+                
+            </div>
+  </main>
+
+    <footer class="fixed_footer">
+
+        {% if food_order %}
+            {% if order_status == 'OR' or order_status == 'CH' or order_status == 'NO'%}
+            <button class="button" >
+                    <a class="btn btn-primary" href="{% url 'customer:orders' %}">
+                    {% if order_status == 'NO' %} <span>مشاهده ی سفارش </span>
+                    {% elif order_status == 'CH' or order_status == 'OR'%} <span> تغییر سفارش </span>
+                    {% endif %}
+                </a>
+            </button>
+            {% endif %}
+        {% endif %}
+
+          </button></a>
+
+
+      {% if order_status == 'NO' %}
+          <div class="top-bar" style="display:inline-block;  ">شما هنوز سفارش نداده‌اید</div>
+
+      {% elif order_status == 'OR'%}
+          <div class="top-bar">سفارش شما ثبت شده، در انتظار تأیید از سمت آشپزخانه</div>
+
+      {% elif order_status == 'CH'%}
+          <div class="top-bar">شما غذای خود را تغییر داده‌اید در انتظار تأیید آشپزخانه</div>
+
+      {% elif order_status == 'PR'%}
+          <div class="top-bar">غذای شما در حال اماده‌سازی است، دیگر امکان تغییر سفارش وجود ندارد</div>
+
+      {% elif order_status == 'RE'%}
+          <div class="top-bar">غذای شما آماده است</div>
+
+      {% elif order_status == 'DE'%}
+          <div class="top-bar">نوش جان</div>
+      {% endif%}
+
+    <!-- vertical-align:middle -->
+  </footer>
+    <script src="{% static 'customer/js/category_detail.js'%}"></script>
+</body>
+</html>

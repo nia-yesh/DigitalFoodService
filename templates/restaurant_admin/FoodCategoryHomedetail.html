@@ -1,0 +1,128 @@
+{% load staticfiles %}
+<head>
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/materialize/css/materialize.css' %}"
+          media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Restaurant_admin/css/food.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<header class="top_header topnav" style="margin-bottom: 1%">
+    <div class="nav_items">
+        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
+        <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+        <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+    </div>
+</header>
+<main class="main_content">
+    <br>
+    {#*********************create**********************#}
+    {% if create_bool %}
+        <div class="card" style="text-align: right;direction: rtl;">
+            <div class="card-body">
+                <div class="row">
+                    <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="input-field col  s6 m6  offset-lg-6 offset-xl-6">
+                                <div id="fC_name">
+                                    {{ create_form.name }}
+                                    <label for="fC_name">نام</label>
+                                    {{ create_form.name.errors }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field  col  s6 m6  l3 xl4">
+                                <div class="btn waves-effect waves-light teal">
+                                    <input style="color: white;font-size: larger;" type="submit" name="create_1"
+                                           value="ایجاد">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {#*******************end create********************#}
+    <ul class="collapsible popout" style="margin:10%;">
+        {% for foodc in object_list %}
+            <li>
+
+                <div class="collapsible-header" style="color:rgb(92,164,169);direction: rtl;font-size: 1.5vw;">
+                    {{ foodc.name }}
+                    {#                    *********************delete & update ************#}
+                    {#                    <a><i class="fas fa-pen"></i></a>#}
+                </div>
+
+
+                <div class="collapsible-body">
+                    {% for food in foodc.Food_FoodCategory.all %}
+
+
+                        <p style="text-align:right;direction: rtl;font-size: 2vw;">
+                            <a style="text-decoration: none;color:rgb(56,113,117);"
+                               href={{ food.get_absolute_url }}>{{ food.food_name }}</a>
+                        </p>
+
+                    {% empty %}
+
+                        <p style="text-align:right;direction: rtl;font-size: 2vw;color:rgb(56,113,117);">غذایی موجود
+                            نیست.</p>
+
+
+                    {% endfor %}
+
+
+                    {#                <form method="post">#}
+                    {#                    {% csrf_token %}#}
+                    {#                    <input type="hidden" name="id" value="{{ foodc.pk }}">#}
+                    {#                    <p><input type="submit" value="this"></p>#}
+                    {#                </form>#}
+                    {##}
+                    {##}
+                    {#                <a href="{% url 'restaurant_admin:FoodCategory_delete' pk=foodc.pk %}">delete</a>#}
+
+                </div>
+            </li>
+        {% empty %}
+            No FoodCategory yet.
+
+        {% endfor %}
+    </ul>
+    {#**********************update*********************#}
+    {% if chosen_object %}
+        <p>name</p>
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <p>category :{{ update_form.name }} {{ update_form.name.errors }}</p>
+            <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+            <input type="submit" name="edit" value="Update">
+        </form>
+    {% endif %}
+    {#********************end update*******************#}
+    {#*******************button create*****************#}
+    <form method="post">
+        {% csrf_token %}
+        <div class="fixed-action-btn">
+            <input class="btn-floating btn-lg teal darken-1"
+                   style="font-size:larger;font-weight: bold ;color:white;border: none;"
+                   type="submit"
+                   name="create"
+                   value="+">
+        </div>
+    </form>
+    {#*****************end button create***************#}
+</main>
+<script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script>
+
+<script src="{% static 'Restaurant_admin/js/food.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems);
+    });
+</script>
+</body>
