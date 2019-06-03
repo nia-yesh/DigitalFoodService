@@ -2,10 +2,21 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 def upload_location(instance, filename):
     return str(instance.id)+'/'
+
+
+class SystemUser(models.Model):
+    POSITIONS = (
+        ('RA', 'restaurant_admin'),
+        ('KA', 'kitchen_admin'),
+        ('DE', 'default')
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    position = models.CharField(max_length=2, default='DE', choices=POSITIONS)
 
 
 class Worker(models.Model):
@@ -29,6 +40,7 @@ class Worker(models.Model):
     mobile_number = models.CharField(max_length=100, validators=[regex_mobileNumber])
     profile = models.ImageField(blank=False, null=False)
     published_date = models.DateField(default=timezone.now())
+    national_code = models.IntegerField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return self.name+" "+self.f_name
@@ -110,7 +122,7 @@ class Cost(models.Model):
         return reverse('restaurant_admin:Cost_detail', args=[self.id])
 
 
-class Subscription(models.Model):
+class Subscript(models.Model):
     sub_id = models.AutoField(primary_key=True, null=False, editable=False, unique=True, verbose_name='کد اشتراک')
     sub_name = models.CharField(max_length=100, verbose_name='نام')
     sub_lastName = models.CharField(max_length=100, verbose_name='نام خانوادگی')
