@@ -25,108 +25,111 @@
         <br>
         {#*******************update form******************#}
         {% if chosen_object %}
-            <div class="card" style="text-align: right;direction: rtl;">
-                <div class="card-body">
-                    <div class="row">
-                        <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="row">
+        <div class="card" style="text-align: right;direction: rtl;">
+            <div class="card-body">
+                <div class="row">
+                    <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
 
-                                <div class="input-field col xl4 l4 m6  s12">
-                                    <div id="l_name">
-                                        {{ update_form.name }}
-                                        <label for="l_name">نام خانوادگی</label>
-                                        {{ update_form.name.errors }}
-                                    </div>
-                                </div>
-                                <div class="input-field col xl4 l4 m6  s12">
-                                    <div id="fir_name">
-                                        {{ update_form.f_name }}
-                                        <label for="fir_name">نام</label>
-                                        {{ update_form.f_name.errors }}
-                                    </div>
-                                </div>
-                                <div class="input-field col xl4 l4 m6  s12">
-                                    <div id="pos">
-                                        {{ update_form.position }}
-                                        <label for="pos">سمت</label>
-                                        {{ update_form.position.errors }}
-                                    </div>
+                            <div class="input-field col xl4 l4 m6  s12">
+                                <div id="l_name">
+                                    {{ update_form.name }}
+                                    <label for="l_name">نام خانوادگی</label>
+                                    {{ update_form.name.errors }}
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col xl12 l12 m12 s12">
-                                    <div id="add">
-                                        {{ update_form.home_addr }}
-                                        <label for="add">آدرس</label>
-                                        {{ update_form.home_addr.errors }}
-                                    </div>
+                            <div class="input-field col xl4 l4 m6  s12">
+                                <div id="fir_name">
+                                    {{ update_form.f_name }}
+                                    <label for="fir_name">نام</label>
+                                    {{ update_form.f_name.errors }}
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="input-field col xl6 l6 m6  s12">
-                                    <div id="num">
-                                        {{ update_form.phone_number }}
-                                        <label for="num">شماره تلفن</label>
-                                        {{ update_form.phone_number.errors }}
-                                    </div>
+                            <div class="input-field col xl4 l4 m6  s12">
+                                <div id="pos">
+                                    {{ update_form.position }}
+                                    <label for="pos">سمت</label>
+                                    {{ update_form.position.errors }}
                                 </div>
-                                <div class="input-field col xl6 l6 m6  s12">
-                                    <div id="nat">
-                                        {{ update_form.national_code }}
-                                        <label for="nat">کد ملی</label>
-                                        {{ update_form.national_code.errors }}
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="row">
-                                <div class="input-field col xl4 l4 m6  s12">
-                                    <div id="mob">
-                                        {{ update_form.mobile_number }}
-                                        <label for="mob">شماره همراه</label>
-                                        {{ update_form.mobile_number.errors }}
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col xl12 l12 m12 s12">
+                                <div id="add">
+                                    {{ update_form.home_addr }}
+                                    <label for="add">آدرس</label>
+                                    {{ update_form.home_addr.errors }}
                                 </div>
-                                <div class="file-field input-field col xl4 l4 m6  s12">
-                                    <div class="waves-effect waves-light btn"
-                                         style="background-color: #009688;color: white;">
-                                        <span> {{ update_form.profile }}</span>
-                                        {{ update_form.profile.errors }}
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col xl6 l6 m6  s12">
+                                <div id="num">
+                                    {{ update_form.phone_number }}
+                                    <label for="num">شماره تلفن</label>
+                                    {{ update_form.phone_number.errors }}
                                 </div>
-                                <div class="input-field col xl4 l4 m6  s12">
-                                    <div id="pub">
-                                        {{ update_form.published_date }}
-                                        <label for="pub">تاریخ</label>
-                                        {{ update_form.published_date.errors }}
-                                    </div>
+                            </div>
+                            <div class="input-field col xl6 l6 m6  s12">
+                                <div id="nat">
+                                    {{ update_form.national_code }}
+                                    <label for="nat">کد ملی</label>
+                                    {{ update_form.national_code.errors }}
                                 </div>
-
-
                             </div>
 
-                            <!-- <td>{{ update_form.published_date.value }}</td> -->
-
-
-                            <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
-                            <div class="btn waves-effect waves-light col xl3 l3 m6  s12"
-                                 style="background-color: #009688">
-                                <input style="color: white;font-size: larger;" type="submit" name="edit" value="تغییر">
+                        </div>
+                        <div class="row">
+                            <div class="input-field col xl4 l4 m6  s12">
+                                <div id="mob">
+                                    {{ update_form.mobile_number }}
+                                    <label for="mob">شماره همراه</label>
+                                    {{ update_form.mobile_number.errors }}
+                                </div>
                             </div>
-                        </form>
+                            <div class="file-field input-field col xl4 l4 m6  s12">
+                                <div class="waves-effect waves-light btn"
+                                     style="background-color: #009688;color: white;">
+                                    <span> {{ update_form.profile }}</span>
+                                    {{ update_form.profile.errors }}
+                                </div>
+                            </div>
+                            <div class="input-field col xl4 l4 m6  s12">
+                                <div id="pub">
+                                    {{ update_form.published_date }}
+                                    <label for="pub">تاریخ</label>
+                                    {{ update_form.published_date.errors }}
+                                </div>
+                            </div>
 
-                    </div>
+
+                        </div>
+
+                        <!-- <td>{{ update_form.published_date.value }}</td> -->
+
+
+                        <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+                        <div class=" col xl3 l3 m6  s12">
+                            <input class="btn waves-effect waves-light"
+                                   style="background-color: #009688;color: white;font-size: larger;" type="submit"
+                                   name="edit" value="تغییر">
+                        </div>
+                    </form>
+
                 </div>
             </div>
+        </div>
         {% endif %}
-        {#    ******************create*************#}
+        {# ******************create*************#}
         {% if create_bool %}
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <form class="col s12" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <form class="col s12 xl12 l12 m12" method="post" enctype="multipart/form-data"
+                          style="direction: rtl;text-align: right;">
+                        {% csrf_token %}
+                        <div class="row">
                             <div class="input-field col s4">
 
                                 <div id="f_name">
@@ -150,6 +153,8 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="input-field col s4">
                                 <div id="home_addr">
                                     {{ create_form.home_addr }}
@@ -172,7 +177,8 @@
                                     {{ create_form.national_code.errors }}
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="row">
                             <div class="input-field col s4">
                                 <div id="mobile_number">
                                     {{ create_form.mobile_number }}
@@ -181,14 +187,14 @@
                                 </div>
                             </div>
                             <div class="file-field input-field col s4">
-                                <div style="margin-left:18%;width:58%;padding-bottom:13%;" class="btn">
+                                <div id="profile" style="margin-left:18%;width:58%;padding-bottom:13%;" class="btn">
                                     {{ create_form.profile }}
-                                    <label style="margin: 1%;color: white;font-size: 2vw;" for="profile;">عکس </label>
+                                    <label style="margin: 1%;color: white;font-size: 2vw;" for="profile">عکس </label>
                                     {{ create_form.profile.errors }}
                                 </div>
                             </div>
                             <div class="input-field col s4">
-                                <div>
+                                <div id="published_date">
                                     {{ create_form.published_date }}
 
                                     <label style="direction:rtl;margin: 1%;" for="published_date">تاریخ انتشار</label>
@@ -196,23 +202,24 @@
 
                                 </div>
                             </div>
-                            <br>
-                            <div class="col s4">
-                                <input class="btn" type="submit" name="create_1"
-                                       value="ایجاد">
-                            </div>
+                        </div>
+                        <br>
+                        <div class="col s4">
+                            <input style="color: white" class="btn" type="submit" name="create_1"
+                                   value="ایجاد">
+                        </div>
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
         {% endif %}
         {#********************end create*******************#}
         <div class="row active-with-click">
             {% for worker in object_list %}
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <article class="material-card teal">
-                        <h2>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <article class="material-card teal">
+                    <h2>
                         <span>
                             <div style="text-align:right;display: flex;direction: rtl;">
                                 <form method="post">
@@ -223,55 +230,57 @@
                                 </form>
                             </div>
                         </span>
-                            <strong>
-                                <i class="fas fa-star"></i>
-                                {{ worker.position }}
-                            </strong>
+                        <strong>
+                            <i class="fas fa-star"></i>
+                            {{ worker.position }}
+                        </strong>
 
-                        </h2>
-                        <div class="mc-content">
-                            <div class="mc-description" style="text-align:right;direction: rtl;">
-                                <p>شماره ملی:{{ worker.national_code }}</p>
-                                <p>شماره تلفن:{{ worker.phone_number }}</p>
+                    </h2>
+                    <div class="mc-content">
+                        <div class="mc-description" style="text-align:right;direction: rtl;">
+                            <p>شماره ملی:{{ worker.national_code }}</p>
+                            <p>شماره تلفن:{{ worker.phone_number }}</p>
 
-
-                            </div>
-                            <div class="img-container">
-                                <img class="img-responsive"
-                                     src="{{ worker.profile.url }}">
-                            </div>
 
                         </div>
-                        <a class="mc-btn-action">
-                            <i class="fa fa-bars"></i>
+                        <div class="img-container">
+                            <img class="img-responsive"
+                                 src="{{ worker.profile.url }}">
+                        </div>
+
+                    </div>
+                    <a class="mc-btn-action">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <div class="mc-footer">
+                        <a href="#">
+                            <button class="button worker_remove_btn" data-worker="{{ worker.pk }}"
+                                    style="border: none;background-color: transparent" data-toggle="modal"
+                                    data-target="#exampleModal"><i style="background-color: transparent" #}
+                                                                   class="fas fa-trash"> </i></button>
                         </a>
-                        <div class="mc-footer">
-                            <a href="#" >
-                                <button class="button worker_remove_btn" data-worker="{{ worker.pk }}"
-                                        style="border: none;data-toggle="modal"
-                                        data-target="#exampleModal"><i#}
-                                        class="fas fa-trash"> </i></button>
-                            </a>
-                        </div>
-                    </article>
-                </div>
+                    </div>
+                </article>
+            </div>
             {% empty %}
-                <li>No Worker yet.</li>
+            <li>No Worker yet.</li>
 
             {% endfor %}
         </div>
     </div>
+    <!--****************floating button****************-->
     <form method="post">
         {% csrf_token %}
         <div class="fixed-action-btn">
-            <input class="btn-floating btn-lg blue-grey darken-4"
-                   style="font-size:larger;font-weight: bold ;color:white;border: none;border-radius: 50%;"
+            <input class="btn-floating btn-lg yellow lighten-1"
+                   style="font-size:larger;font-weight: bold ;color:orangered;border: none;border-radius: 50%;"
                    type="submit"
                    name="create"
                    value="+">
         </div>
     </form>
- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+    <!--*****************************modal*********************-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -293,8 +302,13 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                  <a id="food_remove_link"  role="button" href="#">حذف</a>
+                    <button type="button" class=" waves-effect waves-light btn "
+                            style="background-color: gray;color: white;margin: 1%;" data-dismiss="modal">بستن
+                    </button>
+                    <a class="waves-effect waves-light btn "
+                       style="background-color: red;color: white;font-size: medium" id="worker_remove_link"
+                       role="button"
+                       href="{% url 'restaurant_admin:Worker_delete'}">حذف</a>
                 </div>
             </div>
         </div>

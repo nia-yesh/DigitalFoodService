@@ -23,19 +23,18 @@
         <div class="card" style="text-align: right;direction: rtl;">
             <div class="card-body">
                 <div class="row">
-                    <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                    <form class="col xl12 l12 m12 s12"  method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="input-field col  s6 m6  offset-lg-6 offset-xl-6">
+                            <div class="input-field col  s6 m6 l6  xl6">
                                 <div id="fC_name">
                                     {{ create_form.name }}
                                     <label for="fC_name">نام</label>
                                     {{ create_form.name.errors }}
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field  col  s6 m6  l3 xl4">
+
+                            <div class="input-field  col  s6 m6 l3  xl4">
                                 <div class="btn waves-effect waves-light teal">
                                     <input style="color: white;font-size: larger;" type="submit" name="create_1"
                                            value="ایجاد">

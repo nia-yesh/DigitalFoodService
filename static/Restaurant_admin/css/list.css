@@ -113,22 +113,25 @@ main {
 
 .card {
 
-    border-radius: 4px;
+    /* border-radius: 4px;
     box-sizing: border-box;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
     transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
 
-    cursor: pointer;
+    cursor: pointer; */
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+    /* transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06); */
 }
 
 #img_size {
     height: 300px;
+}
+.md-form label{
+    left: unset !important;
 }
 
 /* *********************************************************************************** */
@@ -137,23 +140,31 @@ main {
         height: auto;
     }
 }
-input[type='checkbox'], input[type='checkbox']:checked, input[type='checkbox']:not(:checked) {
-  display:block;
-  position:relative ;
-  pointer-events: auto;
-  opacity: 1;
+
+/* input[type='checkbox'], input[type='checkbox']:checked, input[type='checkbox']:not(:checked) {
+    display: block;
+    position: relative;
+    pointer-events: auto;
+    opacity: 1;
+} */
+
+#id_food_category {
+    display: block !important;
 }
 
-#id_food_category
-{
-    display: block!important;
+a {
+    color: white;
 }
-a{
-    color:white;
+input{
+    font-family: Shabnam !important;
 }
-.modal{
-    background: none !important;
-
+.modal {
+    background:transparent;
+    box-shadow: none;
     z-index: 1050;
-height:auto;
-width: auto;}
+    height: auto;
+    width: auto;
+}
+/*.btn{*/
+    /*padding: auto !important;*/
+/*}*/
