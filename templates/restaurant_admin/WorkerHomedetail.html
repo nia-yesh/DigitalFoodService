@@ -1,331 +1,330 @@
 {% load staticfiles %}
+
 <head>
     <!--<link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">-->
     <link type="text/css" rel="stylesheet" href="{% static 'assets/materialize/css/materialize.css' %}"
-          media="screen,projection"/>
+        media="screen,projection" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'Restaurant_admin/css/Wtable.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
-<header class="top_header topnav">
-    <div class="nav_items">
-        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
-        <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
-        <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
-        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
-    </div>
-</header>
-<main class="main_content">
-    <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
-        <br>
-        {#*******************update form******************#}
-        {% if chosen_object %}
-        <div class="card" style="text-align: right;direction: rtl;">
-             <h5 class="card-title "
-                style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
-                <strong>تغییر مشخصات کارمند</strong>
-            </h5>
-            <div class="card-body">
-                <div class="row">
-                    <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="row">
-
-                            <div class="input-field col xl4 l4 m6  s12">
-                                <div id="l_name">
-                                    {{ update_form.name }}
-                                    <label for="l_name">نام خانوادگی</label>
-                                    {{ update_form.name.errors }}
-                                </div>
-                            </div>
-                            <div class="input-field col xl4 l4 m6  s12">
-                                <div id="fir_name">
-                                    {{ update_form.f_name }}
-                                    <label for="fir_name">نام</label>
-                                    {{ update_form.f_name.errors }}
-                                </div>
-                            </div>
-                            <div class="input-field col xl4 l4 m6  s12">
-                                <div id="pos">
-                                    {{ update_form.position }}
-                                    <label for="pos">سمت</label>
-                                    {{ update_form.position.errors }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col xl12 l12 m12 s12">
-                                <div id="add">
-                                    {{ update_form.home_addr }}
-                                    <label for="add">آدرس</label>
-                                    {{ update_form.home_addr.errors }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col xl6 l6 m6  s12">
-                                <div id="num">
-                                    {{ update_form.phone_number }}
-                                    <label for="num">شماره تلفن</label>
-                                    {{ update_form.phone_number.errors }}
-                                </div>
-                            </div>
-                            <div class="input-field col xl6 l6 m6  s12">
-                                <div id="nat">
-                                    {{ update_form.national_code }}
-                                    <label for="nat">کد ملی</label>
-                                    {{ update_form.national_code.errors }}
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="input-field col xl4 l4 m6  s12">
-                                <div id="mob">
-                                    {{ update_form.mobile_number }}
-                                    <label for="mob">شماره همراه</label>
-                                    {{ update_form.mobile_number.errors }}
-                                </div>
-                            </div>
-                            <div class="input-field col xl4 l4 m6  s12">
-                                <div id="pub">
-                                    {{ update_form.published_date }}
-                                    <label for="pub">تاریخ</label>
-                                    {{ update_form.published_date.errors }}
-                                </div>
-                            </div>
-                             <div class="file-field input-field col xl4 l4 m6  s12" style="justify-content: center;display: flex;font-size: large;">
-                                <div class="waves-effect  waves-light btn-large">
-                                    <span> تصویر را انتخاب کنید </span>
-                                    {{ update_form.profile.errors }}
-                                </div>
-                            </div>
-                             <!--style="background-color: #009688;color: white;"-->
-
-
-                        </div>
-
-                        <!-- <td>{{ update_form.published_date.value }}</td> -->
-
-
-                        <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
-                        <div class="row" style="justify-content: center;display: flex;">
-                            <input class="btn-large waves-effect waves-light"
-                                   style="font-size: larger;" type="submit"
-                                   name="edit" value="تغییر">
-                        </div>
-                    </form>
-
-                </div>
-            </div>
+    <header class="top_header topnav">
+        <div class="nav_items">
+            <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
+            <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+            <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
+            <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
         </div>
-        {% endif %}
-        {# ******************create*************#}
-        {% if create_bool %}
-        <div class="card">
-            <h5 class="card-title "
-                style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
-                <strong>ایجاد کارمند جدید</strong>
-            </h5>
-            <div class="card-body">
-                <div class="row">
-                    <form class="col s12 xl12 l12 m12" method="post" enctype="multipart/form-data"
-                          style="direction: rtl;text-align: right;">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="input-field col s4">
+    </header>
+    <main class="main_content">
+        <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
+            <br>
+            {#*******************update form******************#}
+            {% if chosen_object %}
+            <div class="card" style="text-align: right;direction: rtl;">
+                <h5 class="card-title "
+                    style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
+                    <strong>تغییر مشخصات کارمند</strong>
+                </h5>
+                <div class="card-body">
+                    <div class="row">
+                        <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
 
-                                <div id="f_name">
-                                    {{ create_form.f_name }}
-                                    <label for="f_name">نام</label>
-                                    {{ create_form.f_name.errors }}
+                                <div class="input-field col xl4 l4 m6  s12">
+                                    <div id="l_name">
+                                        {{ update_form.name }}
+                                        <label for="l_name">نام خانوادگی</label>
+                                        {{ update_form.name.errors }}
+                                    </div>
+                                </div>
+                                <div class="input-field col xl4 l4 m6  s12">
+                                    <div id="fir_name">
+                                        {{ update_form.f_name }}
+                                        <label for="fir_name">نام</label>
+                                        {{ update_form.f_name.errors }}
+                                    </div>
+                                </div>
+                                <div class="input-field col xl4 l4 m6  s12">
+                                    <div id="pos">
+                                        {{ update_form.position }}
+                                        <label for="pos">سمت</label>
+                                        {{ update_form.position.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col xl12 l12 m12 s12">
+                                    <div id="add">
+                                        {{ update_form.home_addr }}
+                                        <label for="add">آدرس</label>
+                                        {{ update_form.home_addr.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col xl6 l6 m6  s12">
+                                    <div id="num">
+                                        {{ update_form.phone_number }}
+                                        <label for="num">شماره تلفن</label>
+                                        {{ update_form.phone_number.errors }}
+                                    </div>
+                                </div>
+                                <div class="input-field col xl6 l6 m6  s12">
+                                    <div id="nat">
+                                        {{ update_form.national_code }}
+                                        <label for="nat">کد ملی</label>
+                                        {{ update_form.national_code.errors }}
+                                    </div>
                                 </div>
 
                             </div>
-                            <div class="input-field col s4">
-                                <div id="name">
-                                    {{ create_form.name }}
-                                    <label for="name">نام خانوادگی</label>
-                                    {{ create_form.name.errors }}
+                            <div class="row">
+                                <div class="input-field col xl4 l4 m6  s12">
+                                    <div id="mob">
+                                        {{ update_form.mobile_number }}
+                                        <label for="mob">شماره همراه</label>
+                                        {{ update_form.mobile_number.errors }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-field col s4">
-                                <div id="position">
-                                    {{ create_form.position }}
-                                    <label style="margin: 1%;" for="position">سمت</label>
+                                <div class="input-field col xl4 l4 m6  s12">
+                                    <div id="pub">
+                                        {{ update_form.published_date }}
+                                        <label for="pub">تاریخ</label>
+                                        {{ update_form.published_date.errors }}
+                                    </div>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s4">
-                                <div id="home_addr">
-                                    {{ create_form.home_addr }}
-                                    <label style="margin: 1%;" for="home_addr">آدزس منزل</label>
-                                    {{ create_form.home_addr.errors }}
+                                <div class="file-field input-field col xl4 l4 m6  s12"
+                                    style="justify-content: center;display: flex;font-size: large;">
+                                    <div class="waves-effect  waves-light btn-large">
+                                        <span> تصویر را انتخاب کنید </span>
+                                        {{ update_form.profile.errors }}
+                                    </div>
                                 </div>
+                                <!--style="background-color: #009688;color: white;"-->
+
 
                             </div>
-                            <div class="input-field col s4">
-                                <div id="phone_number">
-                                    {{ create_form.phone_number }}
-                                    <label style="margin: 1%;" for="phone_number">شماره تلفن</label>
-                                    {{ create_form.phone_number.errors }}
-                                </div>
+
+                            <!-- <td>{{ update_form.published_date.value }}</td> -->
+
+
+                            <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+                            <div class="row" style="justify-content: center;display: flex;">
+                                <input class="btn-large waves-effect waves-light" style="font-size: larger;"
+                                    type="submit" name="edit" value="تغییر">
                             </div>
-                            <div class="input-field col s4">
-                                <div id="national_code">
-                                    {{ create_form.national_code }}
-                                    <label style="margin: 1%;" for="national_code">کد ملی</label>
-                                    {{ create_form.national_code.errors }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s4">
-                                <div id="mobile_number">
-                                    {{ create_form.mobile_number }}
-                                    <label style="margin: 1%;" for="mobile_number">شماره موبایل</label>
-                                    {{ create_form.mobile_number.errors }}
-                                </div>
-                            </div>
-                            <div class="input-field col s4">
-                                <div id="published_date">
-                                    {{ create_form.published_date }}
-
-                                    <label style="direction:rtl;margin: 1%;" for="published_date">تاریخ انتشار</label>
-
-
-                                </div>
-                            </div>
-                            <div class="file-field input-field col s4" style="justify-content: center;display: flex;">
-                                <div id="profile" class="waves-effect waves-light btn-large">
-                                    {{ create_form.profile }}
-                                    <label style="color:white;font-size: large" for="profile">تصویر را انتخاب کنید </label>
-                                    {{ create_form.profile.errors }}
-                                </div>
-                            </div>
-                            <!--style="margin: 1%;color: white;font-size: 2vw;"-->
-                            <!--style="margin-left:18%;width:58%;padding-bottom:13%;"-->
-
-                        </div>
-                        <div class="row"  style="justify-content: center;display: flex;">
-                        <!--<div class="col s4" style="justify-content: center;display: flex;">-->
-                            <input style="color: white;font-size: large;" class="waves-effect waves-light btn-large" type="submit" name="create_1"
-                                   value="ایجاد">
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        {#********************end create*******************#}
-        <div class="row active-with-click">
-            {% for worker in object_list %}
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <article class="material-card teal">
-                    <h2>
-                        <span>
-                            <div style="text-align:right;display: flex;direction: rtl;">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="id" value="{{ worker.pk }}">
-                                    <input style="background-color:rgb(0,150,136);color: white;border:none;"
-                                           type="submit" value="{{ worker.f_name }} {{ worker.name }}">
-                                </form>
-                            </div>
-                        </span>
-                        <strong>
-                            <i class="fas fa-star"></i>
-                            {{ worker.position }}
-                        </strong>
-
-                    </h2>
-                    <div class="mc-content">
-                        <div class="mc-description" style="text-align:right;direction: rtl;">
-                            <p>شماره ملی:{{ worker.national_code }}</p>
-                            <p>شماره تلفن:{{ worker.phone_number }}</p>
-
-
-                        </div>
-                        <div class="img-container">
-                            <img class="img-responsive"
-                                 src="{{ worker.profile.url }}">
-                        </div>
+                        </form>
 
                     </div>
-                    <a class="mc-btn-action">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                    <div class="mc-footer">
-                        <a href="#">
-                            <button class="button worker_remove_btn" data-worker="{{ worker.pk }}"
-                                    style="border: none;background-color: transparent" data-toggle="modal"
-                                    data-target="#exampleModal"><i style="background-color: transparent" #}
-                                                                   class="fas fa-trash"> </i></button>
+                </div>
+            </div>
+            {% endif %}
+            {# ******************create*************#}
+            {% if create_bool %}
+            <div class="card">
+                <h5 class="card-title "
+                    style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
+                    <strong>ایجاد کارمند جدید</strong>
+                </h5>
+                <div class="card-body">
+                    <div class="row">
+                        <form class="col s12 xl12 l12 m12" method="post" enctype="multipart/form-data"
+                            style="direction: rtl;text-align: right;">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="input-field col s4">
+
+                                    <div id="f_name">
+                                        {{ create_form.f_name }}
+                                        <label for="f_name">نام</label>
+                                        {{ create_form.f_name.errors }}
+                                    </div>
+
+                                </div>
+                                <div class="input-field col s4">
+                                    <div id="name">
+                                        {{ create_form.name }}
+                                        <label for="name">نام خانوادگی</label>
+                                        {{ create_form.name.errors }}
+                                    </div>
+                                </div>
+                                <div class="input-field col s4">
+                                    <div id="position">
+                                        {{ create_form.position }}
+                                        <label style="margin: 1%;" for="position">سمت</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <div id="home_addr">
+                                        {{ create_form.home_addr }}
+                                        <label style="margin: 1%;" for="home_addr">آدزس منزل</label>
+                                        {{ create_form.home_addr.errors }}
+                                    </div>
+
+                                </div>
+                                <div class="input-field col s4">
+                                    <div id="phone_number">
+                                        {{ create_form.phone_number }}
+                                        <label style="margin: 1%;" for="phone_number">شماره تلفن</label>
+                                        {{ create_form.phone_number.errors }}
+                                    </div>
+                                </div>
+                                <div class="input-field col s4">
+                                    <div id="national_code">
+                                        {{ create_form.national_code }}
+                                        <label style="margin: 1%;" for="national_code">کد ملی</label>
+                                        {{ create_form.national_code.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <div id="mobile_number">
+                                        {{ create_form.mobile_number }}
+                                        <label style="margin: 1%;" for="mobile_number">شماره موبایل</label>
+                                        {{ create_form.mobile_number.errors }}
+                                    </div>
+                                </div>
+                                <div class="input-field col s4">
+                                    <div id="published_date">
+                                        {{ create_form.published_date }}
+
+                                        <label style="direction:rtl;margin: 1%;" for="published_date">تاریخ
+                                            انتشار</label>
+
+
+                                    </div>
+                                </div>
+                                <div class="file-field input-field col s4"
+                                    style="justify-content: center;display: flex;">
+                                    <div id="profile" class="waves-effect waves-light btn-large">
+                                        {{ create_form.profile }}
+                                        <label style="color:white;font-size: large" for="profile">تصویر را انتخاب کنید
+                                        </label>
+                                        {{ create_form.profile.errors }}
+                                    </div>
+                                </div>
+                                <!--style="margin: 1%;color: white;font-size: 2vw;"-->
+                                <!--style="margin-left:18%;width:58%;padding-bottom:13%;"-->
+
+                            </div>
+                            <div class="row" style="justify-content: center;display: flex;">
+                                <!--<div class="col s4" style="justify-content: center;display: flex;">-->
+                                <input style="color: white;font-size: large;" class="waves-effect waves-light btn-large"
+                                    type="submit" name="create_1" value="ایجاد">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {#********************end create*******************#}
+            <div class="row active-with-click">
+                {% for worker in object_list %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <article class="material-card teal">
+                        <h2>
+                            <span>
+                                <div style="text-align:right;display: flex;direction: rtl;">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id" value="{{ worker.pk }}">
+                                        <input class="tooltipped" data-position="right" data-tooltip="شما با کلیک بر‌روی این قسمت می‌توانید مشخصات  کارمند را به روز‌رسانی کنید"
+                                            style="background-color:rgb(0,150,136);color: white;border:none;"
+                                            type="submit" value="{{ worker.f_name }} {{ worker.name }}">
+                                    </form>
+                                </div>
+                            </span>
+                            <strong>
+                                <i class="fas fa-star"></i>
+                                {{ worker.position }}
+                            </strong>
+
+                        </h2>
+                        <div class="mc-content">
+                            <div class="mc-description" style="text-align:right;direction: rtl;">
+                                <p>شماره ملی:{{ worker.national_code }}</p>
+                                <p>شماره تلفن:{{ worker.phone_number }}</p>
+
+
+                            </div>
+                            <div class="img-container">
+                                <img class="img-responsive" src="{{ worker.profile.url }}">
+                            </div>
+
+                        </div>
+                        <a class="mc-btn-action">
+                            <i class="fa fa-bars"></i>
                         </a>
-                    </div>
-                </article>
-            </div>
-            {% empty %}
-            <li>No Worker yet.</li>
-
-            {% endfor %}
-        </div>
-    </div>
-    <!--****************floating button****************-->
-    <form method="post">
-        {% csrf_token %}
-        <div class="fixed-action-btn">
-            <input class="btn-floating btn-large orange darken-4"
-                   style="font-size:x-large;font-weight: bold ;color:white;border: none;border-radius: 50%;"
-                   type="submit"
-                   name="create"
-                   value="+">
-        </div>
-    </form>
-    <!--*****************************modal*********************-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            <div style="text-align:center;">
-                                حذف
-                            </div>
-                        </h5>
-                    </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <div class="mc-footer">
+                            <a href="#">
+                                <button class="button worker_remove_btn" data-worker="{{ worker.pk }}"
+                                    style="border: none;background-color: transparent" data-toggle="modal"
+                                    data-target="#modalConfirmDelete" onclick="myFunction(event)"><i
+                                        data-worker="{{ worker.pk }}" style="background-color: transparent"
+                                        class="fas fa-trash"> </i></button>
+                            </a>
+                        </div>
+                    </article>
                 </div>
-                <div class="modal-body" style="text-align:center;font-family: shabnam;">
-                    آیا مطمعنید میخواهید این کارمند را حذف کنید؟
-                </div>
+                {% empty %}
+                <li>No Worker yet.</li>
 
-                <div class="modal-footer">
-                    <button type="button" class=" waves-effect waves-light btn "
-                            style="background-color: gray;color: white;margin: 1%;" data-dismiss="modal">بستن
-                    </button>
-                    <a class="waves-effect waves-light btn "
-                       style="background-color: red;color: white;font-size: medium" id="worker_remove_link"
-                       role="button"
-                       href="{% url 'restaurant_admin:Worker_delete'}">حذف</a>
-                </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
-</main>
-<script>
+        <!--****************floating button****************-->
+        <form method="post">
+            {% csrf_token %}
+            <div class="fixed-action-btn">
+                <input class="btn-floating btn-large orange darken-4"
+                    style="font-size:x-large;font-weight: bold ;color:white;border: none;border-radius: 50%;"
+                    type="submit" name="create" value="+">
+            </div>
+        </form>
+        <!--Modal: modalConfirmDelete-->
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                <!--Content-->
+                <div class="modal-content text-center">
+                    <!--Header-->
+                    <div class="modal-header d-flex justify-content-center">
+                        <p class="heading">آیا مطمئنید؟</p>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+
+                        <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer flex-center">
+                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
+                        <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
+
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!--Modal: modalConfirmDelete-->
+    </main>
+    <!-- <script>
     document.querySelectorAll('.worker_remove_btn').forEach(btn => {
         btn.addEventListener('click', event => {
             $('#exampleModal').modal();
@@ -334,10 +333,11 @@
             workerRemoveLink.href = url;
         });
     });
-</script>
-<script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script>
-<script src="{% static 'Restaurant_admin/js/Wtable.js' %}"></script>
-<script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script>
-<script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</script> -->
+    <script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script>
+    <!-- <script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script> -->
+    <!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
+    <!-- <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script> -->
+    <script src="{% static 'Restaurant_admin/js/Wtable.js' %}"></script>
 </body>

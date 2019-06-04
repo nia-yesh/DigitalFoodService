@@ -131,7 +131,7 @@
                         <div class="md-form">
                             <div class="form-check">
                                 {{ create_form.food_availability }}
-                                <label class="form-check-label">موجود بودن
+                                <label class="form-check-label" for="id_food_availability">موجود بودن
                                     غذا:</label>
                                 {{ create_form.food_availability.errors }}
                             </div>
@@ -232,16 +232,16 @@
                 <!-- Card footer -->
                 <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
                     <ul class="list-unstyled list-inline font-small">
-                        <li class="list-inline-item pr-2 white-text"><i class="fas fa-check pr-1"></i>
-                            {{ food.food_availability }}
+                        <li class="list-inline-item pr-2 white-text"><i class="fas fa-check pr-1" style="margin-right: 10px"></i>
+                            <span class="isav"> {{ food.food_availability }}</span>
                         </li>
                         <li class="list-inline-item pr-2"><a href="#" class="white-text"><i
                                 class="fas fa-wallet"></i> {{ food.cost }}</a></li>
                         <li class="list-inline-item pr-2"><a href="#" class="white-text">
                             <button class="button food_remove_btn" data-food="{{ food.pk }}"
                                     style="border: none;background-color: transparent;color: white"
-                                    data-toggle="modal" data-target="#exampleModal">
-                                <i#} class="far fa-trash-alt"> </i>
+                                    data-toggle="modal" data-target="#modalConfirmDelete" onclick="myFunction(event)">
+                                <i  data-food="{{ food.pk }}" class="far fa-trash-alt"></i>
                             </button>
                         </a></li>
                         <li class="list-inline-item"><a href="#" class="white-text">
@@ -269,38 +269,35 @@
                    value="+">
         </div>
     </form>
-    <!--***************************modal********************-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+     <!--Modal: modalConfirmDelete-->
+     <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+         <!--Content-->
+         <div class="modal-content text-center">
+             <!--Header-->
+             <div class="modal-header d-flex justify-content-center">
+                 <p class="heading">آیا مطمئنید؟</p>
+             </div>
 
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title" id="exampleModalLabel" style="text-align: center">
+             <!--Body-->
+             <div class="modal-body">
 
-                            حذف
+                 <i class="fas fa-times fa-4x animated rotateIn"></i>
 
-                        </h5>
-                    </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="text-align:center;font-family: shabnam;">
-                    آیا مطمعنید میخواهید این غذا را حذف کنید؟
-                </div>
+             </div>
 
-                <div class="modal-footer">
-                    <button type="button" class=" waves-effect waves-light btn gray" style="margin: 1%;"
-                            data-dismiss="modal">بستن
-                    </button>
-                    <a class="waves-effect waves-light btn red" id="food_remove_link" role="button"
-                       href="{% url 'restaurant_admin:Food_delete'}">حذف</a>
-                </div>
-            </div>
-        </div>
-    </div>
+             <!--Footer-->
+             <div class="modal-footer flex-center">
+                 <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
+                 <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
+
+             </div>
+         </div>
+         <!--/.Content-->
+     </div>
+ </div>
+ <!--Modal: modalConfirmDelete-->
 </main>
 <footer>
 </footer>
@@ -311,7 +308,7 @@
 <!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
 <!-- <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script> -->
 <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
-<script>
+<!-- <script>
     document.querySelectorAll('.food_remove_btn').forEach(btn => {
         btn.addEventListener('click', event => {
             $('#exampleModal').modal();
@@ -320,7 +317,7 @@
             foodRemoveLink.href = url;
         });
     });
-</script>
+</script> -->
 <script>
     $(document).ready(function () {
         $('.mdb-select').materialSelect();
