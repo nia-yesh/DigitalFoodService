@@ -31,7 +31,7 @@ $(function() {
 window.onscroll = function() {myFunction()};
 
 var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
+//var sticky = header.offsetTop;
 
 function myFunction() {
   if (window.pageYOffset > sticky) {
@@ -40,3 +40,4 @@ function myFunction() {
     header.classList.remove("sticky");
   }
 }
+
