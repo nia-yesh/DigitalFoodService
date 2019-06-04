@@ -148,10 +148,10 @@ main {
     width: auto;
 }
 
-.btn {
-    color: white;
-    background-color: rgb(92, 164, 169);
-}
+/*.btn {*/
+    /*color: white;*/
+    /*background-color: rgb(92, 164, 169);*/
+/*}*/
 
 .material-card {
     position: relative;
@@ -1681,4 +1681,11 @@ body {
 
 a {
     color: white;
+}
+.card-title{
+    height: 40%;
+    margin: 0px;
+}
+.card-body{
+    padding-top: 0px;
 }
