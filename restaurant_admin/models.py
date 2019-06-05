@@ -2,8 +2,8 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
-
 
 def upload_location(instance, filename):
     return str(instance.id)+'/'
