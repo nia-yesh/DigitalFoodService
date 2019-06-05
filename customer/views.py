@@ -366,4 +366,17 @@ class PollView(View):
                 poll.bad_response = poll.bad_response + 1
             poll.save()
 
-        return render(request, 'customer/end.html')
+            return redirect('customer:thank_you')
+
+
+class EndView(TemplateView):
+    template_name = 'customer/end.html'
+
+    def get_context_data(self, **kwargs):
+        ol_pk = self.request.session['order_list_pk']
+        order_list = OrderList.objects.get(pk=ol_pk)
+        table = Table.objects.get(pk=order_list.table.pk)
+        table.table_availability = True
+        table.save()
+        order_list.delete()
+        self.request.session.flush()
