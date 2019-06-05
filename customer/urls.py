@@ -10,7 +10,8 @@ urlpatterns = [
     url(r'^subscript/(?P<pk>[-\w]+)/$', views.SubscriptionDetailView.as_view(), name='sub_detail'),
     url(r'^subscript$', views.SubscriptionCreateView.as_view(), name='subscription'),
     url(r'^orders', views.OrderListView.as_view(), name='orders'),
-    url(r'^poll', views.PollView.as_view(), name='poll')
+    url(r'^poll', views.PollView.as_view(), name='poll'),
+    url(r'^thankyou', views.EndView.as_view(), name='thank_you'),
 
 ]
 
