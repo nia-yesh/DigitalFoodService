@@ -241,7 +241,8 @@
                                     <form method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="id" value="{{ worker.pk }}">
-                                        <input class="tooltipped" data-position="right" data-tooltip="شما با کلیک بر‌روی این قسمت می‌توانید مشخصات  کارمند را به روز‌رسانی کنید"
+                                        <input class="tooltipped" data-position="right"
+                                            data-tooltip="شما با کلیک بر‌روی این قسمت می‌توانید مشخصات  کارمند را به روز‌رسانی کنید"
                                             style="background-color:rgb(0,150,136);color: white;border:none;"
                                             type="submit" value="{{ worker.f_name }} {{ worker.name }}">
                                     </form>
@@ -270,9 +271,9 @@
                         </a>
                         <div class="mc-footer">
                             <a href="#">
-                                <button class="button worker_remove_btn" data-worker="{{ worker.pk }}"
-                                    style="border: none;background-color: transparent" data-toggle="modal"
-                                    data-target="#modalConfirmDelete" onclick="myFunction(event)"><i
+                                <button class="button worker_remove_btn modal-trigger" data-worker="{{ worker.pk }}"
+                                    style="border: none;background-color: transparent"
+                                    data-target="modal1" onclick="myFunction(event)"><i
                                         data-worker="{{ worker.pk }}" style="background-color: transparent"
                                         class="fas fa-trash"> </i></button>
                             </a>
@@ -294,35 +295,17 @@
                     type="submit" name="create" value="+">
             </div>
         </form>
-        <!--Modal: modalConfirmDelete-->
-        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-                <!--Content-->
-                <div class="modal-content text-center">
-                    <!--Header-->
-                    <div class="modal-header d-flex justify-content-center">
-                        <p class="heading">آیا مطمئنید؟</p>
-                    </div>
-
-                    <!--Body-->
-                    <div class="modal-body">
-
-                        <i class="fas fa-times fa-4x animated rotateIn"></i>
-
-                    </div>
-
-                    <!--Footer-->
-                    <div class="modal-footer flex-center">
-                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
-                        <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
-
-                    </div>
-                </div>
-                <!--/.Content-->
+        <!-- modalllll -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>آیا مطمئنید؟</h4>
+                <p> <i class="fas fa-times fa-4x animated rotateIn"></i></p>
+            </div>
+            <div class="modal-footer">
+                <a id="sahand" href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
-        <!--Modal: modalConfirmDelete-->
+        <!-- end modalllll   -->
     </main>
     <!-- <script>
     document.querySelectorAll('.worker_remove_btn').forEach(btn => {
@@ -335,6 +318,11 @@
     });
 </script> -->
     <script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.modal').modal();
+        });
+    </script>
     <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script>
     <!-- <script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script> -->
     <!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
