@@ -5,12 +5,19 @@ from . import models
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm,AuthenticationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
+from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login, logout as auth_logout
 from django.views import View
 from . import forms
 
+
+def is_restaurant_admin(user):
+    if user.position == 'RA':
+        return True
+    else:
+        return False
 
 @login_required
 def change_password(request):
@@ -32,7 +39,43 @@ def change_password(request):
         'form': form
     })
 
+def login(request):
+    if request.method =='POST':
+        form = forms.LoginForm(data=request.POST)
+        if form.is_valid():
+            from django.contrib.auth import authenticate, login
+            user_x = models.User.objects.filter(username=form.cleaned_data['username'])
+            if len(user_x) !=0:
+                if user_x[0].password == form.cleaned_data['password']:
+                    if user_x[0].is_active:
+                        if user_x[0].position == "RA":
+                            login(request,user_x[0])
+                            return render(request, 'restaurant_admin/home.html')
+                        elif user_x[0].position == "KA":
+                            login(request,user_x[0])
+                            return render(request, 'kitchen/TableStatelist.html')
+                    else:
+                        messages.error(request,'حساب کاربری غیر فعال است ')
+                        return redirect('restaurant_admin:login')
+                else:
+                    messages.error(request, 'پسورد یا نام کاربری اشتباه است')
+                    return redirect('restaurant_admin:login')
 
+            else:
+                messages.error(request,'پسورد یا نام کاربری اشتباه است')
+                return redirect('restaurant_admin:login')
+        else:
+            messages.error(request, 'پسورد یا نام کاربری اشتباه است')
+            return redirect('restaurant_admin:login')
+
+    else:
+        form = forms.LoginForm()
+        return render(request, 'restaurant_admin/login.html', {
+            'form': form
+        })
+
+
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 @login_required
 def Home(request):
     return render(request,'restaurant_admin/home.html')
@@ -107,13 +150,14 @@ class SpecialView(View):
                 return render(self.request,self.template_name,context={'object_list':self.queryset,'create_form':self.create_form,
                                                                         'create_bool':self.create_bool})
 
-
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 @method_decorator(login_required, name='dispatch')
 class FoodCategoryDetailView(DetailView):
     template_name = 'restaurant_admin/FoodCategorydetail.html'
     model = models.FoodCategory
     fields = '__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class FoodCategoryHomeDetailView(SpecialView):
@@ -126,6 +170,7 @@ class FoodCategoryHomeDetailView(SpecialView):
     chosen_object=None
     create_bool = False
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class FoodCategoryDeleteView(DeleteView):
@@ -139,6 +184,7 @@ class FoodCategoryDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:FoodCategoryHome_detail')
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class FoodDetailView(DetailView):
@@ -146,6 +192,7 @@ class FoodDetailView(DetailView):
     model = models.Food
     fields = '__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class FoodHomeDetailView(SpecialView):
@@ -158,6 +205,7 @@ class FoodHomeDetailView(SpecialView):
     create_bool=False
     create_form=None
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class FoodDeleteView(DeleteView):
@@ -171,6 +219,7 @@ class FoodDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:FoodHome_detail')
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class WorkerDetailView(DetailView):
@@ -178,6 +227,7 @@ class WorkerDetailView(DetailView):
     model = models.Worker
     fields = '__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class WorkerHomeDetailView(SpecialView):
@@ -190,6 +240,7 @@ class WorkerHomeDetailView(SpecialView):
     create_bool=False
     create_form=None
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class WorkerDeleteView(DeleteView):
@@ -202,6 +253,7 @@ class WorkerDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:WorkerHome_detail')
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class TableDetailView(DetailView):
@@ -209,6 +261,7 @@ class TableDetailView(DetailView):
     model = models.Table
     fields = '__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class TableHomeDetailView(SpecialView):
@@ -221,6 +274,7 @@ class TableHomeDetailView(SpecialView):
     update_form=None
     chosen_object=None
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class TableDeleteView(DeleteView):
@@ -233,6 +287,7 @@ class TableDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:TableHome_detail')
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class CostDetailView(DetailView):
@@ -240,6 +295,7 @@ class CostDetailView(DetailView):
     model = models.Cost
     fields = '__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class CostHomeDetailView(SpecialView):
@@ -252,6 +308,7 @@ class CostHomeDetailView(SpecialView):
     model = models.Cost
     fields='__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class CostDeleteView(DeleteView):
@@ -265,6 +322,7 @@ class CostDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:CostHome_detail')
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class PollDetailView(DetailView):
@@ -272,6 +330,7 @@ class PollDetailView(DetailView):
     model = models.Poll
     fields = '__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class PollHomeDetailView(SpecialView):
@@ -284,6 +343,7 @@ class PollHomeDetailView(SpecialView):
     model = models.Poll
     fields='__all__'
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @method_decorator(login_required, name='dispatch')
 class PollDeleteView(DeleteView):
@@ -297,6 +357,7 @@ class PollDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:PollHome_detail')
 
+@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
 
 @login_required
 def PollResult(request):

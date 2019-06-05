@@ -2,11 +2,38 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+<<<<<<< HEAD
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+=======
 
+>>>>>>> e2a801b5382b03c9e3c30fea2b1741f9ab4abea7
 
 def upload_location(instance, filename):
     return str(instance.id)+'/'
 
+<<<<<<< HEAD
+'''
+class User(models.Model):
+    POSITIONS = (
+        ('RA', 'restaurant_admin'),
+        ('KA', 'kitchen_admin'),
+        ('DE', 'default')
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    position = models.CharField(max_length=2, default='DE', choices=POSITIONS)
+'''
+
+class User(AbstractUser):
+    POSITIONS = (
+        ('RA', 'restaurant_admin'),
+        ('KA', 'kitchen_admin'),
+        ('DE', 'default')
+    )
+    position = models.CharField(max_length=2, default='DE', choices=POSITIONS)
+
+=======
+>>>>>>> e2a801b5382b03c9e3c30fea2b1741f9ab4abea7
 
 class Worker(models.Model):
     positions = {'MCH': 'Master Chef',
