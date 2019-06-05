@@ -19,6 +19,7 @@ class User(models.Model):
     position = models.CharField(max_length=2, default='DE', choices=POSITIONS)
 '''
 
+
 class User(AbstractUser):
     POSITIONS = (
         ('RA', 'restaurant_admin'),
@@ -61,7 +62,6 @@ class Worker(models.Model):
 class Table(models.Model):
     table_number = models.IntegerField(primary_key=True)
     table_availability = models.BooleanField(default=True)
-    reservation_state = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.table_number)
@@ -103,7 +103,6 @@ class OrderList(models.Model):
         ('OR', 'Ordered'),
         ('PR', 'Preparing'),
         ('RE', 'Ready'),
-        ('DE', 'Delivered'),
     )
     table = models.ForeignKey(Table, related_name="OrderList_Table", on_delete=models.CASCADE, null=True)
     details = models.CharField(max_length=1000, blank=True, null=True)
