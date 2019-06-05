@@ -28,15 +28,15 @@ $(function() {
             }
         });
     });
-window.onscroll = function() {myFunction()};
-
-var header = document.getElementById("myHeader");
-var sticky = header.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.tooltipped');
+      var instances = M.Tooltip.init(elems);
+    });
+    var text;
+function myFunction(event){
+text=event.target.dataset.worker;
+    document.getElementById("sahand").href="Worker_delete/"+text;
 }
+
+
+

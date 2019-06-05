@@ -3,7 +3,8 @@
     <link type="text/css" rel="stylesheet" href="{% static 'assets/materialize/css/materialize.css' %}"
           media="screen,projection"/>
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'Restaurant_admin/css/food.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -18,97 +19,138 @@
 </header>
 <main class="main_content">
     <br>
-    {#*********************create**********************#}
+    <!--*********************create**********************-->
     {% if create_bool %}
-        <div class="card" style="text-align: right;direction: rtl;">
-            <div class="card-body">
-                <div class="row">
-                    <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="input-field col  s6 m6  offset-lg-6 offset-xl-6">
-                                <div id="fC_name">
-                                    {{ create_form.name }}
-                                    <label for="fC_name">نام</label>
-                                    {{ create_form.name.errors }}
-                                </div>
+    <div class="card" style="font-family: Shabnam !important;">
+        <h5 class="card-title "
+            style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
+            <strong>ایجاد دسته بندی جدید</strong>
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data"
+                      style="direction: rtl;text-align: right;">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col  s6 m6 l6  xl6">
+                            <div id="fC_name">
+                                {{ create_form.name }}
+                                <label for="fC_name">نام</label>
+                                {{ create_form.name.errors }}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="input-field  col  s6 m6  l3 xl4">
-                                <div class="btn waves-effect waves-light teal">
-                                    <input style="color: white;font-size: larger;" type="submit" name="create_1"
-                                           value="ایجاد">
-                                </div>
+
+                        <div class="input-field  col  s6 m6 l3  xl4" style="display: flex;justify-content: center;">
+                            <div class="waves-effect waves-light btn-large">
+                                <input style="color: white;font-size: larger;" type="submit" name="create_1"
+                                       value="ایجاد">
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
     {% endif %}
-    {#*******************end create********************#}
+    <!--*******************end create********************-->
+    {#**********************update*********************#}
+    {% if chosen_object %}
+    <div class="card" style="font-family: Shabnam !important;">
+        <h5 class="card-title "
+            style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
+            <strong> تغییر دسته بندی</strong>
+        </h5>
+        <div class="card-body">
+            <div class="row">
+                <form  style="direction: rtl;text-align: right;" class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                         <div class="input-field col  s6 m6 l6  xl6">
+                            <div id="fC2_name">
+                               {{ update_form.name }}
+                                <label for="fC2_name">نام</label>
+                                {{ update_form.name.errors }}
+                            </div>
+                        </div>
+
+                    <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+                        <div class="input-field  col  s6 m6 l3  xl4" style="display: flex;justify-content: center;">
+                            <div class="waves-effect waves-light btn-large">
+                                <input style="color: white;font-size: larger;" type="submit" name="edit"
+                                       value="تغییر">
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {#********************end update*******************#}
+    <!--********************update button*************************-->
+
+    <!--*********************end update*******************-->
+
     <ul class="collapsible popout" style="margin:10%;">
         {% for foodc in object_list %}
-            <li>
+        <li>
 
-                <div class="collapsible-header" style="color:rgb(92,164,169);direction: rtl;font-size: 1.5vw;">
+            <div class="collapsible-header"
+                 style="color:rgb(92,164,169);font-size: 1.5vw">
+
+                <div style="display: flex;justify-content:right;direction: rtl;">
                     {{ foodc.name }}
-                    {#                    *********************delete & update ************#}
-                    {#                    <a><i class="fas fa-pen"></i></a>#}
+                </div>
+                <div style="display: flex;justify-content:left;">
+                    <form method="post">
+                        {% csrf_token %}
+                         <input type="hidden" name="id" value="{{ foodc.pk }}">
+                        <input  type="submit"  value="update">
+                    </form>
+
+                </div>
+                <div style="direction: ltr;display: flex">
+                    <a href="{% url 'restaurant_admin:FoodCategory_delete' pk=foodc.pk %}"><i style="color: #009688"
+                                                                                          class="fas fa-trash"></i></a>
                 </div>
 
 
-                <div class="collapsible-body">
-                    {% for food in foodc.Food_FoodCategory.all %}
+                <!--</div>-->
+            </div>
 
 
-                        <p style="text-align:right;direction: rtl;font-size: 2vw;">
-                            <a style="text-decoration: none;color:rgb(56,113,117);"
-                               href={{ food.get_absolute_url }}>{{ food.food_name }}</a>
-                        </p>
-
-                    {% empty %}
-
-                        <p style="text-align:right;direction: rtl;font-size: 2vw;color:rgb(56,113,117);">غذایی موجود
-                            نیست.</p>
+            <div class="collapsible-body">
+                {% for food in foodc.foods.all %}
 
 
-                    {% endfor %}
+                <p style="text-align:right;direction: rtl;font-size: 1.5vw;">
+                    <!--<a style="text-decoration: none;color:rgb(56,113,117);"-->
+                    {{ food.food_name }}
+                    <!--href={{ food.get_absolute_url }}>{{ food.food_name }}</a>-->
+                </p>
+
+                {% empty %}
+
+                <p style="text-align:right;direction: rtl;font-size: 1.5vw;color:rgb(56,113,117);">غذایی موجود
+                    نیست.</p>
 
 
-                    {#                <form method="post">#}
-                    {#                    {% csrf_token %}#}
-                    {#                    <input type="hidden" name="id" value="{{ foodc.pk }}">#}
-                    {#                    <p><input type="submit" value="this"></p>#}
-                    {#                </form>#}
-                    {##}
-                    {##}
-                    {#                <a href="{% url 'restaurant_admin:FoodCategory_delete' pk=foodc.pk %}">delete</a>#}
+                {% endfor %}
 
-                </div>
-            </li>
+
+            </div>
+        </li>
         {% empty %}
-            No FoodCategory yet.
+        No FoodCategory yet.
 
         {% endfor %}
     </ul>
-    {#**********************update*********************#}
-    {% if chosen_object %}
-        <p>name</p>
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
-            <p>category :{{ update_form.name }} {{ update_form.name.errors }}</p>
-            <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
-            <input type="submit" name="edit" value="Update">
-        </form>
-    {% endif %}
-    {#********************end update*******************#}
+
     {#*******************button create*****************#}
     <form method="post">
         {% csrf_token %}
         <div class="fixed-action-btn">
-            <input class="btn-floating btn-lg teal darken-1"
-                   style="font-size:larger;font-weight: bold ;color:white;border: none;"
+            <input class="btn-floating btn-large teal darken-1"
+                   style="font-size:x-large;font-weight: bold ;color:white;border: none;padding-bottom: 15%;"
                    type="submit"
                    name="create"
                    value="+">

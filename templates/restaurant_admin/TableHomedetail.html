@@ -3,56 +3,163 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>table_main</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+    <link rel="stylesheet" href="{% static 'restaurant_admin/css/table_main.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 </head>
 
 <body>
-    <header>
-        <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
-        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
-        <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
-        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+
+    <header class="top_header topnav">
+        <div class="nav_items">
+            <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندان</a>
+            <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه‌ها</a>
+            <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا‌ها</a>
+            <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+        </div>
     </header>
     <main class="main_content">
+        <div class="container">
 
-        <h1>Tables</h1>
-        <ul>
-            {% for table in object_list %}
-            <li>{{ table.table_number }}</li>
-            <li>table availability:{{ table.table_availability  }}</li>
-            <li>reservation state:{{ table.reservation_state }}</li>
-            <ul><a href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a></ul>
+            {%if create_bool%}
+            <div class="card mb-4 mt-4" style="text-align: right;direction: rtl;justify-content: center;">
+                <h5 class="card-header teal white-text text-center py-4">
+                    <strong>ایجاد غذای جدید</strong>
+                </h5>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-6 col-md-4">
+                                <div class="md-form">
+                                    {{ create_form.table_number }}
+                                    <label style="direction: rtl">شماره میز</label>
+                                    {{create_form.table_number.errors}}
+                                </div>
 
-            {% empty %}
-            <li>No Table yet.</li>
-            {% endfor %}
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="md-form">
+                                <div class="form-check">
+                                    {{ create_form.table_availability }}
+                                    <label class="form-check-label">موجود بودن
+                                        میز:</label>
+                                    {{create_form.table_availability.errors}}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row " style="display: flex; justify-content: center">
+                                <input class="btn btn-lg teal " style="color: white;font-size: larger;" type="submit" name="create_1" value="ایجاد">
+                        </div>
+                        <!-- <p>table number:{{ create_form.table_number }} {{create_form.table_number.errors}}</p>
+                        <p>table
+                            availablitiy:{{ create_form.table_availability }}{{create_form.table_availability.errors}}
+                        </p>
+                        <p>reservation state:{{ create_form.reservation_state }}
+                            {{create_form.reservation_state.errors}}</p> -->
+                        
+                    </form>
+                </div>
+            </div>
 
-        </ul>
+            {%endif%}
+            <div class="row">
 
-        <form method="post">
-            {% csrf_token %}
-            <p><input type="submit" name="create" value="create"></p>
-        </form>
 
-        {%if create_bool%}
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
-            <p>table number:{{ create_form.table_number }} {{create_form.table_number.errors}}</p>
-            <p>table availablitiy:{{ create_form.table_availability }}{{create_form.table_availability.errors}} </p>
-            <p>reservation state:{{ create_form.reservation_state }} {{create_form.reservation_state.errors}}</p>
-            <input type="submit" name="create_1" value="CREATE">
-        </form>
+                {% for table in object_list %}
+                <div class="col-12 col-md-4">
+                    <div class="card bg-transparent text-white showhim myc">
+                        <img src="../../../media/418035-PDD34R-711.png" class="card-img" alt="...">
+                        <div class="card-img-overlay" data-av="{{ table.table_availability}}"
+                            data-res="{{ table.reservation_state }}">
+                            <h5 class="card-title text-center">میز شماره</h5>
+                            <div class="card-text" style="display: flex;justify-content: center">
+                                <p class="text-center display-1 ok">{{ table.table_number }}</p>
+                                <!-- <p>{{ table.table_availability}}</p> -->
+                                <!-- <p>{{ table.reservation_state }}</p> -->
+                                <a class="btn-floating btn-lg orange darken-1 del showme" role="button"
+                                    data-toggle="modal" data-target="#modalConfirmDelete" data-link="{{ table.pk }}"
+                                    href="" onclick="myFunction(event)"><i data-link="{{ table.pk }}"
+                                        class="fas fa-times"></i></a>
+                                <!-- href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a> -->
+                            </div>
+                        </div>
+                    </div>
 
-        {%endif%}
+                    <!-- <ul><a href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a></ul> -->
+                </div>
+                {% empty %}
+                <li>No Table yet.</li>
+
+                {% endfor %}
+            </div>
+
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="fixed-action-btn ">
+                    <input class="btn-floating btn-lg teal darken-1"
+                        style="font-size:larger;font-weight: bold ;color:white;border: none;" type="submit"
+                        name="create" value="+">
+                </div>
+            </form>
+
+
+        </div>
+        <!--Modal: modalConfirmDelete-->
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                <!--Content-->
+                <div class="modal-content text-center">
+                    <!--Header-->
+                    <div class="modal-header d-flex justify-content-center">
+                        <p class="heading">آیا مطمئنید؟</p>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+
+                        <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer flex-center">
+                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
+                        <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
+
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!--Modal: modalConfirmDelete-->
     </main>
     <footer>
 
     </footer>
-    <script src="{% static 'Restaurant_admin/js/table_main.js'%}" type="text/javascript"></script>
-    <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    <script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+    <script>
+            $(document).ready(function () {
+                $('.mdb-select').materialSelect();
+            });
+        </script>
+    <script src="{% static 'restaurant_admin/js/table_main.js' %}"></script>
+    
+    <!-- <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script> -->
 
 </body>
 
