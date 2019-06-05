@@ -41,3 +41,7 @@ class PollForm(forms.ModelForm):
     class Meta:
         model=models.Poll
         fields=('question',)
+
+class LoginForm(forms.Form):
+    username = forms.CharField(required = True,max_length=156)
+    password = forms.CharField(required= True, max_length= 16,widget=forms.PasswordInput)

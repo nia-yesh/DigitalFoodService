@@ -25,7 +25,8 @@ SECRET_KEY = '-92%ci@+2pcjw+%tebqbe^$4s*$_gzh3-quh0_7*xsb=c85p*q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+###
+AUTH_USER_MODEL = 'restaurant_admin.User'
 ALLOWED_HOSTS = ["192.168.1.5","127.0.0.1","192.168.69.243","192.168.43.164"]
 
 
