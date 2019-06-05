@@ -58,6 +58,7 @@
                                 <input type="hidden" name="table_id" value="{{ table.pk }}">
                                 <p><input type="submit" value="نمایش سفارش"></p>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -86,11 +87,31 @@
                             <li>No order yet</li>
                         {% endfor %}
                         {% if orderl.status == "OR" %}
+                            <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="table_pk" value="{{ chosen_object.pk }}">
+                            <input type="hidden" name="statustoPR" value="{{ orderl.pk }}">
                             <button class="center or1">آماده سازی غذا</button>
+                            </form>
+
                         {% elif orderl.status == "CH" %}
+                            <form method="post">
+                              {% csrf_token %}
+                              <input type="hidden" name="table_pk" value="{{ chosen_object.pk }}">
+                            <input type="hidden" name="statustoPR" value="{{ orderl.pk }}">
                             <button class="center or2">آماده سازی غذا</button>
-                        {% elif orderl.status == "RE" %}
+                            </form>
+
+                        {% elif orderl.status == "PR" %}
+                          <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="table_pk" value="{{ chosen_object.pk }}">
+                            <input type="hidden" name="statustoRE" value="{{ orderl.pk }}">
                             <button class="center or3">اعلام آمادگی غذا</button>
+                          </form>
+
+                        {% elif orderl.status == "RE" %}
+                              <p> سفارش اماده است</p>
                         {% endif %}
                     </div>
                 {% empty %}

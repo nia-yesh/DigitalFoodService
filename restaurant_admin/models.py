@@ -2,17 +2,12 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
-=======
-
->>>>>>> e2a801b5382b03c9e3c30fea2b1741f9ab4abea7
 
 def upload_location(instance, filename):
     return str(instance.id)+'/'
 
-<<<<<<< HEAD
 '''
 class User(models.Model):
     POSITIONS = (
@@ -24,6 +19,7 @@ class User(models.Model):
     position = models.CharField(max_length=2, default='DE', choices=POSITIONS)
 '''
 
+
 class User(AbstractUser):
     POSITIONS = (
         ('RA', 'restaurant_admin'),
@@ -32,8 +28,6 @@ class User(AbstractUser):
     )
     position = models.CharField(max_length=2, default='DE', choices=POSITIONS)
 
-=======
->>>>>>> e2a801b5382b03c9e3c30fea2b1741f9ab4abea7
 
 class Worker(models.Model):
     positions = {'MCH': 'Master Chef',
@@ -68,7 +62,6 @@ class Worker(models.Model):
 class Table(models.Model):
     table_number = models.IntegerField(primary_key=True)
     table_availability = models.BooleanField(default=True)
-    reservation_state = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.table_number)
@@ -110,7 +103,6 @@ class OrderList(models.Model):
         ('OR', 'Ordered'),
         ('PR', 'Preparing'),
         ('RE', 'Ready'),
-        ('DE', 'Delivered'),
     )
     table = models.ForeignKey(Table, related_name="OrderList_Table", on_delete=models.CASCADE, null=True)
     details = models.CharField(max_length=1000, blank=True, null=True)

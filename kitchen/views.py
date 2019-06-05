@@ -29,8 +29,23 @@ class TableStateListView(View):
     def post(self, *args, **kwargs):
         postvalues = self.request.POST
         print(postvalues)
+        if postvalues.get('statustoPR', None):
+            orederl_id = self.request.POST.get('statustoPR')
+            orderl = models.OrderList.objects.get(pk=orederl_id)
+            orderl.status = 'PR'
+            orderl.save()
+            self.chosen_object = self.model.objects.get(pk=orderl.table.pk)
+            self.queryset = self.model.objects.all()
+
+        if postvalues.get('statustoRE', None):
+            orederl_id = self.request.POST.get('statustoRE')
+            orderl = models.OrderList.objects.get(pk=orederl_id)
+            orderl.status = 'RE'
+            orderl.save()
+            self.chosen_object = self.model.objects.get(pk=orderl.table.pk)
+            self.queryset = self.model.objects.all()
+
         if postvalues.get('table_id', None):
-            print('yes')
             id = self.request.POST.get('table_id')
             self.chosen_object = self.model.objects.get(pk=id)
             self.queryset = self.model.objects.all()
