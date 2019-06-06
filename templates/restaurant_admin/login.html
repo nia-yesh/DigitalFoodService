@@ -1,38 +1,134 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'Restaurant_admin/css/login.css' %}">
+  <style>
+    html,
+    body,
+    header,
+    .view {
+      height: 100%;
+    }
 
+    @media (min-width: 560px) and (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .view {
+        height: 650px;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .view {
+        height: 650px;
+      }
+    }
+  </style>
+</head>
 {% block content %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
+<body class="login-page">
+  {% if messages %}
+  {% for message in messages %}
+  <p>{{message|safe}}</p>
+  {% endfor %}
   {% endif %}
-{% endif %}
 
-<form method="post">
-{% csrf_token %}
-<table>
-
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+  <!-- Main Navigation -->
+  <header>
 
 
+    <!-- Intro Section -->
+    <section class="view intro-2">
+      <div class="mask rgba-stylish-strong h-100 d-flex justify-content-center align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
+
+              <!-- Form with header -->
+              <div class="card wow fadeIn" data-wow-delay="0.3s">
+                <div class="card-body">
+                  <form method="post">
+                    {% csrf_token %}
+                    <!-- Header -->
+                    <div class="form-header amy-crisp-gradient">
+                      <h3 class="font-weight-500 my-2 py-1"><i class="fas fa-user"></i> ورود به
+                        صفحه‌ی مدیریت</h3>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="md-form">
+                      <i style="direction: rtl; right: 0;" class="fas fa-user prefix white-text"></i>
+                      {{ form.username }} {{form.username.errors}}
+                      <label style="direction: rtl; right: 8%;" for="id_username">نام کاربری</label>
+                    </div>
+
+
+                    <div class="md-form">
+                      <i style="direction: rtl; right: 0;" class="fas fa-lock prefix white-text"></i>
+                      {{ form.password }}
+                      {{form.password.errors}}
+                      <label style="direction: rtl;right: 8%;" for="id_password">رمز عبور</label>
+                    </div>
+
+                    <div class="text-center">
+                      <input class="btn amy-crisp-gradient btn-lg" style="font-size: large;color: white;" type="submit" value="ورود" />
+                      <input type="hidden" name="next" value="{{ next }}" />
+                      <hr class="mt-4">
+                      <div class="inline-ul text-center d-flex justify-content-center">
+                        <a href="https://github.com/nia-yesh/DigitalFoodService" class="p-2 m-2 fa-lg tw-ic"><i class="fab fa-github"></i></a>
+                        <a class="p-2 m-2 fa-lg li-ic"><i class="fab fa-telegram white-text"></i></a>
+                        <a class="p-2 m-2 fa-lg ins-ic"><i class="fab fa-instagram white-text ">
+                          </i></a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- Form with header -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Intro Section -->
+
+  </header>
+  <!-- Main Navigation -->
+  
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+  <script>
+
+    new WOW().init();
+
+  </script>
+  <script>
+      document.getElementById("id_username").setAttribute("class", "form-control");
+      document.getElementById("id_password").setAttribute("class", "form-control");
+    </script>
+
+</body>
 {% endblock %}
+
+</html>
