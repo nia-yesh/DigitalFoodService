@@ -1689,3 +1689,16 @@ a {
 .card-body{
     padding-top: 0px;
 }
+.modal{
+    width: 35%;
+    padding: 0;
+}
+.modal .modal-content{
+    padding: 0;
+}
+.modal-content{
+    background-clip: border-box;
+    border: none;
+    border-radius: 0;
+    outline: unset;
+}

@@ -1,71 +1,204 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
-  <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>table_main</title>
-      <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
-      <link rel="stylesheet" href="{% static 'restaurant_admin/css/cost_main.css' %}">
-  </head>
-  <body>
-    <header>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>cost_main</title>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+    <link rel="stylesheet" href="{% static 'restaurant_admin/css/cost_main.css' %}">
+</head>
+<body>
+<header class="top_header topnav">
+    <div class="nav_items">
         <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
         <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
         <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
         <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
-    </header>
-    <main>
-      
-<ul>
-    {% for c in object_list %}
-        <h1>{{c.id}}<h1>
-        <h1>tax:{{c.tax}}<h1>
-        <h1>service charge:{{c.service_charge}}<h1>
-        <h1>packaging cost:{{c.packaging_cost}}<h1>
-          <form method="post">
-               {% csrf_token %}
-              <input type="hidden" name="id" value="{{c.pk}}">
-              <p><input type="submit" value="this" ></p>
-          </form>
-          <a href="{% url 'restaurant_admin:Cost_delete' pk=c.pk %}">delete</a></ul>
-    
-    {% empty %}
+    </div>
+</header>
+<main class="main_content">
+    <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
+        <!--**************************update****************-->
+         {%if chosen_object%}
+        <div class="card mb-4" style="margin-top:2%;text-align: right;direction: rtl;">
+            <h5 class="card-header teal white-text py-4" style="padding-top: 0%">
+                <div style="display: flex;padding-top: 0%;">
+                    <button style="background-color: transparent;border: none;" onclick="myFunction2()">
+                        <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                </div>
+                <div class="text-center" style="padding-top: 0%;">
+                    <strong>تغییر قیمت</strong>
+                </div>
+
+            </h5>
+
+            <div class="card-body">
+                <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                            <div class="md-form">
+                                {{update_form.tax}}
+                                <label>مالیات</label>
+                                {{update_form.tax.errors}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4" style="direction: rtl;text-align: right;">
+                            <div class="md-form">
+                                {{update_form.service_charge}}
+                                <label>حق سرویس</label>
+                                {{update_form.service_charge.errors}}
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                            <div class="md-form">
+                                {{update_form.packaging_cost}}
+                                <label>هزینه بسته بندی</label>
+                                {{update_form.packaging_cost.errors}}
+                            </div>
+                        </div>
+                    </div>
+                    <input type='hidden' name='pk' value="{{chosen_object.pk}}">
+                    <div class="row " style="display: flex; justify-content: center">
+
+
+                        <input class="btn btn-lg teal " style="color: white;font-size: larger;"
+                               type="submit" name="edit" value="تغییر">
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        {%endif%}
+        <!--*************************end update**************-->
+        <!--**********************create**************************-->
+        {%if create_bool%}
+        <div class="card mb-4" style="margin-top:2%;text-align: right;direction: rtl;">
+            <h5 class="card-header teal white-text py-4" style="padding-top: 0%">
+                <div style="display: flex;padding-top: 0%;">
+                    <button style="background-color: transparent;border: none;" onclick="myFunction2()">
+                        <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                </div>
+                <div class="text-center" style="padding-top: 0%;">
+                    <strong>محاسبه قیمت جدید</strong>
+                </div>
+
+            </h5>
+
+            <div class="card-body">
+                <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                            <div class="md-form">
+                                {{create_form.tax}}
+                                <label>مالیات</label>
+                                {{create_form.tax.errors}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4" style="direction: rtl;text-align: right;">
+                            <div class="md-form">
+                                {{create_form.service_charge}}
+                                <label>حق سرویس</label>
+                                {{create_form.service_charge.errors}}
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                            <div class="md-form">
+                                {{create_form.packaging_cost}}
+                                <label>هزینه بسته بندی</label>
+                                {{create_form.packaging_cost.errors}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row " style="display: flex; justify-content: center">
+
+
+                        <input class="btn btn-lg teal " style="color: white;font-size: larger;"
+                               type="submit" name="create_1" value="ایجاد">
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        {%endif%}
+        <!--************************end create***********************-->
+        <!--**********************card****************-->
+        {% for c in object_list %}
+        <div class="card card-cascade wider reverse" style="width: 75%;margin: auto;margin-top: 3%;margin-bottom: 3%;">
+            <div class="view view-cascade overlay">
+                <img class="card-img-top"
+                     src="https://cdn.lynda.com/course/383051/383051-636915514667307190-16x9.jpg"
+                     alt="Card image cap">
+                <a href="#!">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <div class="card-body card-body-cascade ">
+                <!--<h1>{{c.id}}</h1>-->
+                <div class="text-right">
+                    <a href="{% url 'restaurant_admin:Cost_delete' pk=c.pk %}"><i class="fas fa-trash"
+                                                                                  style="background-color: transparent;color: red;font-size: medium;"> </i></a>
+                </div>
+
+                <!-- Title -->
+                <h4 class="text-center card-title " style="color: #004d40"><strong> نحوه محاسبه ی هزینه ها</strong></h4>
+                <!-- Subtitle -->
+                <h6 class="text-center font-weight-bold teal-text py-2">مالیات: {{c.tax}}</h6>
+                <h6 class="text-center font-weight-bold teal-text py-2">هزینه بسته بندی: {{c.packaging_cost}} </h6>
+                <h6 class="text-center font-weight-bold teal-text py-2">حق سرویس : {{c.service_charge}}</h6>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{c.pk}}">
+                    <input class="btn btn-lg teal " style="color: white;font-size: large;" type="submit" value="تغییر">
+                </form>
+            </div>
+
+
+        </div>
+        {% empty %}
         <li>No Cost yet.</li>
-    {% endfor %}
-    </ul>
+        {% endfor %}
+        <!--********************end card**********-->
+        <!--*******************************create float***********-->
+        <form method="post">
+            {% csrf_token %}
+            <div class="fixed-action-btn ">
+                <input class="btn-floating btn-lg teal darken-1"
+                       style="font-size:larger;font-weight: bold ;color:white;border: none;" type="submit" name="create"
+                       value="+">
+            </div>
+        </form>
+        <!--**********************************end***********-->
 
-    {%if chosen_object%}
-<form method="post" enctype="multipart/form-data">{% csrf_token %}
-  <p>tax :{{update_form.tax}} {{update_form.tax.errors}}</p>
-  <p>service charge:{{update_form.service_charge}} {{update_form.service_charge.errors}}</p>
-  <p>packaging_cost:{{update_form.packaging_cost}} {{update_form.packaging_cost.errors}}</p>
-  <input type='hidden' name='pk' value="{{chosen_object.pk}}">
-  <input type="submit" name= "edit" value="Update">
-</form>
-
-{%endif%}
-<form method="post">
-    {% csrf_token %}
-       <p><input type="submit" name="create" value="create" ></p>
-   </form>
-   
-   {%if create_bool%}
-     <form method="post" enctype="multipart/form-data">
-       {% csrf_token %}
-       <p>tax :{{create_form.tax}} {{create_form.tax.errors}}</p>
-       <p>service charge:{{create_form.service_charge}} {{create_form.service_charge.errors}}</p>
-       <p>packaging_cost:{{create_form.packaging_cost}} {{create_form.packaging_cost.errors}}</p>
-       <input type="submit" name="create_1" value="CREATE">
-     </form>
-     {%endif%}
-    </main>
-
-    <footer>
-
-    </footer>
-    <script src="{% static 'Restaurant_admin/js/cost_main.js'%}" type="text/javascript"></script>
-    <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script>
-  </body>
-
+    </div>
+</main>
+<footer>
+</footer>
+<script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+<script src="{% static 'Restaurant_admin/js/cost_main.js'%}" type="text/javascript"></script>
+<script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script>
+    function myFunction() {
+        // document.getElementById("myDialog").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:CostHome_detail' %}");
+    }
+</script>
+<script>
+    function myFunction2() {
+        // document.getElementById("myDialog2").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:CostHome_detail' %}");
+    }
+</script>
+</body>
 </html>

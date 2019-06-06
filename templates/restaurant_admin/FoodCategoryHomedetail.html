@@ -23,14 +23,8 @@
     {% if create_bool %}
     <div class="card" style="font-family: Shabnam !important;">
         <h5 class="card-title "
-            style="background-color:#009688;color: white;line-height: 100%;padding: 1.5%; ">
-            <div style="text-align: right;">
-                <button style="background-color: transparent;border: none;" onclick="myFunction()">
-                    <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
-            </div>
-            <div style="text-align: center;">
-                <strong>ایجاد دسته بندی جدید</strong>
-            </div>
+            style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
+            <strong>ایجاد دسته بندی جدید</strong>
         </h5>
         <div class="card-body">
             <div class="row">
@@ -63,36 +57,29 @@
     {% if chosen_object %}
     <div class="card" style="font-family: Shabnam !important;">
         <h5 class="card-title "
-            style="background-color:#009688;color: white;line-height: 100%;padding: 1.5%; ">
-            <div style="text-align: right;">
-                <button style="background-color: transparent;border: none;" onclick="myFunction()">
-                    <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
-            </div>
-            <div style="text-align: center;">
-                <strong> تغییر دسته بندی</strong>
-            </div>
+            style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
+            <strong> تغییر دسته بندی</strong>
         </h5>
         <div class="card-body">
             <div class="row">
-                <form style="direction: rtl;text-align: right;" class="col xl12 l12 m12 s12" method="post"
-                      enctype="multipart/form-data">{% csrf_token %}
+                <form  style="direction: rtl;text-align: right;" class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">{% csrf_token %}
                     <div class="row">
-                        <div class="input-field col  s6 m6 l6  xl6">
+                         <div class="input-field col  s6 m6 l6  xl6">
                             <div id="fC2_name">
-                                {{ update_form.name }}
+                               {{ update_form.name }}
                                 <label for="fC2_name">نام</label>
                                 {{ update_form.name.errors }}
                             </div>
                         </div>
 
-                        <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+                    <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
                         <div class="input-field  col  s6 m6 l3  xl4" style="display: flex;justify-content: center;">
                             <div class="waves-effect waves-light btn-large">
                                 <input style="color: white;font-size: larger;" type="submit" name="edit"
                                        value="تغییر">
                             </div>
                         </div>
-                    </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -116,14 +103,14 @@
                 <div style="display: flex;justify-content:left;">
                     <form method="post">
                         {% csrf_token %}
-                        <input type="hidden" name="id" value="{{ foodc.pk }}">
-                        <input type="submit" value="update">
+                         <input type="hidden" name="id" value="{{ foodc.pk }}">
+                        <input  type="submit"  value="update">
                     </form>
 
                 </div>
                 <div style="direction: ltr;display: flex">
                     <a href="{% url 'restaurant_admin:FoodCategory_delete' pk=foodc.pk %}"><i style="color: #009688"
-                                                                                              class="fas fa-trash"></i></a>
+                                                                                          class="fas fa-trash"></i></a>
                 </div>
 
 
@@ -179,17 +166,5 @@
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems);
     });
-</script>
-<script>
-    function myFunction() {
-        // document.getElementById("myDialog").style.visibility = "hidden";
-        location.replace("{% url 'restaurant_admin:FoodCategoryHome_detail' %}");
-    }
-</script>
-<script>
-    function myFunction2() {
-        // document.getElementById("myDialog2").style.visibility = "hidden";
-        location.replace("{% url 'restaurant_admin:FoodCategoryHome_detail' %}");
-    }
 </script>
 </body>

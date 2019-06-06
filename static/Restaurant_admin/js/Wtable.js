@@ -36,6 +36,7 @@ $(function() {
 function myFunction(event){
 text=event.target.dataset.worker;
     document.getElementById("sahand").href="Worker_delete/"+text;
+    
 }
 
 

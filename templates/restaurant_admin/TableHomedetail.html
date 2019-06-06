@@ -31,7 +31,7 @@
             {%if create_bool%}
             <div class="card mb-4 mt-4" style="text-align: right;direction: rtl;justify-content: center;">
                 <h5 class="card-header teal white-text text-center py-4">
-                    <strong>ایجاد غذای جدید</strong>
+                    <strong>ایجاد میز جدید</strong>
                 </h5>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
@@ -49,7 +49,7 @@
                                 <div class="md-form">
                                 <div class="form-check">
                                     {{ create_form.table_availability }}
-                                    <label class="form-check-label">موجود بودن
+                                    <label class="form-check-label" for="id_table_availability">موجود بودن
                                         میز:</label>
                                     {{create_form.table_availability.errors}}
                                 </div>

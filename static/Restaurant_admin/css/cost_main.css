@@ -1,0 +1,117 @@
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.ttf') format('truetype');
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: shabnam;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.top_header {
+    flex-shrink: 0;
+}
+
+.main_content {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.topnav {
+    white-space: nowrap; /* [1] */
+    overflow-x: auto; /* [2] */
+    -webkit-overflow-scrolling: touch; /* [3] */
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* [4] */
+}
+
+/* [5] */
+.topnav::-webkit-scrollbar {
+    display: none;
+}
+
+.topnav {
+    padding: 12px 16px;
+    direction: rtl;
+    text-align: center;
+    background: #5CA4A9;
+    opacity: 60%;
+    color: white;
+    /* overflow: hidden; */
+}
+
+.topnav a {
+    font-family: shabnam;
+    direction: rtl;
+    /* float: none; */
+    display: inline;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background: #387175;
+    color: white;
+}
+
+html,
+body {
+    height: 100%;
+    font-size: 15px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+}
+
+.top_header {
+    flex-shrink: 0;
+}
+
+.main_content {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+main {
+    flex: 1;
+    overflow: auto;
+}
+.card.card-cascade.wider{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
