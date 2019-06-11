@@ -21,10 +21,17 @@
     <br>
     <!--*********************create**********************-->
     {% if create_bool %}
-    <div class="card" style="font-family: Shabnam !important;">
+    <div class="card" style="text-align: right;direction: rtl;">
         <h5 class="card-title "
-            style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
-            <strong>ایجاد دسته بندی جدید</strong>
+            style="background-color:#009688;color: white;line-height: 100%;padding: 1.5%; ">
+            <div>
+                <button style="background-color: transparent;border: none;" onclick="royaFunction()">
+                    <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+            </div>
+            <div style="text-align: center;">
+                <strong>ایجاد دسته بندی جدید</strong>
+            </div>
+
         </h5>
         <div class="card-body">
             <div class="row">
@@ -55,31 +62,39 @@
     <!--*******************end create********************-->
     {#**********************update*********************#}
     {% if chosen_object %}
-    <div class="card" style="font-family: Shabnam !important;">
+    <div class="card" style="text-align: right;direction: rtl;">
         <h5 class="card-title "
-            style="background-color:#009688;color: white;line-height: 100%;text-align: center;padding: 1.5%; ">
-            <strong> تغییر دسته بندی</strong>
+            style="background-color:#009688;color: white;line-height: 100%;padding: 1.5%; ">
+            <div>
+                <button style="background-color: transparent;border: none;" onclick="royaFunction()">
+                    <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+            </div>
+            <div style="text-align: center;">
+                <strong>تغییر مشخصات دسته بندی</strong>
+            </div>
+
         </h5>
         <div class="card-body">
             <div class="row">
-                <form  style="direction: rtl;text-align: right;" class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <form style="direction: rtl;text-align: right;" class="col xl12 l12 m12 s12" method="post"
+                      enctype="multipart/form-data">{% csrf_token %}
                     <div class="row">
-                         <div class="input-field col  s6 m6 l6  xl6">
+                        <div class="input-field col  s6 m6 l6  xl6">
                             <div id="fC2_name">
-                               {{ update_form.name }}
+                                {{ update_form.name }}
                                 <label for="fC2_name">نام</label>
                                 {{ update_form.name.errors }}
                             </div>
                         </div>
 
-                    <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+                        <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
                         <div class="input-field  col  s6 m6 l3  xl4" style="display: flex;justify-content: center;">
                             <div class="waves-effect waves-light btn-large">
                                 <input style="color: white;font-size: larger;" type="submit" name="edit"
                                        value="تغییر">
                             </div>
                         </div>
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -90,30 +105,16 @@
 
     <!--*********************end update*******************-->
 
-    <ul class="collapsible popout" style="margin:10%;">
+    <ul class="collapsible popout" style="margin:10%;font-family: Shabnam;">
         {% for foodc in object_list %}
         <li>
 
             <div class="collapsible-header"
-                 style="color:rgb(92,164,169);font-size: 1.5vw">
+                 style="direction:rtl;color:rgb(92,164,169);font-size: 1.5vw">
 
-                <div style="display: flex;justify-content:right;direction: rtl;">
+                <div>
                     {{ foodc.name }}
                 </div>
-                <div style="display: flex;justify-content:left;">
-                    <form method="post">
-                        {% csrf_token %}
-                         <input type="hidden" name="id" value="{{ foodc.pk }}">
-                        <input  type="submit"  value="update">
-                    </form>
-
-                </div>
-                <div style="direction: ltr;display: flex">
-                    <a href="{% url 'restaurant_admin:FoodCategory_delete' pk=foodc.pk %}"><i style="color: #009688"
-                                                                                          class="fas fa-trash"></i></a>
-                </div>
-
-
                 <!--</div>-->
             </div>
 
@@ -127,12 +128,47 @@
                     {{ food.food_name }}
                     <!--href={{ food.get_absolute_url }}>{{ food.food_name }}</a>-->
                 </p>
+                <div style="direction: ltr;display: flex;">
+                    <a href="#">
+                        <button class="button foodc_remove_btn modal-trigger" data-foodc="{{ foodc.pk }}"
+                                style="border: none;background-color: transparent"
+                                data-target="modal1" onclick="myFunction(event)"><i
+                                data-foodc="{{ foodc.pk }}"
+                                style="font-size:x-large;color:red;background-color: transparent"
+                                class="fas fa-trash"> </i></button>
+                    </a>
+                    <form style="margin-left: 1%;" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ foodc.pk }}">
+                        <input class="btn-md waves-effect waves-light"
+                               style="background-color:teal;font-size: large;padding:0.75%;" type="submit"
+                               value="تغییر">
+                    </form>
+
+                </div>
 
                 {% empty %}
 
                 <p style="text-align:right;direction: rtl;font-size: 1.5vw;color:rgb(56,113,117);">غذایی موجود
                     نیست.</p>
+                <div style="direction: ltr;display: flex;">
+                    <a href="#">
+                        <button class="button foodc_remove_btn modal-trigger" data-foodc="{{ foodc.pk }}"
+                                style="border: none;background-color: transparent"
+                                data-target="modal1" onclick="myFunction(event)"><i
+                                data-foodc="{{ foodc.pk }}"
+                                style="font-size:x-large;color:red;background-color: transparent"
+                                class="fas fa-trash"> </i></button>
+                    </a>
+                    <form style="margin-left: 1%;" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ foodc.pk }}">
+                        <input class="btn-md waves-effect waves-light"
+                               style="background-color:teal;font-size: large;padding:0.75%;" type="submit"
+                               value="تغییر">
+                    </form>
 
+                </div>
 
                 {% endfor %}
 
@@ -157,14 +193,51 @@
         </div>
     </form>
     {#*****************end button create***************#}
-</main>
-<script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script>
+    <!-- modalllll -->
+    <div id="modal1" class="modal">
+        <div class="modal-content text-center">
+            <div class="header" style="background-color: #ff3547; color: white;height:10%; ">
+                <h4 style="padding: 5%"> آیا مطمئنید؟</h4>
+            </div>
 
-<script src="{% static 'Restaurant_admin/js/food.js' %}"></script>
+            <p style="padding: 5%"><i style="color: #ff3547"
+                                      class="fas fa-times fa-4x animated rotateIn"></i></p>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: center;">
+            <div class="text-center" style="display: flex">
+                <a style="margin: 3%; color: white;" href="#!"
+                   class="btn modal-action modal-close waves-effect waves-red btn-flat red accent-3">خیر</a>
+                <a style="margin: 3%; color: white"  id="sahand" href="#!"
+                   class="btn modal-close waves-effect waves btn-flat red accent-3" >بله</a>
+            </div>
+        </div>
+    </div>
+    <!-- end modalllll   -->
+</main>
+<script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+</script>
+<script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems);
     });
 </script>
+<script>
+    function royaFunction() {
+        // document.getElementById("myDialog").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:FoodCategoryHome_detail' %}");
+    }
+</script>
+<script>
+    function royaFunction2() {
+        // document.getElementById("myDialog2").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:FoodCategoryHome_detail' %}");
+    }
+</script>
+<script src="{% static 'Restaurant_admin/js/food.js' %}"></script>
 </body>

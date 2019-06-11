@@ -24,12 +24,17 @@
     url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.ttf') format('truetype');
     font-weight: 300;
 }
-
+/* ////////nav */
 body {
+    text-align: right;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+
+    font-family: shabnam;
+}
+
+html,
+body {
     height: 100%;
 }
 
@@ -41,7 +46,6 @@ body {
     flex-grow: 1;
     overflow: auto;
 }
-
 .topnav {
     white-space: nowrap; /* [1] */
     overflow-x: auto; /* [2] */
@@ -80,43 +84,9 @@ body {
     background: #387175;
     color: white;
 }
-
-.top_header {
-    flex-shrink: 0;
+body {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
 }
-
-.main_content {
-    flex-grow: 1;
-    overflow: auto;
-}
-
-main {
-    flex: 1;
-    overflow: auto;
-}
-.waves-effect input{
-    color: white;
-}
-.card{
-    margin: 2% !important;
-}
-.modal{
-    width: 35%;
-    padding: 0;
-}
-.modal .modal-content{
-    padding: 0;
-}
-.modal-content{
-    background-clip: border-box;
-    border: none;
-    border-radius: 0;
-    outline: unset;
-}
-.modal {
-    background: transparent;
-    box-shadow: none;
-    z-index: 1050;
-    height: auto;
-    /*width: auto;*/
-}
+/* end --- nav */

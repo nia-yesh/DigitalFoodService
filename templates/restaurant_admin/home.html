@@ -1,19 +1,361 @@
-{% block title %}Home page{% endblock %}
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
 
-{% block content %}
-{% if user.is_authenticated %}
-<p>Hi {{ user.username }} !</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+  <link rel="stylesheet" href="{% static 'restaurant_admin/css/home.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
 
-<ul><a href="{% url 'restaurant_admin:TableHome_detail' %}">table</a>  </ul>
-<ul><a href="{% url 'restaurant_admin:FoodHome_detail' %}">Food</a></ul>
-<ul><a href="{% url 'restaurant_admin:WorkerHome_detail' %}">Worker</a></ul>
-<ul><a href="{% url 'restaurant_admin:CostHome_detail' %}">Cost</a>  </ul>
+  </style>
+</head>
+
+<body class="">
+  <!-- {% block content %}
+  {% if user.is_authenticated %}
+  <p>Hi {{ user.username }} !</p> -->
+
+  <!-- Main Navigation -->
+      <header class="top_header topnav mb-5">
+          {% else %}
+          <p>You are not logged in</p>
+          <a href="{% url 'restaurant_admin:login' %}">login</a>
+          {% endif %}
+          <div class="nav_items">
+              <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندان</a>
+              <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه‌ها</a>
+              <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا‌ها</a>
+              <a href="{% url 'restaurant_admin:TableHome_detail' %}">میز‌ها</a>
+          </div>
+          
+      </header>  
+  <!-- Main Navigation -->
+
+  <!-- Main layout -->
+  <main>
+    <!-- Fixed button -->
+    <div class="fixed-action-btn clearfix d-none d-xl-block" style="bottom: 45px; right: 24px;">
+
+        <a class="btn-floating btn-lg red">
+          <i class="fas fa-pencil-alt"></i>
+        </a>
+  
+        <ul class="list-unstyled">
+          <li><a href="{% url 'restaurant_admin:logout' %}" class="btn-floating red"><i class="fas fa-sign-out-alt"></i></a></li>
+          <li><a href="{% url 'restaurant_admin:change_password' %}" class="btn-floating blue"><i class="fas fa-lock"></i></a></li>
+        </ul>
+  
+      </div>
+      <!-- Fixed button -->
+    <div class="container-fluid">
+
+      <!-- Section: Classic admin cards -->
+      <section class="pb-3" >
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+
+            <!-- Card Primary -->
+            <div class="card classic-admin-card primary-color" style="direction: rtl">
+              <div class="card-body" style="direction: rtl">
+                <div class="pull-right" style="direction: rtl">
+                  <i class="far fa-money-bill-alt"></i>
+                </div>
+                <p class="white-text">میزان فروش</p>
+                <h4 class="check">2000$</h4>
+              </div>
+              
+            </div>
+            <!-- Card Primary -->
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+
+            <!-- Card Yellow -->
+            <div class="card classic-admin-card warning-color">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <p>تعداد مشترکین</p>
+                <h4 class="check">200</h4>
+              </div>
+            </div>
+            <!-- Card Yellow -->
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-md-0 mb-4">
+
+            <!-- Card Blue -->
+            <div class="card classic-admin-card light-blue lighten-1">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                <p>مشتری‌ها تا به امروز</p>
+                <h4 class="check">20000</h4>
+              </div>
+            </div>
+            <!-- Card Blue -->
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-0">
+
+            <!-- Card Red -->
+            <div class="card classic-admin-card red accent-2">
+              <div class="card-body">
+                <div class="pull-right">
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+                <p>تعداد سفارشات</p>
+                <h4 class="check">2000</h4>
+              </div>
+              
+              
+            </div>
+            <!-- Card Red -->
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </section>
+      <!-- Section: Classic admin cards -->
+
+      <!-- Section: Main panel -->
+      <section class="mb-5">
+
+        <!-- Card -->
+        <div class="card card-cascade narrower">
 
 
-<a href="{% url 'restaurant_admin:logout' %}">logout</a>
-<a href="{% url 'restaurant_admin:change_password' %}">change password</a>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'restaurant_admin:login' %}">login</a>
-{% endif %}
-{% endblock %}
+          <!-- Section: Chart -->
+          <section>
+
+            <!-- Grid row -->
+            
+
+              <!-- Grid column -->
+              <div class="row">
+                <div class="col-12">
+
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header light-blue lighten-1">
+                  <h4 class="h4-responsive mb-0 font-weight-bold">نتایج نظر‌سنجی</h4>
+                </div>
+                <!-- Card image -->
+
+                <!-- Card content -->
+                <div class="card-body card-body-cascade pb-0">
+
+                <!-- Panel data -->
+
+                </div>
+                <!-- Card content -->
+              </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="row justify-content-center">
+                <div class="col-8" style="">
+                <!-- Card image -->
+                <div class="view view-cascade gradient-card-header white">
+
+                  <!-- Chart -->
+                  <canvas id="barChart"></canvas>
+
+                </div>
+                <!-- Card image -->
+              </div>
+              </div>
+              <!-- Grid column -->
+
+            
+            <!-- Grid row -->
+
+          </section>
+          <!-- Section: Chart -->
+
+        </div>
+        <!-- Card -->
+
+      </section>
+      <!-- Section: Main panel -->
+
+
+
+    </div>
+    {% endblock %}
+  </main>
+  <!-- Main layout -->
+
+
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+
+  <!-- Initializations -->
+  <script>
+    // SideNav Button Initialization
+    // SideNav Initialization
+    // SideNav Default Options
+    $('.button-collapse').sideNav({
+      edge: 'right', // Choose the horizontal origin
+      closeOnClick: false, // Closes side-nav on &lt;a&gt; clicks, useful for Angular/Meteor
+      breakpoint: 1440, // Breakpoint for button collapse
+      MENU_WIDTH: 240, // Width for sidenav
+      timeDurationOpen: 300, // Time duration open menu
+      timeDurationClose: 200, // Time duration open menu
+      timeDurationOverlayOpen: 50, // Time duration open overlay
+      timeDurationOverlayClose: 200, // Time duration close overlay
+      easingOpen: 'easeOutQuad', // Open animation
+      easingClose: 'easeOutCubic', // Close animation
+      showOverlay: true, // Display overflay
+      showCloseButton: true // Append close button into siednav
+    });
+    // SideNav Scrollbar Initialization
+    var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(sideNavScrollbar);
+  </script>
+  <script>
+
+
+    // var container = document.querySelector('.custom-scrollbar');
+    // var ps = new PerfectScrollbar(container, {
+    //   wheelSpeed: 2,
+    //   wheelPropagation: true,
+    //   minScrollbarLength: 20
+    // });
+
+    // Data Picker Initialization
+    $('.datepicker').pickadate();
+
+    // Material Select Initialization
+    $(document).ready(function () {
+      $('.mdb-select').material_select();
+    });
+
+    // Tooltips Initialization
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+  </script>
+
+  <!-- Charts -->
+  <script>
+    // Small chart
+    $(function () {
+      $('.min-chart#chart-sales').easyPieChart({
+        barColor: "#4285F4",
+        onStep: function (from, to, percent) {
+          $(this.el).find('.percent').text(Math.round(percent));
+        }
+      });
+    });
+
+
+
+    //bar
+    var ctxB = document.getElementById("barChart").getContext('2d');
+    var myBarChart = new Chart(ctxB, {
+      type: 'bar',
+      data: {
+        labels: ["January", "Febuary", "March", "April", "May"],
+        datasets: [{
+          label: '# of Votes',
+          data: [13, 19, 8, 11, 5],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.3)',
+            'rgba(41, 182, 246, 0.3)',
+            'rgba(255, 187, 51, 0.3)',
+            'rgba(66, 133, 244, 0.3)',
+            'rgba(153, 102, 255, 0.3)',
+
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(41, 182, 246, 1)',
+            'rgba(255, 187, 51, 1)',
+            'rgba(66, 133, 244, 1)',
+            'rgba(153, 102, 255, 1)',
+
+          ],
+          borderWidth: 2
+        }]
+      },
+      optionss: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    $('#dark-mode').on('click', function (e) {
+
+      e.preventDefault();
+      $('footer').toggleClass('mdb-color lighten-4 dark-card-admin');
+      $('body, .navbar').toggleClass('white-skin navy-blue-skin');
+      $(this).toggleClass('white text-dark btn-outline-black');
+      $('body').toggleClass('dark-bg-admin');
+      $('.card').toggleClass('dark-card-admin');
+      $('h6, .card, p, td, th, i, li a, h4, input, label').not(
+        '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+      $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
+      $('.gradient-card-header').toggleClass('white dark-card-admin');
+
+      if ($('.navbar').hasClass('navy-blue-skin')) {
+        for (let i = 0; i <= 5; i++) {
+          myBarChart.data.datasets[0].data[i] = (Math.random(i) * 100);
+        }
+
+        Chart.defaults.global.defaultFontColor = '#fff';
+      } else {
+
+        for (let i = 0; i <= 5; i++) {
+          myBarChart.data.datasets[0].data[i] = (Math.random(i) * 100);
+        }
+
+        Chart.defaults.global.defaultFontColor = '#666';
+      }
+
+      myBarChart.update();
+
+    });
+
+
+  </script>
+  <script src="{% static 'restaurant_admin/js/home.js' %}"></script>
+</body>
+
+</html>

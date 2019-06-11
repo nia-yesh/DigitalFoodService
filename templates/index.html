@@ -19,24 +19,19 @@
                         var json = data['status'];
                         var text = '{ "status" : ' + json + '}';
                         var obj = JSON.parse(text);
-                        if (obj.status.status == "PR")
-                        {
+                        if (obj.status.status == "PR") {
                             document.getElementById('btn_NO').style.display = 'none';
                             document.getElementById('btn_CH_OR').style.display = 'none';
                             document.getElementById('btn_PR').style.display = 'block';
                             document.getElementById('btn_DE').style.display = 'none';
                             document.getElementById('btn_RE').style.display = 'none';
-                        }
-                        else if (obj.status.status == "DE")
-                        {
+                        } else if (obj.status.status == "DE") {
                             document.getElementById('btn_NO').style.display = 'none';
                             document.getElementById('btn_CH_OR').style.display = 'none';
                             document.getElementById('btn_PR').style.display = 'none';
                             document.getElementById('btn_DE').style.display = 'block';
                             document.getElementById('btn_RE').style.display = 'none';
-                        }
-                        else if (obj.status.status == "RE")
-                        {
+                        } else if (obj.status.status == "RE") {
                             // var audio = new Audio('../static/customer/music/notif2.mp3')
                             // audio.play()
                             // var oggSource = '<source src="../static/customer/music/notif_sound.ogg" type="audio/ogg">';
@@ -47,17 +42,13 @@
                             document.getElementById('btn_PR').style.display = 'none';
                             document.getElementById('btn_DE').style.display = 'none';
                             document.getElementById('btn_RE').style.display = 'block';
-                        }
-                        else if (obj.status.status == "NO")
-                        {
+                        } else if (obj.status.status == "NO") {
                             document.getElementById('btn_NO').style.display = 'block';
                             document.getElementById('btn_CH_OR').style.display = 'none';
                             document.getElementById('btn_PR').style.display = 'none';
                             document.getElementById('btn_DE').style.display = 'none';
                             document.getElementById('btn_RE').style.display = 'none';
-                        }
-                        else if (obj.status.status == "CH" || obj.status.status == "OR")
-                        {
+                        } else if (obj.status.status == "CH" || obj.status.status == "OR") {
                             document.getElementById('btn_NO').style.display = 'none';
                             document.getElementById('btn_CH_OR').style.display = 'block';
                             document.getElementById('btn_PR').style.display = 'none';
@@ -106,12 +97,13 @@
                            href="{% url 'customer:food_menu' pk=cat_first_pk %}"><strong>تغییر سفارش</strong></a>
                     </div>
 
-                    <div id="btn_PR" class="btn danger-color btn-rounded btn-lg" style="margin-top:35%; display: none;"><strong>در حال
-                        آماده سازی
-                        سفارش
-                        شما</strong></div>
+                    <div id="btn_PR" class="btn danger-color btn-rounded btn-lg" style="margin-top:35%; display: none;">
+                        <strong>در حال
+                            آماده سازی
+                            سفارش
+                            شما</strong></div>
 
-<!--                    <audio id="xyz" src="{% static 'customer/music/notif2.mp3' %}" preload="auto"></audio>-->
+                    <!--                    <audio id="xyz" src="{% static 'customer/music/notif2.mp3' %}" preload="auto"></audio>-->
 
                     <form style="display: none" id="btn_RE" action="" method="POST">
                         {% csrf_token %}
@@ -124,6 +116,8 @@
                            href="{% url 'zarinpal:request' %}"><strong>پرداخت</strong></a>
                     </div>
                 </div>
+                <a class="btn warning-color btn-rounded btn-lg" style="margin-top:35%" href="">اشتراک می‌خواهم</a>
+
 
 
             </div>

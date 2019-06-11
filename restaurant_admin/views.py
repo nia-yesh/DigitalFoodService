@@ -50,10 +50,10 @@ def login(request):
                     if user_x[0].is_active:
                         if user_x[0].position == "RA":
                             login(request,user_x[0])
-                            return render(request, 'restaurant_admin/home.html')
+                            return redirect('restaurant_admin:admin_home')
                         elif user_x[0].position == "KA":
                             login(request,user_x[0])
-                            return render(request, 'kitchen/TableStatelist.html')
+                            return redirect('kitchen:TableState_list')
                     else:
                         messages.error(request,'حساب کاربری غیر فعال است ')
                         return redirect('restaurant_admin:login')
@@ -75,9 +75,10 @@ def login(request):
         })
 
 
-@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
+@user_passes_test(is_restaurant_admin)
 @login_required
 def Home(request):
+    print('yes')
     return render(request,'restaurant_admin/home.html')
 
 
@@ -158,7 +159,6 @@ class FoodCategoryDetailView(DetailView):
     fields = '__all__'
 
 @method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
-
 @method_decorator(login_required, name='dispatch')
 class FoodCategoryHomeDetailView(SpecialView):
     template_name = 'restaurant_admin/FoodCategoryHomedetail.html'
@@ -357,7 +357,7 @@ class PollDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('restaurant_admin:PollHome_detail')
 
-@method_decorator(user_passes_test(is_restaurant_admin),name='dispatch')
+@user_passes_test(is_restaurant_admin)
 
 @login_required
 def PollResult(request):
