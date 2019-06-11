@@ -32,11 +32,7 @@
                             document.getElementById('btn_DE').style.display = 'block';
                             document.getElementById('btn_RE').style.display = 'none';
                         } else if (obj.status.status == "RE") {
-                            // var audio = new Audio('../static/customer/music/notif2.mp3')
-                            // audio.play()
-                            // var oggSource = '<source src="../static/customer/music/notif_sound.ogg" type="audio/ogg">';
-                            // var embedSource = '<embed hidden="true" autostart="true" loop="false" src="../static/customer/music/notif_sound.ogg">';
-                            // document.getElementById("sound").innerHTML='<audio autoplay="autoplay">' +oggSource + embedSource+ '</audio>';
+
                             document.getElementById('btn_NO').style.display = 'none';
                             document.getElementById('btn_CH_OR').style.display = 'none';
                             document.getElementById('btn_PR').style.display = 'none';
@@ -82,10 +78,9 @@
                 <p class="lead mb-0">غذای خود را
                     <span class="txt-rotate" data-period="3000"
                           data-rotate='[ "نوآورانه", "آسان", "سریع", "خلاقانه", "خوشمزه " ]'>
-                        </span>
+                    </span>
                     سفارش دهید
                 </p>
-
                 <div id="myDiv">
                     <div style="display: none" id="btn_NO">
                         <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
@@ -116,9 +111,7 @@
                            href="{% url 'zarinpal:request' %}"><strong>پرداخت</strong></a>
                     </div>
                 </div>
-                <a class="btn warning-color btn-rounded btn-lg" style="margin-top:35%" href="">اشتراک می‌خواهم</a>
-
-
+                <a class="btn warning-color btn-rounded btn-lg" href="{% url 'customer:subscription' %}">اشتراک می‌خواهم</a>
 
             </div>
 

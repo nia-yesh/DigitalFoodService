@@ -73,12 +73,11 @@
                             میز شماره{{ table.table_number }}
                         </p>
 
-
                         <form method="post">
                             {% csrf_token %}
                             <input type="hidden" name="table_id" value="{{ table.pk }}">
                             <p><input id="btn_{{table.table_number}}" class="but" type="submit" value="نمایش سفارش"
-                                      style="margin-top: 30px;padding-bottom: 5px"></p>
+                                      style="margin-top: 30px; padding-bottom: 5px"></p>
                         </form>
                     </div>
 
