@@ -33,6 +33,13 @@ class IndexView(TemplateView):
 
         return context
 
+    def post(self, request, *args, **kwargs):
+        ol_pk = self.request.session['order_list_pk']
+        order_list = OrderList.objects.get(pk=ol_pk)
+        order_list.status = "DE"
+        order_list.save()
+        return HttpResponseRedirect('')
+
 
 class FoodCategoryListView(ListView):
     model = FoodCategory
@@ -197,15 +204,6 @@ class OrderListView(FormMixin, ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        if request.POST.get('clearList'):
-            food_pk = request.POST.get('food_pk')
-            food = Food.objects.get(pk=food_pk)
-            if 'food_orders_list' not in self.request.session:
-                fo_list = []
-                self.request.session['food_orders_list'] = fo_list
-            fo_list = self.request.session['food_orders_list']
-            ordered_foods = FoodOrder.objects.filter(pk__in=fo_list)
-
         if request.POST.get('addFood'):
 
             food_pk = request.POST.get('food_pk')
@@ -380,3 +378,15 @@ class EndView(TemplateView):
         table.save()
         order_list.delete()
         self.request.session.flush()
+
+
+def update(request):
+    if 'order_list_pk' not in request.session:
+        ol = OrderList.objects.create()
+        request.session['order_list_pk'] = ol.pk
+    ol_pk = request.session['order_list_pk']
+    order_list = OrderList.objects.get(pk=ol_pk)
+    diction = {'status': order_list.status}
+    import json
+    from django.http import JsonResponse
+    return JsonResponse({'status': json.dumps(diction)})

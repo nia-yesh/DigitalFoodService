@@ -103,6 +103,7 @@ class OrderList(models.Model):
         ('OR', 'Ordered'),
         ('PR', 'Preparing'),
         ('RE', 'Ready'),
+        ('DE', 'Delivered'),
     )
     table = models.ForeignKey(Table, related_name="OrderList_Table", on_delete=models.CASCADE, null=True)
     details = models.CharField(max_length=1000, blank=True, null=True)

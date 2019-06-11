@@ -29,8 +29,23 @@ class TableStateListView(View):
     def post(self, *args, **kwargs):
         postvalues = self.request.POST
         print(postvalues)
+        if postvalues.get('statustoPR', None):
+            orederl_id = self.request.POST.get('statustoPR')
+            orderl = models.OrderList.objects.get(pk=orederl_id)
+            orderl.status = 'PR'
+            orderl.save()
+            self.chosen_object = self.model.objects.get(pk=orderl.table.pk)
+            self.queryset = self.model.objects.all()
+
+        if postvalues.get('statustoRE', None):
+            orederl_id = self.request.POST.get('statustoRE')
+            orderl = models.OrderList.objects.get(pk=orederl_id)
+            orderl.status = 'RE'
+            orderl.save()
+            self.chosen_object = self.model.objects.get(pk=orderl.table.pk)
+            self.queryset = self.model.objects.all()
+
         if postvalues.get('table_id', None):
-            print('yes')
             id = self.request.POST.get('table_id')
             self.chosen_object = self.model.objects.get(pk=id)
             self.queryset = self.model.objects.all()
@@ -50,3 +65,23 @@ class TableOrdersView(TemplateView):
         context['order_list'] = order_list
 
         return context
+
+
+def update(request):
+    results = models.Table.objects.all()
+    result_list =[]
+    temp_dict = {}
+    for table in results:
+        if len(table.OrderList_Table.all()) != 0:
+            temp_dict = {'table_number':table.table_number,
+                         'table_availability': table.table_availability,
+                         'table_status': table.OrderList_Table.all()[0].status}
+        else:
+            temp_dict = {'table_number': table.table_number,
+                         'table_availability': table.table_availability,
+                         'table_status': "NO"}
+        result_list.append(temp_dict)
+        temp_dict = {}
+    import json
+    from django.http import JsonResponse
+    return JsonResponse({'object_list': json.dumps(result_list)})

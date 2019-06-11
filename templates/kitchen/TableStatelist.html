@@ -9,6 +9,42 @@
 
     <link rel="stylesheet" href="{% static 'Kitchen/css/tables.css' %}">
     <script src="{% static 'Kitchen/js/script.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+                function update_trackdata() {
+                    $.getJSON('/kitchen/update', function (data) {
+                        var json = data['object_list'];
+                        var text = '{ "tables" : ' + json + '}';
+                        var obj = JSON.parse(text);
+                        for (var i = 0; i < obj.tables.length; i++) {
+                                if (obj.tables[i].table_status == "NO") {
+                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#f0ecec';
+                                }
+                                if (obj.tables[i].table_status == "CH") {
+                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#ffa377';
+                                }
+                                if (obj.tables[i].table_status == "RE") {
+                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#fde674';
+                                }
+                                if (obj.tables[i].table_status == "PR") {
+                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#70bde8';
+                                }
+                                if (obj.tables[i].table_status == "OR") {
+                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#bad350';
+                                }
+                            }
+                    });
+                }
+
+                update_trackdata();
+
+                var interval = setInterval(update_trackdata, 5000);
+
+
+            }
+        );
+
+    </script>
 
 </head>
 <header class="top_header topnav">
@@ -16,92 +52,94 @@
         <a class="l1" href="{% url 'kitchen:TableState_list' %}">آشپزخانه</a>
         <a class="l2" href="{% url 'restaurant_admin:admin_home' %}">مدیریت</a>
     </div>
-</header>
 
+
+</header>
+<body class="boo">
 
 <div class="parent-container ">
     <div style="float: left ; width: 100%">
-
-
-        <div class="card-deck  col-sm-12">
+        <div class="card-deck  col-sm-12" id="myDiv">
 
             {% for table in object_list %}
-                <div class="row">
-                    <div id="myCard" class="card " {% if table.status == "OR" %}style="background-color: darkgray"
-                         {% else %}style="background-color: darkgray"{% endif %}>
-                        <div class="card-body text-center ">
-                            {{ table.status }}
-                            <p class="tb">
-                                میز شماره{{ table.table_number }}
-                            </p>
+            <div class="row">
+                <div id="card_{{table.table_number}}" class="card myCard" style="background-color: darkgray">
+                    <div class="card-body text-center ">
 
-                            {#        {% for t in table.OrderList_Table.all %}#}
-                            {#            <p style="text-align: right; ">#}
-                            {#            {% if t.status == "OR"%}#}
-                            {#                ordered:وضعیت سفارش#}
-                            {#            {% elif t.status == "NO" %}#}
-                            {#                not ordered:وضعیت سفارش#}
-                            {#            {% elif t.status == "CH" %}#}
-                            {#                changed:وضعیت سفارش#}
-                            {#            {% elif t.status == "PR" %}#}
-                            {#                preparing:وضعیت سفارش#}
-                            {#            {% elif t.status == "RE" %}#}
-                            {#                ready:وضعیت سفارش#}
-                            {#            {% elif t.status == "DE" %}#}
-                            {#                delivered:وضعیت سفارش#}
-                            {#            {% endif %}#}
-                            {#            </p>#}
-                            {#            {% endfor %}#}
+                        <div class="mizs" data-ac="{{ table.OrderList_Table.first.status }}"
+                             style="display: none"></div>
 
-                            <form method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="table_id" value="{{ table.pk }}">
-                                <p><input type="submit" value="نمایش سفارش"></p>
-                            </form>
-                        </div>
+                        <p id="numbers_{{table.table_number}}" class="tb" style="background-color: #d0cfcf">
+                            میز شماره{{ table.table_number }}
+                        </p>
+
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="table_id" value="{{ table.pk }}">
+                            <p><input id="btn_{{table.table_number}}" class="but" type="submit" value="نمایش سفارش"
+                                      style="margin-top: 30px;padding-bottom: 5px"></p>
+                        </form>
                     </div>
+
                 </div>
+            </div>
 
             {% empty %}
-                <li>No Table yet.</li>
+            <li>No Table yet.</li>
             {% endfor %}
             </ul>
         </div>
     </div>
+
+
     {% if chosen_object %}
-        {% if not chosen_object.table_availability %}
+    {% if not chosen_object.table_availability %}
 
-            <div class="orl">
-                <p class="tor text-center">لیست سفارشات</p>
+    <div class="orl">
+        <p class="tor text-center">
+            لیست سفارشات
 
-                {% for orderl in chosen_object.OrderList_Table.all %}
-                    <div class="ors">
-                        {% for order in orderl.FoodOrder_list.all %}
 
-                            <p class="p1">نام غذا:{{ order.food.food_name }}</p>
-                            <p class="p2">تعداد: {{ order.number }}</p>
-                            <p class="p3">جزئیات:{{ orderl.details }}</p>
+        </p>
 
-                        {% empty %}
-                            <li>No order yet</li>
-                        {% endfor %}
-                        {% if orderl.status == "OR" %}
-                            <button class="center or1">آماده سازی غذا</button>
-                        {% elif orderl.status == "CH" %}
-                            <button class="center or2">آماده سازی غذا</button>
-                        {% elif orderl.status == "RE" %}
-                            <button class="center or3">اعلام آمادگی غذا</button>
-                        {% endif %}
-                    </div>
-                {% empty %}
-                    <li>No orderlist yet</li>
-                {% endfor %}
+        {% for orderl in chosen_object.OrderList_Table.all %}
+        <div class="ors" style="border-radius: 10px">
+            {% for order in orderl.FoodOrder_list.all %}
 
-            </div>
-        {% endif %}
+            <p class="p1">نام غذا:{{ order.food.food_name }}</p>
+            <p class="p2">تعداد: {{ order.number }}</p>
+            <p class="p3" style="margin-bottom: 40px">:جزئیات{{ orderl.details }}</p>
+
+            {% empty %}
+            <li>No order yet</li>
+            {% endfor %}
+            {% if orderl.status == "OR" %}
+            <button class="center or1"
+                    style="background-color: #029bdd; margin-right: 10px; border: 2px solid #0D47A1;border-radius: 10px">
+                آماده سازی غذا
+            </button>
+            {% elif orderl.status == "CH" %}
+            <button class="center or2"
+                    style="background-color: #029bdd; margin-right: 10px;border: 2px solid #0D47A1;border-radius: 10px">
+                آماده سازی غذا
+            </button>
+            {% elif orderl.status == "RE" %}
+            <button class="center or3"
+                    style="background-color: #029bdd; margin-right: 10px;border: 2px solid #0D47A1;border-radius: 10px">
+                اعلام آمادگی غذا
+            </button>
+            {% endif %}
+        </div>
+        {% empty %}
+        <li>No orderlist yet</li>
+        {% endfor %}
+
+    </div>
+    {% endif %}
     {% endif %}
 </div>
-
+</body>
 <script src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
 <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
