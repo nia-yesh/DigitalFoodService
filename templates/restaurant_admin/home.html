@@ -29,10 +29,12 @@
           <a href="{% url 'restaurant_admin:login' %}">login</a>
           {% endif %}
           <div class="nav_items">
+             <a href="{% url 'restaurant_admin:PollHome_detail' %}">نظرسنجی</a>
               <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندان</a>
               <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه‌ها</a>
               <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا‌ها</a>
               <a href="{% url 'restaurant_admin:TableHome_detail' %}">میز‌ها</a>
+              <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
           </div>
           
       </header>  

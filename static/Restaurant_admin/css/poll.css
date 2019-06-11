@@ -59,7 +59,7 @@ body {
 }
 
 .topnav {
-    padding: 12px 16px;
+    padding: 0%;
     direction: rtl;
     text-align: center;
     background: #5CA4A9;
@@ -109,4 +109,7 @@ body {
 main {
     flex: 1;
     overflow: auto;
+}
+.md-form label{
+    left: unset !important;
 }

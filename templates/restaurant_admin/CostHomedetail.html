@@ -14,10 +14,15 @@
 <body>
 <header class="top_header topnav">
     <div class="nav_items">
-        <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+           <a href="{% url 'restaurant_admin:PollHome_detail' %}">نظرسنجی</a>
+        <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
+        <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
         <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
         <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
-        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+        <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
+
     </div>
 </header>
 <main class="main_content">
@@ -136,7 +141,7 @@
         <div class="card card-cascade wider reverse" style="width: 75%;margin: auto;margin-top: 3%;margin-bottom: 3%;">
             <div class="view view-cascade overlay">
                 <img class="card-img-top"
-                     src="https://cdn.lynda.com/course/383051/383051-636915514667307190-16x9.jpg"
+                     src="{% static 'Restaurant_admin/image/2.jpg' %}"
                      alt="Card image cap">
                 <a href="#!">
                     <div class="mask rgba-white-slight"></div>

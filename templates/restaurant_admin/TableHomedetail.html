@@ -17,41 +17,45 @@
 
 <body>
 
-    <header class="top_header topnav">
-        <div class="nav_items">
-            <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندان</a>
-            <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه‌ها</a>
-            <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا‌ها</a>
-            <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
-        </div>
-    </header>
-    <main class="main_content">
-        <div class="container">
+<header class="top_header topnav">
+    <div class="nav_items">
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+        <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
+        <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندان</a>
+        <a href="{% url 'restaurant_admin:PollHome_detail' %}">نظرسنجی</a>
+        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
+        <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
+        <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا‌ها</a>
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+    </div>
+</header>
+<main class="main_content">
+    <div class="container">
 
-            {%if create_bool%}
-            <div class="card mb-4 mt-4" style="text-align: right;direction: rtl;justify-content: center;">
-                    
-                <h5 class="card-header teal white-text text-center py-4">
-                        <div style="display: flex;padding-top: 0%;">
-                                <button style="background-color: transparent;border: none;" onclick="royaFunction()">
-                                    <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
-                            </div>
-                    <strong>ایجاد میز جدید</strong>
-                </h5>
-                <div class="card-body">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-6 col-md-4">
-                                <div class="md-form">
-                                    {{ create_form.table_number }}
-                                    <label style="direction: rtl">شماره میز</label>
-                                    {{create_form.table_number.errors}}
-                                </div>
+        {%if create_bool%}
+        <div class="card mb-4 mt-4" style="text-align: right;direction: rtl;justify-content: center;">
 
+            <h5 class="card-header teal white-text text-center py-4">
+                <div style="display: flex;padding-top: 0%;">
+                    <button style="background-color: transparent;border: none;" onclick="royaFunction()">
+                        <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                </div>
+                <strong>ایجاد میز جدید</strong>
+            </h5>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-6 col-md-4">
+                            <div class="md-form">
+                                {{ create_form.table_number }}
+                                <label style="direction: rtl">شماره میز</label>
+                                {{create_form.table_number.errors}}
                             </div>
-                            <div class="col-6 col-md-4">
-                                <div class="md-form">
+
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="md-form">
                                 <div class="form-check">
                                     {{ create_form.table_availability }}
                                     <label class="form-check-label" for="id_table_availability">موجود بودن
@@ -59,118 +63,119 @@
                                     {{create_form.table_availability.errors}}
                                 </div>
                             </div>
-                            </div>
-                        </div>
-                        <div class="row " style="display: flex; justify-content: center">
-                                <input class="btn btn-lg teal " style="color: white;font-size: larger;" type="submit" name="create_1" value="ایجاد">
-                        </div>
-                        <!-- <p>table number:{{ create_form.table_number }} {{create_form.table_number.errors}}</p>
-                        <p>table
-                            availablitiy:{{ create_form.table_availability }}{{create_form.table_availability.errors}}
-                        </p>
-                        <p>reservation state:{{ create_form.reservation_state }}
-                            {{create_form.reservation_state.errors}}</p> -->
-                        
-                    </form>
-                </div>
-            </div>
-
-            {%endif%}
-            <div class="row">
-
-
-                {% for table in object_list %}
-                <div class="col-12 col-md-4">
-                    <div class="card bg-transparent text-white showhim myc">
-                        <img src="../../../media/418035-PDD34R-711.png" class="card-img" alt="...">
-                        <div class="card-img-overlay" data-av="{{ table.table_availability}}"
-                            data-res="{{ table.reservation_state }}">
-                            <h5 class="card-title text-center">میز شماره</h5>
-                            <div class="card-text" style="display: flex;justify-content: center">
-                                <p class="text-center display-1 ok">{{ table.table_number }}</p>
-                                <!-- <p>{{ table.table_availability}}</p> -->
-                                <!-- <p>{{ table.reservation_state }}</p> -->
-                                <a class="btn-floating btn-lg orange darken-1 del showme" role="button"
-                                    data-toggle="modal" data-target="#modalConfirmDelete" data-link="{{ table.pk }}"
-                                    href="" onclick="myFunction(event)"><i data-link="{{ table.pk }}"
-                                        class="fas fa-times"></i></a>
-                                <!-- href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a> -->
-                            </div>
                         </div>
                     </div>
-
-                    <!-- <ul><a href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a></ul> -->
-                </div>
-                {% empty %}
-                <li>No Table yet.</li>
-
-                {% endfor %}
-            </div>
-
-
-            <form method="post">
-                {% csrf_token %}
-                <div class="fixed-action-btn ">
-                    <input class="btn-floating btn-lg teal darken-1"
-                        style="font-size:larger;font-weight: bold ;color:white;border: none;" type="submit"
-                        name="create" value="+">
-                </div>
-            </form>
-
-
-        </div>
-        <!--Modal: modalConfirmDelete-->
-        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-                <!--Content-->
-                <div class="modal-content text-center">
-                    <!--Header-->
-                    <div class="modal-header d-flex justify-content-center">
-                        <p class="heading">آیا مطمئنید؟</p>
+                    <div class="row " style="display: flex; justify-content: center">
+                        <input class="btn btn-lg teal " style="color: white;font-size: larger;" type="submit"
+                               name="create_1" value="ایجاد">
                     </div>
+                    <!-- <p>table number:{{ create_form.table_number }} {{create_form.table_number.errors}}</p>
+                    <p>table
+                        availablitiy:{{ create_form.table_availability }}{{create_form.table_availability.errors}}
+                    </p>
+                    <p>reservation state:{{ create_form.reservation_state }}
+                        {{create_form.reservation_state.errors}}</p> -->
 
-                    <!--Body-->
-                    <div class="modal-body">
-
-                        <i class="fas fa-times fa-4x animated rotateIn"></i>
-
-                    </div>
-
-                    <!--Footer-->
-                    <div class="modal-footer flex-center">
-                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
-                        <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
-
-                    </div>
-                </div>
-                <!--/.Content-->
+                </form>
             </div>
         </div>
-        <!--Modal: modalConfirmDelete-->
-    </main>
-    <footer>
 
-    </footer>
-    
-    <script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
-    <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
-    <script>
-            $(document).ready(function () {
-                $('.mdb-select').materialSelect();
-            });
-        </script>
-         <script>
-                function royaFunction() {
-                    // document.getElementById("myDialog").style.visibility = "hidden";
-                    location.replace("{% url 'restaurant_admin:TableHome_detail' %}");
-                }
-            </script>
-    <script src="{% static 'restaurant_admin/js/table_main.js' %}"></script>
-    
-    <!-- <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script> -->
+        {%endif%}
+        <div class="row">
+
+
+            {% for table in object_list %}
+            <div class="col-12 col-md-4">
+                <div class="card bg-transparent text-white showhim myc">
+                    <img src="../../../media/418035-PDD34R-711.png" class="card-img" alt="...">
+                    <div class="card-img-overlay" data-av="{{ table.table_availability}}"
+                         data-res="{{ table.reservation_state }}">
+                        <h5 class="card-title text-center">میز شماره</h5>
+                        <div class="card-text" style="display: flex;justify-content: center">
+                            <p class="text-center display-1 ok">{{ table.table_number }}</p>
+                            <!-- <p>{{ table.table_availability}}</p> -->
+                            <!-- <p>{{ table.reservation_state }}</p> -->
+                            <a class="btn-floating btn-lg orange darken-1 del showme" role="button"
+                               data-toggle="modal" data-target="#modalConfirmDelete" data-link="{{ table.pk }}"
+                               href="" onclick="myFunction(event)"><i data-link="{{ table.pk }}"
+                                                                      class="fas fa-times"></i></a>
+                            <!-- href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <ul><a href="{% url 'restaurant_admin:Table_delete' pk=table.pk %}">delete</a></ul> -->
+            </div>
+            {% empty %}
+            <li>No Table yet.</li>
+
+            {% endfor %}
+        </div>
+
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="fixed-action-btn ">
+                <input class="btn-floating btn-lg teal darken-1"
+                       style="font-size:larger;font-weight: bold ;color:white;border: none;" type="submit"
+                       name="create" value="+">
+            </div>
+        </form>
+
+
+    </div>
+    <!--Modal: modalConfirmDelete-->
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">آیا مطمئنید؟</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+
+                    <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
+                    <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
+
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: modalConfirmDelete-->
+</main>
+<footer>
+
+</footer>
+
+<script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.mdb-select').materialSelect();
+    });
+</script>
+<script>
+    function royaFunction() {
+        // document.getElementById("myDialog").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:TableHome_detail' %}");
+    }
+</script>
+<script src="{% static 'restaurant_admin/js/table_main.js' %}"></script>
+
+<!-- <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script> -->
 
 </body>
 
