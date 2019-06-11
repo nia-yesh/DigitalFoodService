@@ -30,7 +30,12 @@
 
             {%if create_bool%}
             <div class="card mb-4 mt-4" style="text-align: right;direction: rtl;justify-content: center;">
+                    
                 <h5 class="card-header teal white-text text-center py-4">
+                        <div style="display: flex;padding-top: 0%;">
+                                <button style="background-color: transparent;border: none;" onclick="royaFunction()">
+                                    <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                            </div>
                     <strong>ایجاد میز جدید</strong>
                 </h5>
                 <div class="card-body">
@@ -157,6 +162,12 @@
                 $('.mdb-select').materialSelect();
             });
         </script>
+         <script>
+                function royaFunction() {
+                    // document.getElementById("myDialog").style.visibility = "hidden";
+                    location.replace("{% url 'restaurant_admin:TableHome_detail' %}");
+                }
+            </script>
     <script src="{% static 'restaurant_admin/js/table_main.js' %}"></script>
     
     <!-- <script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script> -->

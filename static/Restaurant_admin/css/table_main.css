@@ -157,3 +157,6 @@ body {
       display: none;
   } */
   /* end buttonnnn */
+  .md-form label{
+    left: unset !important;
+}

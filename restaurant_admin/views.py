@@ -50,10 +50,10 @@ def login(request):
                     if user_x[0].is_active:
                         if user_x[0].position == "RA":
                             login(request,user_x[0])
-                            return render(request, 'restaurant_admin/home.html')
+                            return redirect('restaurant_admin:admin_home')
                         elif user_x[0].position == "KA":
                             login(request,user_x[0])
-                            return render(request, 'kitchen/TableStatelist.html')
+                            return redirect('kitchen:TableState_list')
                     else:
                         messages.error(request,'حساب کاربری غیر فعال است ')
                         return redirect('restaurant_admin:login')

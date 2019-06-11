@@ -16,317 +16,318 @@
 </head>
 
 <body>
-<header class="top_header topnav">
-    <div class="nav_items">
-        <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
-        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
-    </div>
-</header>
-<main class="main_content">
-    <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
-        <br>
-        <!--*********************update******************-->
-
-        {% if chosen_object %}
-        <div class="card mb-4" style="text-align: right;direction: rtl;justify-content: center;">
-            <h5 class="card-header teal white-text  py-4" style="padding-top: 0%">
-                 <div style="display: flex;padding-top: 0%;">
-                     <button style="background-color: transparent;border: none;" onclick="royaFunction()">
-                 <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
-                </div>
-                <div class="text-center" style="padding-top: 0%;">
-                    <strong> تغییر جزئیات غذا</strong>
-                </div>
-            </h5>
-            <div class="card-body">
-                <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            <div class="md-form">
-                                {{ update_form.food_name }}
-                                <label>نام</label>
-                                {{ update_form.food_name.errors }}
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            <div class="md-form" data-length="1000">
-                                {{ update_form.food_details }}
-                                {{ update_form.food_details.errors }}
-                                <label>جزئیات</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4"
-                             style="display: flex;justify-content: center; line-height: 3">
-                            <div class="md-form">
-                                <div class="form-check">
-                                    {{ update_form.food_availability }}
-                                    {{ update_form.food_availability.errors }}
-                                    <label class="form-check-label" for="id_food_availability">موجود بودن</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            <div class="md-form">
-                                {{ update_form.cost }}
-                                {{ update_form.cost.errors }}
-                                <label>هزینه</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            {{ update_form.food_category }}
-                            {{ update_form.food_category.errors }}
-                            <label>دسته بندی</label>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4"
-                             style="display: flex; justify-content:center; ">
-                            <div class="md-form">
-                                <div class="file-field">
-                                    <div class=" btn teal btn-lg " style="color: white;">
-                                        <span>{{update_form.food_img }}</span>
-                                        {{ update_form.food_img.errors }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
-                    <div class="row " style="display: flex; justify-content: center">
-                        <input class="btn btn-lg teal " style="color: white;font-size: larger;" type="submit"
-                               name="edit"
-                               value="تغییر">
-                    </div>
-
-                </form>
-            </div>
+    <header class="top_header topnav">
+        <div class="nav_items">
+            <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
+            <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
         </div>
-        {% endif %}
-        <br>
-        <!--*****************create**********************-->
+    </header>
+    <main class="main_content">
+        <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
+            <br>
+            <!--*********************update******************-->
 
-        {% if create_bool %}
-        <div class="card mb-4" style="text-align: right;direction: rtl;justify-content: center;">
+            {% if chosen_object %}
+            <div class="card mb-4" style="text-align: right;direction: rtl;justify-content: center;">
+                <h5 class="card-header teal white-text  py-4" style="padding-top: 0%">
+                    <div style="display: flex;padding-top: 0%;">
+                        <button style="background-color: transparent;border: none;" onclick="royaFunction()">
+                            <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                    </div>
+                    <div class="text-center" style="padding-top: 0%;">
+                        <strong> تغییر جزئیات غذا</strong>
+                    </div>
+                </h5>
+                <div class="card-body">
+                    <form class="col xl12 l12 m12 s12" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
 
-            <h5 class="card-header teal white-text py-4" style="padding-top: 0%">
-                <div style="display: flex;padding-top: 0%;">
-                    <button style="background-color: transparent;border: none;" onclick="royaFunction2()">
-                        <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
-                </div>
-                <div class="text-center" style="padding-top: 0%;">
-                    <strong>ایجاد غذای جدید</strong>
-                </div>
-
-            </h5>
-            <div class="card-body">
-                <!-- <div class="row"> -->
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            <div class="md-form">
-                                {{ create_form.food_name }}
-                                <label style="direction: rtl">نام</label>
-                                {{ create_form.food_name.errors }}
-
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                <div class="md-form">
+                                    {{ update_form.food_name }}
+                                    <label>نام</label>
+                                    {{ update_form.food_name.errors }}
+                                </div>
                             </div>
-
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            <div class="md-form" data-length="1000">
-                                {{ create_form.food_details }}
-                                <label>جزئیات </label>
-                                {{ create_form.food_details.errors }}
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                <div class="md-form" data-length="1000">
+                                    {{ update_form.food_details }}
+                                    {{ update_form.food_details.errors }}
+                                    <label>جزئیات</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4"
-                             style="display: flex;justify-content: center; line-height: 3">
-                            <div class="md-form">
-                                <div class="form-check">
-                                    {{ create_form.food_availability }}
-                                    <label class="form-check-label" for="id_food_availability">موجود بودن
-                                        غذا:</label>
-                                    {{ create_form.food_availability.errors }}
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4"
+                                style="display: flex;justify-content: center; line-height: 3">
+                                <div class="md-form">
+                                    <div class="form-check">
+                                        {{ update_form.food_availability }}
+                                        {{ update_form.food_availability.errors }}
+                                        <label class="form-check-label" for="id_food_availability">موجود بودن</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-                            <div class="md-form">
-                                {{ create_form.cost }}
-                                <label> هزینه </label>
-                                {{ create_form.cost.errors }}
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                <div class="md-form">
+                                    {{ update_form.cost }}
+                                    {{ update_form.cost.errors }}
+                                    <label>هزینه</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                {{ update_form.food_category }}
+                                {{ update_form.food_category.errors }}
+                                <label>دسته بندی</label>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4"
+                                style="display: flex; justify-content:center; ">
+                                <div class="md-form">
+                                    <div class="file-field">
+                                        <div class=" btn teal btn-lg " style="color: white;">
+                                            <span>{{update_form.food_img }}</span>
+                                            {{ update_form.food_img.errors }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
-
-                            {{ create_form.food_category }}
-                            <label> دسته بندی غذا</label>
-                            {{ create_form.food_category.errors }}
-
+                        <input type='hidden' name='pk' value="{{ chosen_object.pk }}">
+                        <div class="row " style="display: flex; justify-content: center">
+                            <input class="btn btn-lg teal " style="color: white;font-size: larger;" type="submit"
+                                name="edit" value="تغییر">
                         </div>
 
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            <br>
+            <!--*****************create**********************-->
 
-                        <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4 "
-                             style="display: flex; justify-content:center; ">
-                            <div class="md-form">
-                                <div class="file-field">
-                                    <div class=" btn teal btn-lg " style="color: white;">
-                                        <span>تصویر را انتخاب کنید</span>
-                                        {{ create_form.food_img }}
-                                        {{ create_form.food_img.errors }}
+            {% if create_bool %}
+            <div class="card mb-4" style="text-align: right;direction: rtl;justify-content: center;">
 
+                <h5 class="card-header teal white-text py-4" style="padding-top: 0%">
+                    <div style="display: flex;padding-top: 0%;">
+                        <button style="background-color: transparent;border: none;" onclick="royaFunction2()">
+                            <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                    </div>
+                    <div class="text-center" style="padding-top: 0%;">
+                        <strong>ایجاد غذای جدید</strong>
+                    </div>
+
+                </h5>
+                <div class="card-body">
+                    <!-- <div class="row"> -->
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                <div class="md-form">
+                                    {{ create_form.food_name }}
+                                    <label style="direction: rtl">نام</label>
+                                    {{ create_form.food_name.errors }}
+
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                <div class="md-form" data-length="1000">
+                                    {{ create_form.food_details }}
+                                    <label>جزئیات </label>
+                                    {{ create_form.food_details.errors }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4"
+                                style="display: flex;justify-content: center; line-height: 3">
+                                <div class="md-form">
+                                    <div class="form-check">
+                                        {{ create_form.food_availability }}
+                                        <label class="form-check-label" for="id_food_availability">موجود بودن
+                                            غذا:</label>
+                                        {{ create_form.food_availability.errors }}
                                     </div>
-                                    <!-- <div class="file-path-wrapper">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+                                <div class="md-form">
+                                    {{ create_form.cost }}
+                                    <label> هزینه </label>
+                                    {{ create_form.cost.errors }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
+
+                                {{ create_form.food_category }}
+                                <label> دسته بندی غذا</label>
+                                {{ create_form.food_category.errors }}
+
+                            </div>
+
+
+                            <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4 "
+                                style="display: flex; justify-content:center; ">
+                                <div class="md-form">
+                                    <div class="file-field">
+                                        <div class=" btn teal btn-lg " style="color: white;">
+                                            <span>تصویر را انتخاب کنید</span>
+                                            {{ create_form.food_img }}
+                                            {{ create_form.food_img.errors }}
+
+                                        </div>
+                                        <!-- <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text"
                                             placeholder="عکس خود را آپلود کنید">
                                     </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row " style="display: flex; justify-content: center">
+                        <div class="row " style="display: flex; justify-content: center">
 
 
-                        <input class="btn btn-lg teal " style="color: white;font-size: larger;"
-                               type="submit" name="create_1" value="ایجاد">
+                            <input class="btn btn-lg teal " style="color: white;font-size: larger;" type="submit"
+                                name="create_1" value="ایجاد">
 
 
-                    </div>
+                        </div>
 
 
-                </form>
-                <!-- </div> -->
+                    </form>
+                    <!-- </div> -->
+                </div>
             </div>
-        </div>
-        {% endif %}
-        <!--*********************************************-->
-        <div class="row">
+            {% endif %}
+            <!--*********************************************-->
+            <div class="row">
 
-            {% for food in object_list %}
+                {% for food in object_list %}
 
-            <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4">
 
-                <!-- Card -->
-                <div class="card mb-4 hoverable">
+                    <!-- Card -->
+                    <div class="card mb-4 hoverable">
 
-                    <!-- Card image -->
-                    <div class="view overlay">
-                        <div id="img_size">
-                            <img class="card-img-top h-100" src="{{ food.food_img.url }}" alt="Card image cap">
-                            <a>
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
+                        <!-- Card image -->
+                        <div class="view overlay">
+                            <div id="img_size">
+                                <img class="card-img-top h-100" src="{{ food.food_img.url }}" alt="Card image cap">
+                                <a>
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <!-- Button -->
+                        <a class="btn-floating btn-lg btn-action ml-auto mr-4 mdb-color lighten-3">
+                            <form method="post" class="button">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ food.pk }}">
+                                <input
+                                    style="font-size:medium;padding-top: 12%;line-height: 2.5;padding-left: 20%; color: white;background:none;border: none;"
+                                    type="submit" value="تغییر">
+                            </form>
+                        </a>
+
+                        <!-- Card content -->
+                        <div class="card-body">
+
+                            <!-- Title -->
+                            <h4 class="card-title" style="text-align: center;">{{ food.food_name }}</h4>
+                            <hr>
+                            <!-- Text -->
+                            <p class="card-text" style="direction: rtl;text-align: right;">{{ food.food_details }}</p>
+
+                        </div>
+
+                        <!-- Card footer -->
+                        
+                        <div class="rounded-bottom mdb-color lighten-3 text-center pt-3 pb-3">
+                            <div class="row ">
+                                    <div class="col-3 font-small" style="right: 10px;color: Tomato"><a href="#" >
+                                            <button class="button food_remove_btn" data-food="{{ food.pk }}"
+                                                style="border: none;background-color: transparent;color: red"
+                                                data-toggle="modal" data-target="#modalConfirmDelete"
+                                                onclick="myFunction(event)">
+                                                <i data-food="{{ food.pk }}" class="far fa-trash-alt"></i>
+                                            </button>
+                                        </a></div>
+                                <div class="col-3 white-text font-small"><i class="fas fa-check pr-1"
+                                        style="margin-right: 10px"></i>
+                                    <span class="isav"> {{ food.food_availability }}</span>
+                                </div>
+                                <div class="col-3 font-small"><a href="#" class="white-text"><i
+                                            class="fas fa-wallet"></i> {{ food.cost }}</a></div>
+                                
+                                <div class="col-3 font-small" ><a href="#" class="white-text">
+                                        <i class="fas fa-utensils"> </i> {{ food.food_category }}</a></div>
+                                </div>
                         </div>
 
                     </div>
+                    <!-- Card -->
 
-                    <!-- Button -->
-                    <a class="btn-floating btn-action ml-auto mr-4 mdb-color lighten-3">
-                        <form method="post" class="button">
-                            {% csrf_token %}
-                            <input type="hidden" name="id" value="{{ food.pk }}">
-                            <input style="font-size:medium;padding-top: 12%; color: white;background:none;border: none;"
-                                   type="submit" value="تغییر">
-                        </form>
-                    </a>
+                </div>
+                {% empty %}
+                <li>No Food yet.</li>
 
-                    <!-- Card content -->
-                    <div class="card-body">
 
-                        <!-- Title -->
-                        <h4 class="card-title" style="text-align: center;">{{ food.food_name }}</h4>
-                        <hr>
-                        <!-- Text -->
-                        <p class="card-text" style="direction: rtl;text-align: right;">{{ food.food_details }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <!--****************create********************-->
+        <form method="post">
+            {% csrf_token %}
+            <div class="fixed-action-btn ">
+                <input class="btn-floating btn-lg teal darken-1"
+                    style="font-size:larger;font-weight: bold ;color:white;border: none;" type="submit" name="create"
+                    value="+">
+            </div>
+        </form>
+        <!--Modal: modalConfirmDelete-->
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                <!--Content-->
+                <div class="modal-content text-center">
+                    <!--Header-->
+                    <div class="modal-header d-flex justify-content-center">
+                        <p class="heading">آیا مطمئنید؟</p>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+
+                        <i class="fas fa-times fa-4x animated rotateIn"></i>
 
                     </div>
 
-                    <!-- Card footer -->
-                    <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
-                        <ul class="list-unstyled list-inline font-small">
-                            <li class="list-inline-item pr-2 white-text"><i class="fas fa-check pr-1"
-                                                                            style="margin-right: 10px"></i>
-                                <span class="isav"> {{ food.food_availability }}</span>
-                            </li>
-                            <li class="list-inline-item pr-2"><a href="#" class="white-text"><i
-                                    class="fas fa-wallet"></i> {{ food.cost }}</a></li>
-                            <li class="list-inline-item pr-2"><a href="#" class="white-text">
-                                <button class="button food_remove_btn" data-food="{{ food.pk }}"
-                                        style="border: none;background-color: transparent;color: white"
-                                        data-toggle="modal" data-target="#modalConfirmDelete"
-                                        onclick="myFunction(event)">
-                                    <i data-food="{{ food.pk }}" class="far fa-trash-alt"></i>
-                                </button>
-                            </a></li>
-                            <li class="list-inline-item"><a href="#" class="white-text">
-                                <i class="fas fa-utensils"> </i> {{ food.food_category }}</a></li>
-                        </ul>
+                    <!--Footer-->
+                    <div class="modal-footer flex-center">
+                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
+                        <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
+
                     </div>
-
                 </div>
-                <!-- Card -->
-
+                <!--/.Content-->
             </div>
-            {% empty %}
-            <li>No Food yet.</li>
-
-
-            {% endfor %}
         </div>
-    </div>
-    <!--****************create********************-->
-    <form method="post">
-        {% csrf_token %}
-        <div class="fixed-action-btn ">
-            <input class="btn-floating btn-lg teal darken-1"
-                   style="font-size:larger;font-weight: bold ;color:white;border: none;" type="submit" name="create"
-                   value="+">
-        </div>
-    </form>
-    <!--Modal: modalConfirmDelete-->
-    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-            <!--Content-->
-            <div class="modal-content text-center">
-                <!--Header-->
-                <div class="modal-header d-flex justify-content-center">
-                    <p class="heading">آیا مطمئنید؟</p>
-                </div>
-
-                <!--Body-->
-                <div class="modal-body">
-
-                    <i class="fas fa-times fa-4x animated rotateIn"></i>
-
-                </div>
-
-                <!--Footer-->
-                <div class="modal-footer flex-center">
-                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
-                    <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
-
-                </div>
-            </div>
-            <!--/.Content-->
-        </div>
-    </div>
-    <!--Modal: modalConfirmDelete-->
-</main>
-<footer>
-</footer>
-<script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
-<!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
-<!-- <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script> -->
-<script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
-<!-- <script>
+        <!--Modal: modalConfirmDelete-->
+    </main>
+    <footer>
+    </footer>
+    <script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
+    <!-- <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+    <!-- <script>
     document.querySelectorAll('.food_remove_btn').forEach(btn => {
         btn.addEventListener('click', event => {
             $('#exampleModal').modal();
@@ -336,24 +337,24 @@
         });
     });
 </script> -->
-<script>
-function royaFunction() {
-  // document.getElementById("myDialog").style.visibility = "hidden";
-  location.replace("{% url 'restaurant_admin:FoodHome_detail' %}");
-}
-</script>
-<script>
-function royaFunction2() {
-  // document.getElementById("myDialog2").style.visibility = "hidden";
-  location.replace("{% url 'restaurant_admin:FoodHome_detail' %}");
-}
-</script>
-<script>
-    $(document).ready(function () {
-        $('.mdb-select').materialSelect();
-    });
-</script>
-<script src="{% static 'Restaurant_admin/js/list.js' %}"></script>
+    <script>
+        function royaFunction() {
+            // document.getElementById("myDialog").style.visibility = "hidden";
+            location.replace("{% url 'restaurant_admin:FoodHome_detail' %}");
+        }
+    </script>
+    <script>
+        function royaFunction2() {
+            // document.getElementById("myDialog2").style.visibility = "hidden";
+            location.replace("{% url 'restaurant_admin:FoodHome_detail' %}");
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.mdb-select').materialSelect();
+        });
+    </script>
+    <script src="{% static 'Restaurant_admin/js/list.js' %}"></script>
 
 </body>
 
