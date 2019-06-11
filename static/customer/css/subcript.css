@@ -1,0 +1,193 @@
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-FD.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Bold-FD.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot');
+    src: url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.woff') format('woff'),
+    url('../../assets/fonts/shabnam/Farsi-Digits/Shabnam-Light-FD.ttf') format('truetype');
+    font-weight: 300;
+}
+.topnav {
+    white-space: nowrap; /* [1] */
+    overflow-x: auto; /* [2] */
+    -webkit-overflow-scrolling: touch; /* [3] */
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* [4] */
+}
+
+/* [5] */
+.topnav::-webkit-scrollbar {
+    display: none;
+}
+
+.topnav {
+    padding: 12px 16px;
+    direction: rtl;
+    text-align: center;
+    background-color: #ec407a;
+    opacity: 0.6;
+    color: white;
+    /* overflow: hidden; */
+}
+
+.topnav a {
+    font-family: shabnam;
+    direction: rtl;
+    /* float: none; */
+    display: inline;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+/***.topnav{
+    text-align:center;
+    height:40px;
+    white-space: nowrap;
+    background-color: #ad1457;
+    text-align:right;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}***/
+.l1{
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 10px ;
+    color: white;
+}
+.l2{
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    color: white;
+}
+.all{
+    background-color:  #f48fb1 ;
+    width: 350px;
+    height: 100vh ;
+    border-radius: 30px;
+    margin-left: 500px;
+    margin-bottom: 20px;
+    position: sticky;
+    position: -webkit-sticky;
+
+
+
+}
+.bo{
+    font-family: Shabnam;
+    background-image: url("../../customer/image/2389705.jpg");
+    opacity: 0.8;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+
+}
+.head{
+    color: white;
+    font-size: 20px ;
+    padding-left: 60px;
+    padding-top: 20px;
+    text-align: center;
+    padding:10px;
+    background-color: #ad1457;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px ;
+    height: 60px;
+}
+.n{
+    padding-top: 20px;
+    padding-right: 70px;
+    float: right;
+    padding-bottom: 5px;
+}
+.nbox{
+    padding-right: 70px;
+    float:right ;
+}
+.ln{
+    padding-top: 20px;
+    padding-right: 70px;
+    float: right;
+    padding-bottom: 5px;
+}
+.lnbox{
+    padding-right: 70px;
+    float:right;
+}
+.bd{
+    padding-top: 20px;
+    padding-right: 70px;
+    float: right;
+    padding-bottom: 5px;
+}
+.bdbox{
+    padding-right: 70px;
+    float:right;
+}
+.add{
+    padding-top: 20px;
+    padding-right: 70px;
+    float: right;
+    padding-bottom: 5px;
+}
+.addbox{
+    padding-right: 70px;
+    float:right;
+}
+.ph{
+    padding-top: 20px;
+    padding-right: 70px;
+    float: right;
+    padding-bottom: 5px;
+}
+.phbox{
+    padding-right: 70px;
+    float:right;
+}
+.mph{
+    padding-top: 20px;
+    padding-right: 70px;
+    float: right;
+    padding-bottom: 5px;
+}
+.mphbox{
+    padding-right: 70px;
+    float:right;
+}
+.subb{
+    color: white;
+    width:145px;
+    height: 30px;
+    background-color: #ad1457 ;
+    margin-top: 60px;
+    margin-bottom:20px;
+    margin-right: 95px;
+    float: right ;
+    text-align: center;
+    border-radius: 5px;
+}
+.md-form label{
+    left:unset !important;
+}
+
