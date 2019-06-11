@@ -23,7 +23,7 @@
 <main class="main_content">
     <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
         <!--**************************update****************-->
-         {%if chosen_object%}
+        {%if chosen_object%}
         <div class="card mb-4" style="margin-top:2%;text-align: right;direction: rtl;">
             <h5 class="card-header teal white-text py-4" style="padding-top: 0%">
                 <div style="display: flex;padding-top: 0%;">
@@ -98,14 +98,14 @@
                         <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
                             <div class="md-form">
                                 {{create_form.tax}}
-                                <label>مالیات</label>
+                                <label style="direction: rtl">مالیات</label>
                                 {{create_form.tax.errors}}
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4" style="direction: rtl;text-align: right;">
                             <div class="md-form">
                                 {{create_form.service_charge}}
-                                <label>حق سرویس</label>
+                                <label style="direction: rtl">حق سرویس</label>
                                 {{create_form.service_charge.errors}}
 
                             </div>
@@ -113,7 +113,7 @@
                         <div class="col-sm-6 col-md-4 col-lg-4  col-xl-4">
                             <div class="md-form">
                                 {{create_form.packaging_cost}}
-                                <label>هزینه بسته بندی</label>
+                                <label style="direction: rtl">هزینه بسته بندی</label>
                                 {{create_form.packaging_cost.errors}}
                             </div>
                         </div>
@@ -145,8 +145,14 @@
             <div class="card-body card-body-cascade ">
                 <!--<h1>{{c.id}}</h1>-->
                 <div class="text-right">
-                    <a href="{% url 'restaurant_admin:Cost_delete' pk=c.pk %}"><i class="fas fa-trash"
-                                                                                  style="background-color: transparent;color: red;font-size: medium;"> </i></a>
+                    <a href="#">
+                        <button class="button cost_remove_btn" cost-food="{{ c.pk }}"
+                                style="border: none;background-color: transparent;color: red"
+                                data-toggle="modal" data-target="#modalConfirmDelete"
+                                onclick="myFunction(event)">
+                            <i data-food="{{ c.pk }}" class="far fa-trash-alt"></i>
+                        </button>
+                    </a>
                 </div>
 
                 <!-- Title -->
@@ -180,14 +186,47 @@
         <!--**********************************end***********-->
 
     </div>
+    <!--Modal: modalConfirmDelete-->
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">آیا مطمئنید؟</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+
+                    <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">خیر</a>
+                    <a id="sahand" href="" class="btn btn-outline-danger">بله</a>
+
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: modalConfirmDelete-->
 </main>
 <footer>
 </footer>
-<script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
-<script src="{% static 'Restaurant_admin/js/cost_main.js'%}" type="text/javascript"></script>
-<script src="{% static 'Restaurant_admin/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script>document.getElementById("id_tax").setAttribute("class", "form-control");</script>
+<script>document.getElementById("id_service_charge").setAttribute("class", "form-control");</script>
+<script>document.getElementById("id_packaging_cost").setAttribute("class", "form-control")</script>
+    <script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
+    <!-- <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
 <script>
     function myFunction() {
         // document.getElementById("myDialog").style.visibility = "hidden";
@@ -200,5 +239,11 @@
         location.replace("{% url 'restaurant_admin:CostHome_detail' %}");
     }
 </script>
+<script>
+    $(document).ready(function () {
+        $('.mdb-select').materialSelect();
+    });
+</script>
+<script src="{% static 'Restaurant_admin/js/cost_main.js'%}" type="text/javascript"></script>
 </body>
 </html>

@@ -115,3 +115,6 @@ main {
     border: none;
     box-shadow: none;
 }
+.md-form label{
+    left: unset !important;
+}

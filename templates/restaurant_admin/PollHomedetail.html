@@ -1,50 +1,120 @@
-<a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
-<a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
-<a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
-<a href="{% url 'restaurant_admin:CostHome_detail' %}">cost</a>
-
-<a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
-<h1>Polls</h1>
-<ul>
-{% for object in object_list %}
-<h1>question :{{object.question}}<h1>
-<h1>response_good :{{object.good_response}}<h1>
-<h1>response_medium :{{object.medium_response}}<h1>
-<h1>response_bad :{{object.bad_response}}<h1>
-
-      <form method="post">
-           {% csrf_token %}
-          <input type="hidden" name="id" value="{{object.pk}}">
-          <p><input type="submit" value="this" ></p>
-      </form>
-      <a href="{% url 'restaurant_admin:Poll_delete' pk=object.pk %}">delete</a></ul>
-
-{% empty %}
-    <li>No Poll yet.</li>
-{% endfor %}
-</ul>
-
-{%if chosen_object%}
-<form method="post" enctype="multipart/form-data">{% csrf_token %}
-  <p>question :{{update_form.question}} {{update_form.question.errors}}</p>
-  <input type='hidden' name='pk' value="{{chosen_object.pk}}">
-  <input type="submit" name= "edit" value="Update">
-</form>
-
-{%endif%}
-
-<form method="post">
- {% csrf_token %}
-    <p><input type="submit" name="create" value="create" ></p>
-</form>
-
-{%if create_bool%}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>question :{{create_form.question}} {{create_form.question.errors}}</p>
-    <input type="submit" name="create_1" value="CREATE">
-  </form>
-  {%endif%}
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/materialize/css/materialize.css' %}"
+          media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'Restaurant_admin/css/poll.css' %}">
+</head>
+<body>
+<header class="top_header topnav">
+    <div class="nav_items">
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+        <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندها</a>
+        <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+        <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
+        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
 
 
+    </div>
+</header>
+<main class="main_content">
+    <div class="wrapper" style="margin-left: 2%;margin-right: 2%">
+        <br>
+
+        <!--***********************************************-->
+        <ul class="collapsible popout" style="margin:10%;font-family: Shabnam;">
+            {% for object in object_list %}
+            <li>
+
+                <div class="collapsible-header"
+                     style="direction:rtl;color:rgb(92,164,169);font-size: 1.5vw">
+
+                    <div>
+                        {{object.question}}
+                    </div>
+                    <!--</div>-->
+                </div>
+                <div class="collapsible-body">
+                    <p>نظر :{{object.good_response}}</p>
+                    <p>response_medium :{{object.medium_response}}</p>
+                   <p>response_bad :{{object.bad_response}}</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{object.pk}}">
+                        <p><input type="submit" value="this"></p>
+                    </form>
+
+                    <a href="{% url 'restaurant_admin:Poll_delete' pk=object.pk %}">delete</a>
+
+                </div>
+            </li>
+            {% empty %}
+            <li>No Poll yet.</li>
+            {% endfor %}
+        </ul>
+        <!--*********************************-->
+        {%if chosen_object%}
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <p>question :{{update_form.question}} {{update_form.question.errors}}</p>
+            <input type='hidden' name='pk' value="{{chosen_object.pk}}">
+            <input type="submit" name="edit" value="Update">
+        </form>
+
+        {%endif%}
+        <!--**********************************************-->
+        <form method="post">
+            {% csrf_token %}
+            <div class="fixed-action-btn">
+                <input class="btn-floating btn-large teal darken-1"
+                       style="font-size:x-large;font-weight: bold ;color:white;border: none;padding-bottom: 15%;"
+                       type="submit"
+                       name="create"
+                       value="+">
+            </div>
+        </form>
+
+        <!--*****************************************-->
+        {%if create_bool%}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>question :{{create_form.question}} {{create_form.question.errors}}</p>
+            <input type="submit" name="create_1" value="CREATE">
+        </form>
+        {%endif%}
+    </div>
 </main>
+<script src="{% static 'assets/js/jquery-3.4.0.slim.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+</script>
+<script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems);
+    });
+</script>
+<script>
+    function royaFunction() {
+        // document.getElementById("myDialog").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:FoodCategoryHome_detail' %}");
+    }
+</script>
+<script>
+    function royaFunction2() {
+        // document.getElementById("myDialog2").style.visibility = "hidden";
+        location.replace("{% url 'restaurant_admin:FoodCategoryHome_detail' %}");
+    }
+</script>
+<script src="{% static 'Restaurant_admin/js/poll.js' %}"></script>
+</body>
+
+</html>
