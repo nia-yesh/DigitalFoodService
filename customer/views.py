@@ -10,6 +10,10 @@ from django.shortcuts import render
 from django.views import View
 
 
+class ZarinPal(TemplateView):
+    template_name = 'zarinpal.html'
+
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
