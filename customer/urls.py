@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^poll', views.PollView.as_view(), name='poll'),
     url(r'^update', views.update, name='update'),
     url(r'^thankyou', views.EndView.as_view(), name='thank_you'),
+    url(r'pay', views.ZarinPal.as_view(), name='zarinpal'),
 
 ]
 
