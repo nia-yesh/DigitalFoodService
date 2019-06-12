@@ -14,10 +14,15 @@
 <body>
 <header class="top_header topnav">
     <div class="nav_items">
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+           <a href="{% url 'restaurant_admin:PollHome_detail' %}">نظرسنجی</a>
+        <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
+        <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
+        <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
         <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
         <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
         <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
-        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+
     </div>
 </header>
 <main class="main_content">

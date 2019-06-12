@@ -6,9 +6,10 @@ MERCHANT = ''
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 amount = 1000  # Toman / Required
 description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
-email = 'email@example.com'  # Optional
-mobile = '09123456789'  # Optional
+email = 'niayesh.sadeghi@gmail.com'  # Optional
+mobile = '09217506678'  # Optional
 CallbackURL = 'http://localhost:8000/pay/verify/' # Important: need to edit for realy server.
+
 
 def send_request(request):
     result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
@@ -16,6 +17,7 @@ def send_request(request):
         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
     else:
         return HttpResponse('Error code: ' + str(result.Status))
+
 
 def verify(request):
     if request.GET.get('Status') == 'OK':

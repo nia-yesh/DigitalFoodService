@@ -65,3 +65,23 @@ class TableOrdersView(TemplateView):
         context['order_list'] = order_list
 
         return context
+
+
+def update(request):
+    results = models.Table.objects.all()
+    result_list =[]
+    temp_dict = {}
+    for table in results:
+        if len(table.OrderList_Table.all()) != 0:
+            temp_dict = {'table_number':table.table_number,
+                         'table_availability': table.table_availability,
+                         'table_status': table.OrderList_Table.all()[0].status}
+        else:
+            temp_dict = {'table_number': table.table_number,
+                         'table_availability': table.table_availability,
+                         'table_status': "NO"}
+        result_list.append(temp_dict)
+        temp_dict = {}
+    import json
+    from django.http import JsonResponse
+    return JsonResponse({'object_list': json.dumps(result_list)})

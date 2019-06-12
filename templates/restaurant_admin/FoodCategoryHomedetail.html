@@ -11,10 +11,14 @@
 <body>
 <header class="top_header topnav" style="margin-bottom: 1%">
     <div class="nav_items">
+        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+         <a href="{% url 'restaurant_admin:FoodCategoryHome_detail' %}">مدیریت دسته بندی ها</a>
+        <a href="{% url 'restaurant_admin:WorkerHome_detail' %}">کارمندان</a>
+        <a href="{% url 'restaurant_admin:PollHome_detail' %}">نظرسنجی</a>
         <a href="{% url 'restaurant_admin:CostHome_detail' %}">هزینه</a>
         <a href="{% url 'restaurant_admin:TableHome_detail' %}">میزها</a>
         <a href="{% url 'restaurant_admin:FoodHome_detail' %}">غذا</a>
-        <a href="{% url 'restaurant_admin:admin_home' %}">خانه</a>
+
     </div>
 </header>
 <main class="main_content">
@@ -110,7 +114,7 @@
         <li>
 
             <div class="collapsible-header"
-                 style="direction:rtl;color:rgb(92,164,169);font-size: 1.5vw">
+                 style="direction:rtl;color:rgb(92,164,169);font-size: large">
 
                 <div>
                     {{ foodc.name }}
@@ -123,7 +127,7 @@
                 {% for food in foodc.foods.all %}
 
 
-                <p style="text-align:right;direction: rtl;font-size: 1.5vw;">
+                <p style="text-align:right;direction: rtl;font-size: medium;">
                     <!--<a style="text-decoration: none;color:rgb(56,113,117);"-->
                     {{ food.food_name }}
                     <!--href={{ food.get_absolute_url }}>{{ food.food_name }}</a>-->

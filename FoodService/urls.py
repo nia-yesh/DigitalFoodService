@@ -28,7 +28,6 @@ urlpatterns = [
     url(r'^customer/', include('customer.urls', namespace='customer')),
     url(r'restaurant_ad/', include(('restaurant_admin.urls', 'restaurant_admin'), namespace='restaurant_admin')),
     url(r'pay/', include(('ZarinPal.urls', 'zarinpal'), namespace='zarinpal')),
-
     url(r'^$', views.IndexView.as_view(), name='index'),
 ]
 

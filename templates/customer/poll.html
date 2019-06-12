@@ -1,24 +1,92 @@
 <!DOCTYPE html>
 <head>
 {% load static %}
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
+    <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+   <link rel="stylesheet" href="{% static 'customer/css/polls.css' %}">
+
+    <!-- jQuery library -->
+
 <script src="{% static 'app.js' %}"></script>
 <title>Site</title>
 </head>
-<body>
 
 
-    <form method="post" name={{q.pk}} enctype="multipart/form-data">
-      {%csrf_token%}
-      {%for q in questions%}
-      <p>{{q.question}}</p>
-        <input type=hidden name="question_{{q.pk}}" value={{q.pk}}>
-        <input  type="radio" name="state_{{q.pk}}" value="good" required>good<br>
-        <input type="radio" name="state_{{q.pk}}" value="medium">medium<br>
-        <input  type="radio" name="state_{{q.pk}}" value="bad">bad<br>
-      {%endfor%}
-      <input type="submit" value="submit" name="sub" >
+<body class="bod">
+<div class="container" style="width: 60% ;padding-left: 15px;padding-right: 15px;margin-left: auto;margin-right: auto;margin-top: 20px">
+<div class="row" style="display: flex;flex-wrap: wrap">
+    <div class="card card card-cascade narrower" style=" opacity: 0.5; text-align: right;direction: rtl;justify-content: center;margin-top: 10px">
+            <h1 class="view view-cascade overlay card-header ripe-malinka-gradient white-text  py-4" style="padding-top: 0%">
+                <div class="text-center" style="padding-top: 0%;">
+                    <strong> نظرسنجی </strong>
+                </div>
+            </h1>
 
-    </form>
 
+        <div class="card-body card-body-cascade" style="align-content: center">
+                <form class="col xl12 l12 m12 s12" method="post" name={{q.pk}} enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row" >
+
+                        <div class="col-sm-12 col-md-12 col-lg-12  col-xl-12">
+                             {%for q in questions%}
+                    <div class="ques" style="text-align: center; ">
+                        <p>{{q.question}}</p>
+                         <input type=hidden name="question_{{q.pk}}" value={{q.pk}}>
+
+                        <label >
+                            <input class="op1"  type="radio"  name="state_{{q.pk}}" value="good" required>
+                            <img src="{%static 'customer/image/sccpre.cat-crown-emoji-png-89924.png'%}" width="30px" height="30px" class="img1" style="margin-left: 90px">
+                        </label>
+
+                        <label >
+                            <input class="op2"  type="radio"  name="state_{{q.pk}}" value="medium">
+                            <img src="{%static 'customer/image/sccpre.cat-confused-person-png-1192333.png'%}" width="30px" height="30px" class="img2" style="margin-left:90px" >
+                        </label>
+
+                        <label>
+                            <input class="op3"  type="radio"  name="state_{{q.pk}}" value="bad">
+                            <img src="{%static 'customer/image/sccpre.cat-crying-eyes-png-777655.png'%}" width="30px" height="30px" class="img3" style="margin-left: 90px">
+                        </label>
+                        <br>
+                        <hr>
+
+                    </div>
+
+                            {%endfor%}
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row " style="display: flex; justify-content: center">
+
+                        <button  value="submit" name=""sub class="btn ripe-malinka-gradient btn-md" style="color:white;border-radius: 10px" >ثبت</button>
+
+                    </div>
+
+                </form>
+        </div>
+    </div>
+</div>
+</div>
 </body>
-</html>
+
+
+
+
+
+
+<script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
+<!-- <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
