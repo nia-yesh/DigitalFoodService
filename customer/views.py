@@ -38,11 +38,12 @@ class IndexView(TemplateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        ol_pk = self.request.session['order_list_pk']
-        order_list = OrderList.objects.get(pk=ol_pk)
-        order_list.status = "DE"
-        order_list.save()
-        return HttpResponseRedirect('')
+        if self.request.POST.get('deliver'):
+            ol_pk = self.request.session['order_list_pk']
+            order_list = OrderList.objects.get(pk=ol_pk)
+            order_list.status = "DE"
+            order_list.save()
+        return HttpResponseRedirect(self.request.path_info)
 
 
 class FoodCategoryListView(ListView):
@@ -149,9 +150,9 @@ class FoodCategoryDetailView(DetailView):
             except ObjectDoesNotExist:
                 pass
 
-            return HttpResponseRedirect('')
+            return HttpResponseRedirect(self.request.path_info)
 
-        return HttpResponseRedirect('')
+        return HttpResponseRedirect(self.request.path_info)
 
 
 class OrderListView(FormMixin, ListView):
@@ -230,7 +231,7 @@ class OrderListView(FormMixin, ListView):
                 fo_list.append(food_order.pk)
                 self.request.session['food_orders_list'] = fo_list
 
-            return HttpResponseRedirect('')
+            return HttpResponseRedirect(self.request.path_info)
 
         if request.POST.get('removeFood'):
             food_pk = request.POST.get('food_pk')
@@ -255,7 +256,7 @@ class OrderListView(FormMixin, ListView):
             except ObjectDoesNotExist:
                 pass
 
-            return HttpResponseRedirect('')
+            return HttpResponseRedirect(self.request.path_info)
 
         if request.POST.get('order'):
             form = FormOrder(request.POST)
@@ -311,7 +312,7 @@ class OrderListView(FormMixin, ListView):
             order_list.save()
             return redirect('index')
 
-        return HttpResponseRedirect('')
+        return HttpResponseRedirect(self.request.path_info)
 
 
 class SubscriptionDetailView(DetailView):
@@ -356,7 +357,7 @@ class PollView(View):
 
         for post in poll_list:
             if post[2] is None:
-                return HttpResponseRedirect('')
+                return HttpResponseRedirect(self.request.path_info)
 
         for post in poll_list:
             poll = self.model.objects.get(pk=int(post[0]))
