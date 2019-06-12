@@ -2,14 +2,25 @@
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
 
     <!-- jQuery library -->
     <script src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
 
     <link rel="stylesheet" href="{% static 'Kitchen/css/tables.css' %}">
+
+
     <script src="{% static 'Kitchen/js/script.js' %}" type="text/javascript"></script>
     <script type="text/javascript">
+
+        function myFunction2() {
+            location.replace("{% url 'kitchen:TableState_list' %}");
+        }
+
+
         $(document).ready(function () {
                 function update_trackdata() {
                     $.getJSON('/kitchen/update', function (data) {
@@ -17,22 +28,27 @@
                         var text = '{ "tables" : ' + json + '}';
                         var obj = JSON.parse(text);
                         for (var i = 0; i < obj.tables.length; i++) {
-                                if (obj.tables[i].table_status == "NO") {
-                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#f0ecec';
-                                }
-                                if (obj.tables[i].table_status == "CH") {
-                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#ffa377';
-                                }
-                                if (obj.tables[i].table_status == "RE") {
-                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#fde674';
-                                }
-                                if (obj.tables[i].table_status == "PR") {
-                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#70bde8';
-                                }
-                                if (obj.tables[i].table_status == "OR") {
-                                    document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor =  '#bad350';
-                                }
+                            if (obj.tables[i].table_status == "NO") {
+                                document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#f2eeee';
+                                document.getElementById(`btn_${obj.tables[i].table_number}`).style.backgroundColor = 'darkgray';
                             }
+                            if (obj.tables[i].table_status == "CH") {
+                                document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#ffc8ae';
+                                document.getElementById(`btn_${obj.tables[i].table_number}`).style.backgroundColor = '#ff7d40';
+                            }
+                            if (obj.tables[i].table_status == "RE") {
+                                document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#d8e79d';
+                                document.getElementById(`btn_${obj.tables[i].table_number}`).style.backgroundColor = '#859c27';
+                            }
+                            if (obj.tables[i].table_status == "PR") {
+                                document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#acd9f2';
+                                document.getElementById(`btn_${obj.tables[i].table_number}`).style.backgroundColor = '#33a1de';
+                            }
+                            if (obj.tables[i].table_status == "OR") {
+                                document.getElementById(`card_${obj.tables[i].table_number}`).style.backgroundColor = '#fef0ad';
+                                document.getElementById(`btn_${obj.tables[i].table_number}`).style.backgroundColor = '#fcdc3b';
+                            }
+                        }
                     });
                 }
 
@@ -58,86 +74,107 @@
 <body class="boo">
 
 <div class="parent-container ">
-    <div style="float: left ; width: 100%">
-        <div class="card-deck  col-sm-12" id="myDiv">
+    <div class="row">
 
-            {% for table in object_list %}
-            <div class="row">
-                <div id="card_{{table.table_number}}" class="card myCard" style="background-color: darkgray">
-                    <div class="card-body text-center ">
+        {% for table in object_list %}
+        <div class="col-12 col-md-4">
+            <div class="card bg-transparent text-white showhim myc" style="margin-left: 5%">
+                <img src="../../../media/418035-PDD34R-711.png" class="card-img" alt="...">
+                <div id="card_{{table.table_number}}" class="card-img-overlay">
+                    <h5 class="card-title text-center" style="color: black">میز شماره {{ table.table_number }}</h5>
+                    <div class="card-text" style="display: flex;justify-content: center">
 
-                        <div class="mizs" data-ac="{{ table.OrderList_Table.first.status }}"
-                             style="display: none"></div>
-
-                        <p id="numbers_{{table.table_number}}" class="tb" style="background-color: #d0cfcf">
-                            میز شماره{{ table.table_number }}
-                        </p>
 
                         <form method="post">
                             {% csrf_token %}
                             <input type="hidden" name="table_id" value="{{ table.pk }}">
-                            <p><input id="btn_{{table.table_number}}" class="but" type="submit" value="نمایش سفارش"
-                                      style="margin-top: 30px; padding-bottom: 5px"></p>
+                            <p>
+                                <button class="btn  btn-sm" id="btn_{{table.table_number}}" type="submit"
+                                        value="نمایش سفارش" style="padding-top:7px;margin-top: 10px ; border-radius: 10px">نمایش سفارش
+                                </button>
+                            </p>
                         </form>
                     </div>
-
                 </div>
             </div>
 
-            {% empty %}
-            <li>No Table yet.</li>
-            {% endfor %}
-            </ul>
+
         </div>
+        {% empty %}
+        <li>No Table yet.</li>
+
+        {% endfor %}
     </div>
 
 
     {% if chosen_object %}
     {% if not chosen_object.table_availability %}
 
-    <div class="orl">
-        <p class="tor text-center">
-            لیست سفارشات
+    <div class="card card card-cascade narrower orl" style="color: white;margin-left: 5%">
+    <div style="direction: rtl; display: flex;padding-top: 0%;">
+                    <button style="background-color: transparent;border: white;" onclick="myFunction2()">
+                        <i style="background-color:transparent;color: white;" class="fas fa-times"></i></button>
+                </div>
+        <h6 class="view view-cascade overlay card-header ripe-malinka-gradient  white-text  py-4"
+            style="padding-top: 0%">
 
 
-        </p>
 
-        {% for orderl in chosen_object.OrderList_Table.all %}
-        <div class="ors" style="border-radius: 10px">
-            {% for order in orderl.FoodOrder_list.all %}
+            <div class="text-center" style="padding-top: 0%;">
+                <strong> لیست سفارشات </strong>
+            </div>
+        </h6>
 
-            <p class="p1">نام غذا:{{ order.food.food_name }}</p>
-            <p class="p2">تعداد: {{ order.number }}</p>
-            <p class="p3" style="margin-bottom: 40px">:جزئیات{{ orderl.details }}</p>
+        <div class="card-body  card-body-cascade">
+            {% for orderl in chosen_object.OrderList_Table.all %}
+            <div class="ors" style="border-radius: 10px">
+                {% for order in orderl.FoodOrder_list.all %}
 
+                <p class="p1">نام غذا:{{ order.food.food_name }}</p>
+                <p class="p2">تعداد: {{ order.number }}</p>
+                <p class="p3" style="margin-bottom: 40px">:جزئیات{{ orderl.details }}</p>
+
+                {% empty %}
+                <li>No order yet</li>
+                {% endfor %}
+                {% if orderl.status == "OR" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="table_pk" value="{{ chosen_object.pk }}">
+                    <input type="hidden" name="statustoPR" value="{{ orderl.pk }}">
+                    <button class="center or1 btn btn-sm" style="border: solid white">آماده سازی غذا</button>
+                </form>
+
+                {% elif orderl.status == "CH" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="table_pk" value="{{ chosen_object.pk }}">
+                    <input type="hidden" name="statustoPR" value="{{ orderl.pk }}">
+                    <button class="center or2 btn  btn-sm" style="border: solid white">آماده سازی غذا</button>
+                </form>
+
+                {% elif orderl.status == "PR" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="table_pk" value="{{ chosen_object.pk }}">
+                    <input type="hidden" name="statustoRE" value="{{ orderl.pk }}">
+                    <button class="center or3 btn  btn-sm" style="border: solid white">اعلام آمادگی غذا</button>
+                </form>
+
+                {% elif orderl.status == "RE" %}
+                <button class="btn btn-sm" style="margin-left:5px;color: white ;border: solid white;"> سفارش اماده
+                    است
+                </button>
+                {% endif %}
+            </div>
             {% empty %}
-            <li>No order yet</li>
+            <li>No orderlist yet</li>
             {% endfor %}
-            {% if orderl.status == "OR" %}
-            <button class="center or1"
-                    style="background-color: #029bdd; margin-right: 10px; border: 2px solid #0D47A1;border-radius: 10px">
-                آماده سازی غذا
-            </button>
-            {% elif orderl.status == "CH" %}
-            <button class="center or2"
-                    style="background-color: #029bdd; margin-right: 10px;border: 2px solid #0D47A1;border-radius: 10px">
-                آماده سازی غذا
-            </button>
-            {% elif orderl.status == "RE" %}
-            <button class="center or3"
-                    style="background-color: #029bdd; margin-right: 10px;border: 2px solid #0D47A1;border-radius: 10px">
-                اعلام آمادگی غذا
-            </button>
-            {% endif %}
-        </div>
-        {% empty %}
-        <li>No orderlist yet</li>
-        {% endfor %}
 
+        </div>
+        {% endif %}
+        {% endif %}
     </div>
-    {% endif %}
-    {% endif %}
-</div>
 </body>
 <script src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
 <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

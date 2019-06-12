@@ -1,16 +1,104 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ثبت اشتراک</title>
-</head>
-<body>
-    {{ sub.sub_name}}
-    {{ sub.sub_lastName}}
-    {{ sub.sub_address}}
-    {{ sub.sub_phone}}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <p>کد اشتراک شما</p>
-    {{ sub.sub_id }}
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
+
+    <!-- jQuery library -->
+
+    <link rel="stylesheet" href="{% static 'customer/css/subcript.css'%}">
+
+    <title>اشتراک</title>
+</head>
+
+<body class="bo" style="font-family: Shabnam;">
+
+
+<div class="container"
+     style="width: 50% ;padding-left: 15px;padding-right: 15px;margin-left: auto;margin-right: auto;margin-top: 10px">
+    <div class="row" style="display: flex;flex-wrap: wrap">
+        <div class="card card-cascade wider reverse"
+             style="margin-top: 20%; text-align: right;direction: rtl;justify-content: center;">
+
+            <h1 class="view view-cascade overlay card-header ripe-malinka-gradient  white-text  py-4"
+                style="padding-top: 0%">
+
+                <div class="text-center" style="padding-top: 0%;">
+                    <strong> اشتراک </strong>
+                </div>
+            </h1>
+
+
+            <div class="card-body  card-body card-body-cascade text-center text-center" style="height: 50%">
+
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-6 col-lg-6  col-xl-6">
+
+                        <label><i class="fa fa-user" aria-hidden="true"></i> نام:</label>
+                        {{ sub.sub_name }}
+
+
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6  col-xl-6">
+
+                        <label><i class="fa fa-user" aria-hidden="true"></i> نام خانوادگی: </label>
+                        {{ sub.sub_lastName }}
+
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-md-6 col-lg-6  col-xl-6">
+
+                        <label> <i class="fa fa-home" aria-hidden="true"></i> ادرس: </label>
+                        {{ sub.sub_address }}
+
+
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6  col-xl-6">
+
+                        <label> <i class="fa fa-phone" aria-hidden="true"></i> تلفن: </label>
+                        {{ sub.sub_phone }}
+                    </div>
+
+                </div>
+
+                <div class="row text-center" >
+
+                    <div class="col-sm-12 col-md-12 col-lg-12  col-xl-12">
+                        <label>  شماره اشتراک : </label>
+                        {{ sub.sub_id }}
+                    </div>
+
+
+
+
+                    </div>
+                <a class="btn ripe-malinka-gradient btn-rounded btn-lg" href="{% url 'index' %}" style="color: white">بازگشت
+                    به صفحه اصلی</a>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
-</html>
+
+<script type="text/javascript" src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/MDB/js/popper.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- <script src="{% static 'assets/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
+<!-- <script type="text/javascript" src="{% static 'assets/materialize/js/materialize.min.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'assets/MDB/js/mdb.min.js' %}"></script>
+
