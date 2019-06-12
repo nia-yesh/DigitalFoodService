@@ -132,24 +132,7 @@
                     {{ food.food_name }}
                     <!--href={{ food.get_absolute_url }}>{{ food.food_name }}</a>-->
                 </p>
-                <div style="direction: ltr;display: flex;">
-                    <a href="#">
-                        <button class="button foodc_remove_btn modal-trigger" data-foodc="{{ foodc.pk }}"
-                                style="border: none;background-color: transparent"
-                                data-target="modal1" onclick="myFunction(event)"><i
-                                data-foodc="{{ foodc.pk }}"
-                                style="font-size:x-large;color:red;background-color: transparent"
-                                class="fas fa-trash"> </i></button>
-                    </a>
-                    <form style="margin-left: 1%;" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{ foodc.pk }}">
-                        <input class="btn-md waves-effect waves-light"
-                               style="background-color:teal;font-size: large;padding:0.75%;" type="submit"
-                               value="تغییر">
-                    </form>
-
-                </div>
+               
 
                 {% empty %}
 
@@ -175,7 +158,24 @@
                 </div>
 
                 {% endfor %}
-
+                <div style="direction: ltr;display: flex;">
+                        <a href="#">
+                            <button class="button foodc_remove_btn modal-trigger" data-foodc="{{ foodc.pk }}"
+                                    style="border: none;background-color: transparent"
+                                    data-target="modal1" onclick="myFunction(event)"><i
+                                    data-foodc="{{ foodc.pk }}"
+                                    style="font-size:x-large;color:red;background-color: transparent"
+                                    class="fas fa-trash"> </i></button>
+                        </a>
+                        <form style="margin-left: 1%;" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ foodc.pk }}">
+                            <input class="btn-md waves-effect waves-light"
+                                   style="background-color:teal;font-size: large;padding:0.75%;" type="submit"
+                                   value="تغییر">
+                        </form>
+    
+                    </div>
 
             </div>
         </li>

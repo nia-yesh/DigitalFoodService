@@ -125,6 +125,7 @@ class FoodCategoryDetailView(DetailView):
                 self.request.session['food_orders_list'] = fo_list
 
             return HttpResponseRedirect(self.request.path_info)
+            #return HttpResponseRedirect('.')
 
         if request.POST.get('removeFood'):
             food_pk = request.POST.get('food_pk')
@@ -149,7 +150,8 @@ class FoodCategoryDetailView(DetailView):
             except ObjectDoesNotExist:
                 pass
 
-            return HttpResponseRedirect('')
+            #return HttpResponseRedirect('')
+            return HttpResponseRedirect(self.request.path_info)
 
         return HttpResponseRedirect('')
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <meta charset="UTF-8">
     <title>Index Page</title>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/MDB/css/mdb.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css'%}">
@@ -14,110 +14,110 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-                function update_trackdata() {
-                    $.getJSON('/customer/update', function (data) {
-                        var json = data['status'];
-                        var text = '{ "status" : ' + json + '}';
-                        var obj = JSON.parse(text);
-                        if (obj.status.status == "PR") {
-                            document.getElementById('btn_NO').style.display = 'none';
-                            document.getElementById('btn_CH_OR').style.display = 'none';
-                            document.getElementById('btn_PR').style.display = 'block';
-                            document.getElementById('btn_DE').style.display = 'none';
-                            document.getElementById('btn_RE').style.display = 'none';
-                        } else if (obj.status.status == "DE") {
-                            document.getElementById('btn_NO').style.display = 'none';
-                            document.getElementById('btn_CH_OR').style.display = 'none';
-                            document.getElementById('btn_PR').style.display = 'none';
-                            document.getElementById('btn_DE').style.display = 'block';
-                            document.getElementById('btn_RE').style.display = 'none';
-                        } else if (obj.status.status == "RE") {
+            function update_trackdata() {
+                $.getJSON('/customer/update', function (data) {
+                    var json = data['status'];
+                    var text = '{ "status" : ' + json + '}';
+                    var obj = JSON.parse(text);
+                    if (obj.status.status == "PR") {
+                        document.getElementById('btn_NO').style.display = 'none';
+                        document.getElementById('btn_CH_OR').style.display = 'none';
+                        document.getElementById('btn_PR').style.display = 'block';
+                        document.getElementById('btn_DE').style.display = 'none';
+                        document.getElementById('btn_RE').style.display = 'none';
+                    } else if (obj.status.status == "DE") {
+                        document.getElementById('btn_NO').style.display = 'none';
+                        document.getElementById('btn_CH_OR').style.display = 'none';
+                        document.getElementById('btn_PR').style.display = 'none';
+                        document.getElementById('btn_DE').style.display = 'block';
+                        document.getElementById('btn_RE').style.display = 'none';
+                    } else if (obj.status.status == "RE") {
 
-                            document.getElementById('btn_NO').style.display = 'none';
-                            document.getElementById('btn_CH_OR').style.display = 'none';
-                            document.getElementById('btn_PR').style.display = 'none';
-                            document.getElementById('btn_DE').style.display = 'none';
-                            document.getElementById('btn_RE').style.display = 'block';
-                        } else if (obj.status.status == "NO") {
-                            document.getElementById('btn_NO').style.display = 'block';
-                            document.getElementById('btn_CH_OR').style.display = 'none';
-                            document.getElementById('btn_PR').style.display = 'none';
-                            document.getElementById('btn_DE').style.display = 'none';
-                            document.getElementById('btn_RE').style.display = 'none';
-                        } else if (obj.status.status == "CH" || obj.status.status == "OR") {
-                            document.getElementById('btn_NO').style.display = 'none';
-                            document.getElementById('btn_CH_OR').style.display = 'block';
-                            document.getElementById('btn_PR').style.display = 'none';
-                            document.getElementById('btn_DE').style.display = 'none';
-                            document.getElementById('btn_RE').style.display = 'none';
-                        }
-                    });
-                }
-
-                update_trackdata();
-
-                var interval = setInterval(update_trackdata, 5000);
-
-
+                        document.getElementById('btn_NO').style.display = 'none';
+                        document.getElementById('btn_CH_OR').style.display = 'none';
+                        document.getElementById('btn_PR').style.display = 'none';
+                        document.getElementById('btn_DE').style.display = 'none';
+                        document.getElementById('btn_RE').style.display = 'block';
+                    } else if (obj.status.status == "NO") {
+                        document.getElementById('btn_NO').style.display = 'block';
+                        document.getElementById('btn_CH_OR').style.display = 'none';
+                        document.getElementById('btn_PR').style.display = 'none';
+                        document.getElementById('btn_DE').style.display = 'none';
+                        document.getElementById('btn_RE').style.display = 'none';
+                    } else if (obj.status.status == "CH" || obj.status.status == "OR") {
+                        document.getElementById('btn_NO').style.display = 'none';
+                        document.getElementById('btn_CH_OR').style.display = 'block';
+                        document.getElementById('btn_PR').style.display = 'none';
+                        document.getElementById('btn_DE').style.display = 'none';
+                        document.getElementById('btn_RE').style.display = 'none';
+                    }
+                });
             }
+
+            update_trackdata();
+
+            var interval = setInterval(update_trackdata, 5000);
+
+
+        }
         );
     </script>
 
 </head>
 
 <body>
-<header>
-    <div class="overlay"></div>
-    <video playsinline="playsinline" id="video1" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="https://ak.picdn.net/footage/assets/directors_choice/food-stock-footage.mp4" type="video/mp4">
-    </video>
-    <div class="container h-100">
-        <div class="d-flex h-100 text-center align-items-center">
-            <div class="w-100 text-white">
-                <h1 class="display-4">منوی دیجیتال</h1>
-                <p class="lead mb-0">غذای خود را
-                    <span class="txt-rotate" data-period="3000"
-                          data-rotate='[ "نوآورانه", "آسان", "سریع", "خلاقانه", "خوشمزه " ]'>
-                    </span>
-                    سفارش دهید
-                </p>
-                <div id="myDiv">
-                    <div style="display: none" id="btn_NO">
-                        <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
-                           href="{% url 'customer:food_menu' pk=cat_first_pk %}"><strong>شروع سفارش</strong></a>
-                    </div>
+    <header>
+        <div class="overlay"></div>
+        <video playsinline="playsinline" id="video1" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="https://ak.picdn.net/footage/assets/directors_choice/food-stock-footage.mp4" type="video/mp4">
+        </video>
+        <div class="container h-100">
+            <div class="d-flex h-100 text-center align-items-center">
+                <div class="w-100 text-white">
+                    <h1 class="display-4">منوی دیجیتال</h1>
+                    <p class="lead mb-0">غذای خود را
+                        <span class="txt-rotate" data-period="3000"
+                            data-rotate='[ "نوآورانه", "آسان", "سریع", "خلاقانه", "خوشمزه " ]'>
+                        </span>
+                        سفارش دهید
+                    </p>
+                    <div class="mt-5" style="display: flex;justify-content: center" id="myDiv" >
+                        <div style="display: none" id="btn_NO">
+                            <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
+                                href="{% url 'customer:food_menu' pk=cat_first_pk %}"><strong>شروع سفارش</strong></a>
+                        </div>
 
-                    <div style="display: none" id="btn_CH_OR">
-                        <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
-                           href="{% url 'customer:food_menu' pk=cat_first_pk %}"><strong>تغییر سفارش</strong></a>
-                    </div>
+                        <div style="display: none" id="btn_CH_OR">
+                            <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
+                                href="{% url 'customer:food_menu' pk=cat_first_pk %}"><strong>تغییر سفارش</strong></a>
+                        </div>
 
-                    <div id="btn_PR" class="btn danger-color btn-rounded btn-lg" style="margin-top:35%; display: none;">
-                        <strong>در حال
-                            آماده سازی
-                            سفارش
-                            شما</strong></div>
+                        <div id="btn_PR" class="btn danger-color btn-rounded btn-lg"
+                            style="margin-top:35%; display: none;max-width: 190px;">
+                            <strong>در حال
+                                آماده سازی</strong></div>
 
-                    <!--                    <audio id="xyz" src="{% static 'customer/music/notif2.mp3' %}" preload="auto"></audio>-->
+                        <!--                    <audio id="xyz" src="{% static 'customer/music/notif2.mp3' %}" preload="auto"></audio>-->
 
-                    <form style="display: none" id="btn_RE" action="" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" name="deliver" class="btn danger-color btn-rounded btn-lg"
+                        <form style="display: none" id="btn_RE" action="" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" name="deliver" class="btn danger-color btn-rounded btn-lg"
                                 style="margin-top:35%" value="deliver"><strong>تحویل گرفتن سفارش</strong></button>
-                    </form>
+                        </form>
 
-                    <div style="display: none" id="btn_DE">
-                        <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
-                           href="{% url 'customer:zarinpal' %}"><strong>پرداخت</strong></a>
+                        <div style="display: none" id="btn_DE">
+                            <a class="btn danger-color btn-rounded btn-lg" style="margin-top:35%"
+                                href="{% url 'customer:zarinpal' %}"><strong>پرداخت</strong></a>
+                        </div>
                     </div>
+                    <a class="btn warning-color btn-rounded btn-lg" href="{% url 'customer:subscription' %}">اشتراک
+                        می‌خواهم</a>
+
                 </div>
-                <a class="btn warning-color btn-rounded btn-lg" href="{% url 'customer:subscription' %}">اشتراک می‌خواهم</a>
 
             </div>
-
         </div>
-    </div>
-</header>
+    </header>
 </body>
 <!-- <script src="{% static 'customer/js/order_list.js'%}" type="text/javascript"></script> -->
 <script src="{% static 'assets/MDB/js/jquery-3.4.0.min.js' %}"></script>
