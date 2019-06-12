@@ -93,11 +93,12 @@
 }
 .bo{
     font-family: Shabnam;
-    background-image: url("../../customer/image/2389705.jpg");
+    background-image: url("../../customer/image/janko-ferlic-165857-unsplash.jpg");
+    -webkit-background-size: cover;
+    background-size: cover;
     opacity: 0.8;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
     height: 100%;
 
 }
