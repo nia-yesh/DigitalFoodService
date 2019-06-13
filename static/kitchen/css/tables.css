@@ -275,3 +275,13 @@ body {
     text-align: center ;
     margin-left: 45px;
 }
+.boo{
+    font-family: Shabnam;
+    background-image: url("../../../media/simple-fast-food-background_7457-34.jpg");
+    /*-webkit-background-size: cover;*/
+    /*background-size: cover;*/
+    opacity: 0.8;
+    background-position: center;
+    background-repeat: repeat;
+    height: 100%;
+}
